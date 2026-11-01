@@ -7,9 +7,11 @@ from decimal import Decimal
 from datetime import datetime, timezone
 
 from config import CONFIG
+from market_scanner import get_markets
 
 
 API_URL = f"{CONFIG['API_URL']}/v1/markets"
+
 API_KEY = os.environ.get("PREDICT_API_KEY")
 
 if not API_KEY:
@@ -21,6 +23,7 @@ HEADERS = {
 
 
 def get_orderbook(market_id):
+
     url = f"{API_URL}/{market_id}/orderbook"
 
     response = requests.get(
@@ -30,6 +33,7 @@ def get_orderbook(market_id):
     )
 
     response.raise_for_status()
+
     result = response.json()
 
     if not result.get("success"):
@@ -39,6 +43,7 @@ def get_orderbook(market_id):
 
 
 def get_price(levels):
+
     if not levels:
         return None, 0.0
 
@@ -49,29 +54,46 @@ def get_price(levels):
 
 
 def complement_price(price, precision):
+
     if price is None:
         return None
 
     result = Decimal("1") - Decimal(str(price))
+
     return float(round(result, precision))
 
 
 def scan_markets():
-    with open("market_data.json", "r") as file:
-        market_data = json.load(file)
 
-    markets = market_data.get("markets", [])[:10]
+    markets = get_markets()
+
+    now = datetime.now(timezone.utc)
+
+    # Only scan currently active and upcoming rounds.
+    markets = [
+        market for market in markets
+        if market.get("startsAt")
+        and market.get("endsAt")
+        and datetime.fromisoformat(
+            market["endsAt"].replace("Z", "+00:00")
+        ) > now
+    ]
+
     scanned = []
 
-    print(f"Scanning {len(markets)} markets...")
+    print("\nBTC ORDERBOOK SCANNER")
+    print("----------------------------")
+    print("Markets to scan:", len(markets))
 
     for market in markets:
+
         market_id = market.get("id")
 
         if market_id is None:
             continue
 
         try:
+
             book = get_orderbook(market_id)
 
             if not isinstance(book, dict):
@@ -81,69 +103,91 @@ def scan_markets():
             asks = book.get("asks") or []
 
             precision = market.get("decimalPrecision", 4)
-            stats = market.get("stats") or {}
 
             yes_bid, yes_bid_size = get_price(bids)
             yes_ask, yes_ask_size = get_price(asks)
 
-            no_bid = complement_price(yes_ask, precision)
-            no_ask = complement_price(yes_bid, precision)
+            no_bid = complement_price(
+                yes_ask,
+                precision
+            )
+
+            no_ask = complement_price(
+                yes_bid,
+                precision
+            )
 
             item = {
+
                 "market_id": market_id,
-                "question": market.get("question"),
+
                 "title": market.get("title"),
+                "question": market.get("question"),
 
-                "trading_status": market.get("tradingStatus"),
-                "market_status": market.get("status"),
-                "is_visible": market.get("isVisible"),
-                "is_neg_risk": market.get("isNegRisk"),
-                "is_yield_bearing": market.get("isYieldBearing"),
+                "asset": "BTC",
+                "timeframe": "5 minutes",
 
-                "fee_rate_bps": market.get("feeRateBps"),
-                "maker_fee_bps": market.get("makerFeeBps"),
+                "starts_at": market.get("startsAt"),
+                "ends_at": market.get("endsAt"),
 
                 "yes_bid": yes_bid,
                 "yes_ask": yes_ask,
+
                 "no_bid": no_bid,
                 "no_ask": no_ask,
 
                 "yes_bid_quantity": yes_bid_size,
                 "yes_ask_quantity": yes_ask_size,
 
-                "total_liquidity_usd": stats.get("totalLiquidityUsd"),
-                "volume_24h_usd": stats.get("volume24hUsd"),
+                "fee_rate_bps": market.get("feeRateBps"),
+                "maker_fee_bps": market.get("makerFeeBps"),
 
-                "outcomes": market.get("outcomes") or [],
-
-                "orderbook_updated": book.get("updateTimestampMs")
+                "orderbook_updated": book.get(
+                    "updateTimestampMs"
+                )
             }
 
             scanned.append(item)
 
-            print(
-                f"Market {market_id}: "
-                f"{market.get('question')} | "
-                f"YES bid={yes_bid} | "
-                f"YES ask={yes_ask}"
-            )
+            print("\nMarket:", item["title"])
+            print("ID:", market_id)
+            print("UP/YES bid:", yes_bid)
+            print("UP/YES ask:", yes_ask)
+            print("Complementary prices:", no_bid, no_ask)
 
         except Exception as error:
-            print(f"\nMarket {market_id} failed: {error}")
+
+            print(
+                f"\nMarket {market_id} failed: {error}"
+            )
+
             traceback.print_exc()
 
     output = {
+
         "updated_at": datetime.now(timezone.utc).isoformat(),
+
+        "asset": "BTC",
+
+        "timeframe": "5 minutes",
+
         "markets_scanned": len(scanned),
+
         "orderbooks": scanned
     }
 
     with open("orderbooks.json", "w") as file:
-        json.dump(output, file, indent=2)
 
-    print("\nOrderbook scanning completed!")
-    print("Markets successfully scanned:", len(scanned))
+        json.dump(
+            output,
+            file,
+            indent=2
+        )
+
+    print("\nORDERBOOK SCAN COMPLETED")
+    print("Successfully scanned:", len(scanned))
 
 
 if __name__ == "__main__":
+
     scan_markets()
