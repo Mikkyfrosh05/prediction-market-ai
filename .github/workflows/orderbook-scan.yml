@@ -1,0 +1,36 @@
+name: Orderbook Scanner
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  scan-orderbooks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run orderbook scanner
+        env:
+          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+        run: python orderbook_scanner.py
+
+      - name: Save orderbook data
+        run: |
+          git config user.name "Market Data Bot"
+          git config user.email "actions@github.com"
+          git add orderbooks.json
+          git diff --cached --quiet || git commit -m "Update orderbook data"
+          git push
