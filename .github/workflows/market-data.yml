@@ -1,0 +1,74 @@
+name: Update Market Data
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  update-markets:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install requests
+        run: pip install requests
+
+      - name: Fetch Predict.fun markets
+        env:
+          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          import json
+          import requests
+          from datetime import datetime, timezone
+
+          url = "https://api.predict.fun/v1/markets"
+
+          headers = {
+              "x-api-key": os.environ["PREDICT_API_KEY"]
+          }
+
+          response = requests.get(
+              url,
+              headers=headers,
+              params={"first": 50},
+              timeout=30
+          )
+
+          response.raise_for_status()
+
+          result = response.json()
+          markets = result.get("data", [])
+
+          output = {
+              "updated_at": datetime.now(timezone.utc).isoformat(),
+              "total_markets": len(markets),
+              "markets": markets
+          }
+
+          with open("market_data.json", "w") as file:
+              json.dump(output, file, indent=2)
+
+          print("Market data updated successfully!")
+          print("Markets collected:", len(markets))
+          PY
+
+      - name: Save market data
+        run: |
+          git config user.name "Market Data Bot"
+          git config user.email "actions@github.com"
+          git add market_data.json
+          git diff --cached --quiet || git commit -m "Update market data"
+          git push
