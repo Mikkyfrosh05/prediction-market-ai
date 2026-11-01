@@ -1,60 +1,119 @@
-class ProbabilityEngine:
+import json
+from config import CONFIG
+from probability_engine import ProbabilityEngine
 
-    def __init__(self, minimum_edge=0.05):
-        self.minimum_edge = minimum_edge
 
-    def validate_probability(self, probability):
+class OpportunityDetector:
 
-        if not isinstance(probability, (int, float)):
-            return False
-
-        return 0 <= probability <= 1
-
-    def calculate_edge(self, estimated_probability, market_price):
-
-        if not self.validate_probability(estimated_probability):
-            raise ValueError("Invalid estimated probability")
-
-        if not self.validate_probability(market_price):
-            raise ValueError("Invalid market price")
-
-        return estimated_probability - market_price
-
-    def analyse(self, estimated_probability, market_price):
-
-        edge = self.calculate_edge(
-            estimated_probability,
-            market_price
+    def __init__(self):
+        self.engine = ProbabilityEngine(
+            minimum_edge=CONFIG["MINIMUM_EDGE"]
         )
 
-        if edge >= self.minimum_edge:
-            signal = "POTENTIAL_YES_OPPORTUNITY"
+    def detect(self, market, estimated_yes_probability):
 
-        elif edge <= -self.minimum_edge:
-            signal = "POTENTIAL_NO_OPPORTUNITY"
+        yes_ask = market.get("yes_ask")
+        no_ask = market.get("no_ask")
 
-        else:
-            signal = "NO_CLEAR_OPPORTUNITY"
+        if yes_ask is None or no_ask is None:
+            return []
 
-        return {
-            "estimated_probability": estimated_probability,
-            "market_probability": market_price,
-            "edge": round(edge, 4),
-            "signal": signal
+        if not 0 < yes_ask < 1:
+            return []
+
+        if not 0 < no_ask < 1:
+            return []
+
+        if not self.engine.validate_probability(
+            estimated_yes_probability
+        ):
+            return []
+
+        results = []
+
+        # Analyse YES
+        yes_result = self.engine.analyse(
+            estimated_yes_probability,
+            yes_ask
+        )
+
+        if yes_result["edge"] >= self.engine.minimum_edge:
+            results.append({
+                "market_id": market["market_id"],
+                "market_title": market["question"],
+                "side": "YES",
+                "entry_price": yes_ask,
+                "estimated_edge": yes_result["edge"]
+            })
+
+        # Analyse NO
+        no_probability = 1 - estimated_yes_probability
+
+        no_result = self.engine.analyse(
+            no_probability,
+            no_ask
+        )
+
+        if no_result["edge"] >= self.engine.minimum_edge:
+            results.append({
+                "market_id": market["market_id"],
+                "market_title": market["question"],
+                "side": "NO",
+                "entry_price": no_ask,
+                "estimated_edge": no_result["edge"]
+            })
+
+        return results
+
+    def scan(self, estimated_probabilities):
+
+        with open("orderbooks.json") as file:
+            data = json.load(file)
+
+        opportunities = []
+
+        for market in data.get("orderbooks", []):
+
+            market_id = str(market["market_id"])
+
+            probability = estimated_probabilities.get(
+                market_id
+            )
+
+            if probability is None:
+                continue
+
+            opportunities.extend(
+                self.detect(market, probability)
+            )
+
+        opportunities.sort(
+            key=lambda x: x["estimated_edge"],
+            reverse=True
+        )
+
+        output = {
+            "markets_analysed": len(data["orderbooks"]),
+            "opportunities_found": len(opportunities),
+            "opportunities": opportunities
         }
+
+        with open("opportunities.json", "w") as file:
+            json.dump(output, file, indent=2)
+
+        print("Markets analysed:", output["markets_analysed"])
+        print("Opportunities found:", output["opportunities_found"])
+
+        return output
 
 
 if __name__ == "__main__":
 
-    engine = ProbabilityEngine(minimum_edge=0.05)
+    detector = OpportunityDetector()
 
-    result = engine.analyse(
-        estimated_probability=0.65,
-        market_price=0.40
-    )
+    test_probabilities = {
+        "52261": 0.65,
+        "190414": 0.60
+    }
 
-    print("PROBABILITY ANALYSIS")
-    print("--------------------")
-
-    for key, value in result.items():
-        print(f"{key}: {value}")
+    detector.scan(test_probabilities)
