@@ -1,5 +1,6 @@
 import requests
 import json
+import time
 
 from datetime import datetime, timezone
 
@@ -15,30 +16,15 @@ def get_btc_price():
         "symbol": "BTCUSDT"
     }
 
-    try:
+    response = requests.get(
+        url,
+        params=params,
+        timeout=15
+    )
 
-        response = requests.get(
-            url,
-            params=params,
-            timeout=15
-        )
+    response.raise_for_status()
 
-        response.raise_for_status()
-
-        data = response.json()
-
-        return {
-            "symbol": data["symbol"],
-            "price": float(data["price"]),
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "source": "BINANCE"
-        }
-
-    except requests.RequestException as error:
-
-        print("BTC price request failed:", error)
-
-        return None
+    return float(response.json()["price"])
 
 
 def get_btc_candles():
@@ -48,94 +34,114 @@ def get_btc_candles():
     params = {
         "symbol": "BTCUSDT",
         "interval": "1m",
-        "limit": 15
+        "limit": 100
     }
 
-    try:
+    response = requests.get(
+        url,
+        params=params,
+        timeout=15
+    )
 
-        response = requests.get(
-            url,
-            params=params,
-            timeout=15
-        )
+    response.raise_for_status()
 
-        response.raise_for_status()
+    raw_candles = response.json()
 
-        candles = response.json()
+    now_ms = int(time.time() * 1000)
 
-        results = []
+    candles = []
 
-        for candle in candles:
+    for candle in raw_candles:
 
-            results.append({
-                "open_time": candle[0],
-                "open": float(candle[1]),
-                "high": float(candle[2]),
-                "low": float(candle[3]),
-                "close": float(candle[4]),
-                "volume": float(candle[5]),
-                "close_time": candle[6]
-            })
+        close_time = candle[6]
 
-        return results
+        # Ignore candles that have not closed yet
+        if close_time >= now_ms:
+            continue
 
-    except requests.RequestException as error:
+        candles.append({
 
-        print("BTC candle request failed:", error)
+            "open_time": candle[0],
 
-        return None
+            "open": float(candle[1]),
+
+            "high": float(candle[2]),
+
+            "low": float(candle[3]),
+
+            "close": float(candle[4]),
+
+            "volume": float(candle[5]),
+
+            "close_time": close_time
+
+        })
+
+    return candles
 
 
 def save_price_data():
 
-    price = get_btc_price()
+    try:
 
-    candles = get_btc_candles()
+        price = get_btc_price()
 
-    if price is None or candles is None:
+        candles = get_btc_candles()
 
-        print("Price tracking failed.")
+        if len(candles) < 30:
 
-        return
+            print("Insufficient completed candles.")
 
-    output = {
+            return
 
-        "updated_at": price["timestamp"],
+        output = {
 
-        "asset": "BTC",
+            "updated_at": datetime.now(
+                timezone.utc
+            ).isoformat(),
 
-        "trading_pair": "BTCUSDT",
+            "asset": "BTC",
 
-        "price_source": "BINANCE",
+            "trading_pair": "BTCUSDT",
 
-        "settlement_source": "CHAINLINK",
+            "price_source": "BINANCE",
 
-        "current_price": price["price"],
+            "settlement_source": "CHAINLINK",
 
-        "candles": candles,
+            "current_price": price,
 
-        "candle_count": len(candles)
+            "candles": candles,
 
-    }
+            "candle_count": len(candles)
 
-    with open("btc_price_data.json", "w") as file:
+        }
 
-        json.dump(
-            output,
-            file,
-            indent=2
-        )
+        with open("btc_price_data.json", "w") as file:
 
-    print("\nBTC PRICE TRACKER")
-    print("----------------------------")
+            json.dump(
+                output,
+                file,
+                indent=2
+            )
 
-    print("Current BTC price:", price["price"])
+        print("\nBTC PRICE TRACKER")
+        print("----------------------------")
 
-    print("Candles collected:", len(candles))
+        print("Current BTC price:", price)
 
-    print("Price source:", price["source"])
+        print("Completed candles:", len(candles))
 
-    print("\nBTC price data saved successfully!")
+        print("First candle:", candles[0]["open_time"])
+
+        print("Latest candle:", candles[-1]["close_time"])
+
+        print("\nBTC data saved successfully!")
+
+    except Exception as error:
+
+        print("BTC tracker error:", error)
+
+        raise
 
 
 if __name__ == "__main__":
