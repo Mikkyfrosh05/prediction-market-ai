@@ -1,5 +1,550 @@
 {
-  "updated_at": "2026-11-01T23:30:32.956366+00:00",
-  "markets_scanned": 0,
-  "orderbooks": []
+  "updated_at": "2026-11-01T23:36:09.406492+00:00",
+  "markets_scanned": 10,
+  "orderbooks": [
+    {
+      "market_id": 52261,
+      "question": "Will Ethereum hit $1,000 or $3,000 first?",
+      "title": "Will Ethereum hit $1,000 or $3,000 first?",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": false,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.35,
+      "yes_ask": 0.4,
+      "no_bid": 0.6,
+      "no_ask": 0.65,
+      "yes_bid_quantity": 400.0,
+      "yes_ask_quantity": 32.0,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "$1,000",
+          "indexSet": 1,
+          "onChainId": "53727338341141758961983375514819431676140033602166521068469999613293808179494",
+          "status": null,
+          "bestBid": {
+            "price": 0.35,
+            "size": 400
+          },
+          "bestAsk": {
+            "price": 0.4,
+            "size": 32
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "$3,000",
+          "indexSet": 2,
+          "onChainId": "50652796412610643786819169498783735266437330197922294923802126678209883710070",
+          "status": null,
+          "bestBid": {
+            "price": 0.6,
+            "size": 32
+          },
+          "bestAsk": {
+            "price": 0.65,
+            "size": 400
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793575767100
+    },
+    {
+      "market_id": 190414,
+      "question": "Will Justin Sun's address no longer be blacklisted by WLFI by 2027?",
+      "title": "Will Justin Sun's address no longer be blacklisted by WLFI by 2027?",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": false,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.01,
+      "yes_ask": 0.98,
+      "no_bid": 0.02,
+      "no_ask": 0.99,
+      "yes_bid_quantity": 1419.012902020202,
+      "yes_ask_quantity": 39.7968,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "85556203901520498534267034841100021581180423205182682518978417509126723282624",
+          "status": null,
+          "bestBid": {
+            "price": 0.01,
+            "size": 1419.012902020202
+          },
+          "bestAsk": {
+            "price": 0.98,
+            "size": 39.7968
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "111969906208440861617284277294836555686517393902733584762558889090579643366134",
+          "status": null,
+          "bestBid": {
+            "price": 0.02,
+            "size": 39.7968
+          },
+          "bestAsk": {
+            "price": 0.99,
+            "size": 1419.012902020202
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793555749217
+    },
+    {
+      "market_id": 58416,
+      "question": "Will Solana hit $60 or $140 first?",
+      "title": "Will Solana hit $60 or $140 first?",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": false,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.42,
+      "yes_ask": 0.47,
+      "no_bid": 0.53,
+      "no_ask": 0.58,
+      "yes_bid_quantity": 52.275862068965516,
+      "yes_ask_quantity": 32.0,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "$60",
+          "indexSet": 1,
+          "onChainId": "51188965685736968848840633000462324544960124817084207560938617391389955705058",
+          "status": null,
+          "bestBid": {
+            "price": 0.42,
+            "size": 52.275862068965516
+          },
+          "bestAsk": {
+            "price": 0.47,
+            "size": 566.03
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "$140",
+          "indexSet": 2,
+          "onChainId": "12275532166588743743679942135188582280838006476752073844466548277959183641746",
+          "status": null,
+          "bestBid": {
+            "price": 0.53,
+            "size": 566.03
+          },
+          "bestAsk": {
+            "price": 0.58,
+            "size": 52.275862068965516
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793575916727
+    },
+    {
+      "market_id": 10835,
+      "question": "Will the US confirm that aliens exist before 2027?",
+      "title": "Will the US confirm that aliens exist before 2027?",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": false,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.025,
+      "yes_ask": 0.026,
+      "no_bid": 0.974,
+      "no_ask": 0.975,
+      "yes_bid_quantity": 1955.194358974359,
+      "yes_ask_quantity": 7438.960888767967,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "43913266138716061999370819231995125816339102838741430587666640620946616511038",
+          "status": null,
+          "bestBid": {
+            "price": 0.025,
+            "size": 1955.194358974359
+          },
+          "bestAsk": {
+            "price": 0.026,
+            "size": 7438.960888767967
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95666191922701525064334130359292250282544945245687904032708488194449877618656",
+          "status": null,
+          "bestBid": {
+            "price": 0.974,
+            "size": 7438.960888767967
+          },
+          "bestAsk": {
+            "price": 0.975,
+            "size": 1955.194358974359
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793576125182
+    },
+    {
+      "market_id": 10909,
+      "question": "Will Jesus Christ return before 2027?",
+      "title": "Will Jesus Christ return before 2027?",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": false,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.002,
+      "yes_ask": 0.006,
+      "no_bid": 0.994,
+      "no_ask": 0.998,
+      "yes_bid_quantity": 30314.20311096192,
+      "yes_ask_quantity": 6284.928618121029,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "48506319167796551402259986962903690800337075804319127979354715359832719534666",
+          "status": null,
+          "bestBid": {
+            "price": 0.002,
+            "size": 30365.205094929857
+          },
+          "bestAsk": {
+            "price": 0.006,
+            "size": 6335.91861812103
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95637417573336848067756319356527844561082404486469791004960410072163068233540",
+          "status": null,
+          "bestBid": {
+            "price": 0.994,
+            "size": 6335.91861812103
+          },
+          "bestAsk": {
+            "price": 0.998,
+            "size": 30365.205094929857
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793576018571
+    },
+    {
+      "market_id": 12742,
+      "question": "Will no Fed rate cuts happen in 2026?",
+      "title": "0 (0 bps)",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": true,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.961,
+      "yes_ask": 0.962,
+      "no_bid": 0.038,
+      "no_ask": 0.039,
+      "yes_bid_quantity": 3465.3168,
+      "yes_ask_quantity": 1936.9245374220375,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "8763382621728719692440811850839837076229847708714973135748207839605096094236",
+          "status": null,
+          "bestBid": {
+            "price": 0.961,
+            "size": 3465.3168
+          },
+          "bestAsk": {
+            "price": 0.962,
+            "size": 1936.9245374220375
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95324165559237286425840007654078557149874658616540132358365141259039209468963",
+          "status": null,
+          "bestBid": {
+            "price": 0.038,
+            "size": 1936.9245374220375
+          },
+          "bestAsk": {
+            "price": 0.039,
+            "size": 3465.3168
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793576166999
+    },
+    {
+      "market_id": 12743,
+      "question": "Will 1 Fed rate cut happen in 2026?",
+      "title": "1 (25 bps)",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": true,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.026,
+      "yes_ask": 0.028,
+      "no_bid": 0.972,
+      "no_ask": 0.974,
+      "yes_bid_quantity": 143.68,
+      "yes_ask_quantity": 695.1983421516754,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "5871871681277715404108162193462981674984372572246852219434411639928849300441",
+          "status": null,
+          "bestBid": {
+            "price": 0.026,
+            "size": 143.68
+          },
+          "bestAsk": {
+            "price": 0.028,
+            "size": 695.1983421516754
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "82907577927559016423074205494120407256070557246882807223817290380999412143521",
+          "status": null,
+          "bestBid": {
+            "price": 0.972,
+            "size": 695.1983421516754
+          },
+          "bestAsk": {
+            "price": 0.974,
+            "size": 143.68
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793576116273
+    },
+    {
+      "market_id": 12744,
+      "question": "Will 2 Fed rate cuts happen in 2026?",
+      "title": "2 (50 bps)",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": true,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.002,
+      "yes_ask": 0.003,
+      "no_bid": 0.997,
+      "no_ask": 0.998,
+      "yes_bid_quantity": 13702.109028036073,
+      "yes_ask_quantity": 1641.6633333333334,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "59248366298135355944970197401564166458913687372450025580002685356719416206294",
+          "status": null,
+          "bestBid": {
+            "price": 0.002,
+            "size": 13702.109028036073
+          },
+          "bestAsk": {
+            "price": 0.003,
+            "size": 1641.6633333333334
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "35783378891215261970693018596088001670467843830677746273302757468328846196257",
+          "status": null,
+          "bestBid": {
+            "price": 0.997,
+            "size": 1641.6633333333334
+          },
+          "bestAsk": {
+            "price": 0.998,
+            "size": 13702.109028036073
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793576042001
+    },
+    {
+      "market_id": 12745,
+      "question": "Will 3 Fed rate cuts happen in 2026?",
+      "title": "3 (75 bps)",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": true,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": 0.001,
+      "yes_ask": 0.002,
+      "no_bid": 0.998,
+      "no_ask": 0.999,
+      "yes_bid_quantity": 10245.071894894896,
+      "yes_ask_quantity": 10386.470000000001,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "102232740152804807026472196567875735561192633320940885075452536533508891009619",
+          "status": null,
+          "bestBid": {
+            "price": 0.001,
+            "size": 10245.071894894896
+          },
+          "bestAsk": {
+            "price": 0.002,
+            "size": 10386.470000000001
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "7865812145382904053276418819703957281860251563252089600104168827186541279361",
+          "status": null,
+          "bestBid": {
+            "price": 0.998,
+            "size": 10386.470000000001
+          },
+          "bestAsk": {
+            "price": 0.999,
+            "size": 10245.071894894896
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793575906392
+    },
+    {
+      "market_id": 12746,
+      "question": "Will 4 Fed rate cuts happen in 2026?",
+      "title": "4 (100 bps)",
+      "trading_status": "OPEN",
+      "market_status": "REGISTERED",
+      "is_visible": true,
+      "is_neg_risk": true,
+      "is_yield_bearing": true,
+      "fee_rate_bps": 200,
+      "maker_fee_bps": 0,
+      "yes_bid": null,
+      "yes_ask": 0.001,
+      "no_bid": 0.999,
+      "no_ask": null,
+      "yes_bid_quantity": 0.0,
+      "yes_ask_quantity": 2162.802538,
+      "total_liquidity_usd": null,
+      "volume_24h_usd": null,
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "5757844789045842809698619572368584467409427446620056400382506152410334368545",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 2162.802538
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "9137032765043806438424113260159961859146225701451950124802594504285694021408",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 2162.802538
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "orderbook_updated": 1793574241432
+    }
+  ]
 }
