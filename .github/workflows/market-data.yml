@@ -1,115 +1,109 @@
 name: Update Market Data
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: "*/15 * * * *"
+workflow_dispatch:
+schedule:
+- cron: “*/15 * * * *”
 
 permissions:
-  contents: write
+contents: write
 
 jobs:
-  update-markets:
-    runs-on: ubuntu-latest
+update-markets:
+runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.11"
-
-      - name: Install requests
-        run: pip install requests
-
-      - name: Fetch Predict.fun markets
-        env:
-          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
-        run: |
-          python - <<'PY'
-          import os
-          import json
-          import requests
-          from datetime import datetime, timezone
-
-          url = "https://api.predict.fun/v1/markets"
-
-          headers = {
-              "x-api-key": os.environ["PREDICT_API_KEY"]
-          }
-
-          active_markets = []
-          cursor = None
-          max_pages = 10
-
-          for page in range(max_pages):
-
-              params = {"first": 50}
-
-              if cursor:
-                  params["after"] = cursor
-
-              response = requests.get(
-                  url,
-                  headers=headers,
-                  params=params,
-                  timeout=30
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v5
+  - name: Set up Python
+    uses: actions/setup-python@v6
+    with:
+      python-version: "3.11"
+  - name: Install requests
+    run: pip install requests
+  - name: Fetch Predict.fun markets
+    env:
+      PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+    run: |
+      python - <<'PY'
+      import os
+      import json
+      import requests
+      from collections import Counter
+      from datetime import datetime, timezone
+      url = "https://api.predict.fun/v1/markets"
+      headers = {
+          "x-api-key": os.environ["PREDICT_API_KEY"]
+      }
+      active_markets = []
+      trading_status_counts = Counter()
+      market_status_counts = Counter()
+      cursor = None
+      max_pages = 10
+      for page in range(max_pages):
+          params = {"first": 50}
+          if cursor:
+              params["after"] = cursor
+          response = requests.get(
+              url,
+              headers=headers,
+              params=params,
+              timeout=30
+          )
+          response.raise_for_status()
+          result = response.json()
+          if not result.get("success", False):
+              raise Exception(
+                  "Predict.fun API returned an unsuccessful response"
               )
-
-              response.raise_for_status()
-
-              result = response.json()
-
-              if not result.get("success", False):
-                  raise Exception("Predict.fun API returned an unsuccessful response")
-
-              markets = result.get("data", [])
-
-              for market in markets:
-
-                  if (
-                      market.get("tradingStatus") == "OPEN"
-                      and market.get("status") != "RESOLVED"
-                      and market.get("isVisible") is True
-                  ):
-                      active_markets.append(market)
-
-                  if len(active_markets) >= 50:
-                      break
-
-              print(
-                  f"Page {page + 1}: "
-                  f"{len(markets)} markets checked"
-              )
-
+          markets = result.get("data", [])
+          for market in markets:
+              trading_status_counts[
+                  str(market.get("tradingStatus"))
+              ] += 1
+              market_status_counts[
+                  str(market.get("status"))
+              ] += 1
+          for market in markets:
+              if (
+                  market.get("tradingStatus") == "OPEN"
+                  and market.get("status") != "RESOLVED"
+                  and market.get("isVisible") is True
+              ):
+                  active_markets.append(market)
               if len(active_markets) >= 50:
                   break
-
-              cursor = result.get("cursor")
-
-              if not cursor:
-                  break
-
-          output = {
-              "updated_at": datetime.now(timezone.utc).isoformat(),
-              "total_markets": len(active_markets),
-              "markets": active_markets
-          }
-
-          with open("market_data.json", "w") as file:
-              json.dump(output, file, indent=2)
-
-          print("Market data updated successfully!")
-          print("Open markets collected:", len(active_markets))
-
-          PY
-
-      - name: Save market data
-        run: |
-          git config user.name "Market Data Bot"
-          git config user.email "actions@github.com"
-          git add market_data.json
-          git diff --cached --quiet || git commit -m "Update market data"
-          git push
+          print(
+              f"Page {page + 1}: "
+              f"{len(markets)} markets checked"
+          )
+          if len(active_markets) >= 50:
+              break
+          cursor = result.get("cursor")
+          if not cursor:
+              break
+      print(
+          "TRADING STATUS BREAKDOWN:",
+          dict(trading_status_counts)
+      )
+      print(
+          "MARKET STATUS BREAKDOWN:",
+          dict(market_status_counts)
+      )
+      output = {
+          "updated_at": datetime.now(timezone.utc).isoformat(),
+          "total_markets": len(active_markets),
+          "markets": active_markets
+      }
+      with open("market_data.json", "w") as file:
+          json.dump(output, file, indent=2)
+      print("Market data updated successfully!")
+      print("Open markets collected:", len(active_markets))
+      PY
+  - name: Save market data
+    run: |
+      git config user.name "Market Data Bot"
+      git config user.email "actions@github.com"
+      git add market_data.json
+      git diff --cached --quiet || git commit -m "Update market data"
+      git push
