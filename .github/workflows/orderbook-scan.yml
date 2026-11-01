@@ -1,13 +1,23 @@
-name: Orderbook Scanner
+name: Prediction Market AI
 
-on:
+"on":
   workflow_dispatch:
+
+  workflow_run:
+    workflows:
+      - Update Market Data
+    types:
+      - completed
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
-  scan-orderbooks:
+  scan-markets:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+
     runs-on: ubuntu-latest
 
     steps:
@@ -22,15 +32,15 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run orderbook scanner
+      - name: Run Prediction Market AI
         env:
           PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
-        run: python orderbook_scanner.py
+        run: python main.py
 
       - name: Save orderbook data
         run: |
           git config user.name "Market Data Bot"
           git config user.email "actions@github.com"
           git add orderbooks.json
-          git diff --cached --quiet || git commit -m "Update orderbook data"
+          git diff --cached --quiet || git commit -m "Update orderbook analysis"
           git push
