@@ -1,53 +1,86 @@
-import time
-from datetime import datetime
+import json
+from datetime import datetime, timezone
 
-BOT_NAME = "Prediction Market AI"
-
-# Trading configuration
-CONFIG = {
-    "mode": "PAPER",
-    "starting_balance": 100,
-    "max_trade": 2,
-    "max_daily_loss": 5,
-    "scan_interval": 60
-}
+from config import CONFIG
+from orderbook_scanner import scan_markets
 
 
 def display_status():
-    print("=" * 40)
-    print(BOT_NAME)
-    print("=" * 40)
-    print(f"Mode: {CONFIG['mode']}")
-    print(f"Starting balance: ${CONFIG['starting_balance']}")
-    print(f"Maximum trade: ${CONFIG['max_trade']}")
-    print(f"Maximum daily loss: ${CONFIG['max_daily_loss']}")
-    print(f"Time: {datetime.now()}")
-    print("=" * 40)
+
+    print("=" * 45)
+    print("PREDICTION MARKET AI")
+    print("=" * 45)
+
+    print("Mode:", CONFIG["MODE"])
+    print("Starting balance:", CONFIG["STARTING_BALANCE"])
+    print("Maximum trade:", CONFIG["MAX_TRADE"])
+    print("Maximum daily loss:", CONFIG["MAX_DAILY_LOSS"])
+    print("Time:", datetime.now(timezone.utc).isoformat())
+
+    print("=" * 45)
 
 
-def scan_markets():
-    print("\nScanning prediction markets...")
+def analyse_orderbooks():
 
-    # Market scanner will be connected here.
-    print("Waiting for market data...")
+    try:
+        with open("orderbooks.json", "r") as file:
+            data = json.load(file)
 
+    except FileNotFoundError:
+        print("Orderbook data not found.")
+        return
 
-def analyse_markets():
-    print("\nAnalysing market probabilities...")
+    markets = data.get("orderbooks", [])
 
-    # AI probability engine will be connected here.
-    print("Analysis engine awaiting market data...")
+    print("\nORDER BOOK ANALYSIS")
+    print("-" * 45)
+
+    print("Markets analysed:", len(markets))
+
+    for market in markets:
+
+        yes_bid = market.get("yes_bid")
+        yes_ask = market.get("yes_ask")
+
+        if yes_bid is None or yes_ask is None:
+            continue
+
+        spread = yes_ask - yes_bid
+
+        print("\nMarket:", market.get("question"))
+        print("YES bid:", yes_bid)
+        print("YES ask:", yes_ask)
+        print("YES spread:", round(spread, 4))
+
+        if spread >= 0.20:
+            print("Warning: Very wide spread")
+
+        elif spread <= 0.05:
+            print("Spread: Relatively narrow")
+
+        else:
+            print("Spread: Moderate")
 
 
 def main():
+
     display_status()
 
-    while True:
-        scan_markets()
-        analyse_markets()
+    print("\nStarting market analysis...")
 
-        print("\nNext scan in 60 seconds.")
-        time.sleep(CONFIG["scan_interval"])
+    try:
+        scan_markets()
+
+        analyse_orderbooks()
+
+        print("\nAnalysis completed successfully.")
+
+    except Exception as error:
+        print("\nAnalysis failed:", error)
+        raise
+
+    print("\nTrading mode:", CONFIG["MODE"])
+    print("No real trades have been executed.")
 
 
 if __name__ == "__main__":
