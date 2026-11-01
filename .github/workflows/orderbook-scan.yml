@@ -16,11 +16,13 @@ permissions:
 
 jobs:
   scan-markets:
+
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
 
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v5
 
@@ -32,15 +34,18 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Run BTC Price Tracker
+        run: python btc_price_tracker.py
+
       - name: Run Prediction Market AI
         env:
           PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
         run: python main.py
 
-      - name: Save orderbook data
+      - name: Save market and BTC data
         run: |
           git config user.name "Market Data Bot"
           git config user.email "actions@github.com"
-          git add orderbooks.json
-          git diff --cached --quiet || git commit -m "Update orderbook analysis"
+          git add orderbooks.json btc_price_data.json
+          git diff --cached --quiet || git commit -m "Update BTC market and price data"
           git push
