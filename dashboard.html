@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prediction Market AI</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #080d18;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    padding: 22px;
+    background: #101a2b;
+    border-bottom: 1px solid #26344b;
+}
+
+header h2 {
+    margin: 0;
+    color: #52e0ad;
+}
+
+header p {
+    color: #8999b3;
+    font-size: 13px;
+}
+
+.container {
+    padding: 18px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.status {
+    padding: 15px;
+    background: #102c26;
+    border: 1px solid #23644c;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.status span {
+    color: #52e0ad;
+    font-weight: bold;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.card {
+    background: #111c2e;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #24334b;
+}
+
+.card p {
+    color: #8999b3;
+    font-size: 13px;
+}
+
+.value {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.green {
+    color: #52e0ad;
+}
+
+.red {
+    color: #ff6464;
+}
+
+.section {
+    margin-top: 25px;
+}
+
+.section h3 {
+    margin-bottom: 14px;
+}
+
+button {
+    padding: 13px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 5px 5px 5px 0;
+}
+
+.start {
+    background: #52e0ad;
+    color: #08150f;
+}
+
+.pause {
+    background: #ffbd59;
+    color: #171006;
+}
+
+.stop {
+    background: #ff6464;
+    color: white;
+}
+
+.panel {
+    background: #111c2e;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 12px;
+    border: 1px solid #24334b;
+}
+
+footer {
+    padding: 25px;
+    text-align: center;
+    color: #71819b;
+    font-size: 12px;
+}
+
+@media(max-width: 450px) {
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>◈ Prediction Market AI</h2>
+
+<p>Autonomous Trading Intelligence</p>
+
+</header>
+
+<div class="container">
+
+<div class="status">
+    ● SYSTEM STATUS:
+    <span id="status">PAPER MODE - IDLE</span>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<p>Virtual Balance</p>
+<div class="value green" id="balance">$100.00</div>
+</div>
+
+<div class="card">
+<p>Total Profit/Loss</p>
+<div class="value" id="profit">$0.00</div>
+</div>
+
+<div class="card">
+<p>Open Positions</p>
+<div class="value" id="positions">0</div>
+</div>
+
+<div class="card">
+<p>Total Trades</p>
+<div class="value" id="trades">0</div>
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>AI Controls</h3>
+
+<div class="panel">
+
+<button class="start" onclick="startBot()">
+START
+</button>
+
+<button class="pause" onclick="pauseBot()">
+PAUSE
+</button>
+
+<button class="stop" onclick="stopBot()">
+STOP
+</button>
+
+<p id="message">
+Trading engine is awaiting connection.
+</p>
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Market Opportunities</h3>
+
+<div class="panel" id="markets">
+
+No market data available yet.
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Trading Activity</h3>
+
+<div class="panel" id="activity">
+
+No trades recorded.
+
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Risk Management</h3>
+
+<div class="panel">
+
+<p>Maximum trade: $2</p>
+<p>Maximum daily loss: $5</p>
+<p>Execution mode: PAPER</p>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+Prediction Market AI · Experimental Trading System
+
+</footer>
+
+<script>
+
+let botStatus = "IDLE";
+
+function updateStatus() {
+
+    document.getElementById("status").textContent =
+        "PAPER MODE - " + botStatus;
+
+}
+
+function startBot() {
+
+    botStatus = "START REQUESTED";
+
+    updateStatus();
+
+    document.getElementById("message").textContent =
+        "Dashboard start request recorded. Backend connection required.";
+
+}
+
+function pauseBot() {
+
+    botStatus = "PAUSE REQUESTED";
+
+    updateStatus();
+
+    document.getElementById("message").textContent =
+        "Dashboard pause request recorded. Backend connection required.";
+
+}
+
+function stopBot() {
+
+    botStatus = "STOP REQUESTED";
+
+    updateStatus();
+
+    document.getElementById("message").textContent =
+        "Dashboard stop request recorded. Backend connection required.";
+
+}
+
+</script>
+
+</body>
+</html>
