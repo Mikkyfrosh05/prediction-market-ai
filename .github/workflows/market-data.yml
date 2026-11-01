@@ -40,29 +40,70 @@ jobs:
               "x-api-key": os.environ["PREDICT_API_KEY"]
           }
 
-          response = requests.get(
-              url,
-              headers=headers,
-              params={"first": 50},
-              timeout=30
-          )
+          active_markets = []
+          cursor = None
+          max_pages = 10
 
-          response.raise_for_status()
+          for page in range(max_pages):
 
-          result = response.json()
-          markets = result.get("data", [])
+              params = {"first": 50}
+
+              if cursor:
+                  params["after"] = cursor
+
+              response = requests.get(
+                  url,
+                  headers=headers,
+                  params=params,
+                  timeout=30
+              )
+
+              response.raise_for_status()
+
+              result = response.json()
+
+              if not result.get("success", False):
+                  raise Exception("Predict.fun API returned an unsuccessful response")
+
+              markets = result.get("data", [])
+
+              for market in markets:
+
+                  if (
+                      market.get("tradingStatus") == "OPEN"
+                      and market.get("status") != "RESOLVED"
+                      and market.get("isVisible") is True
+                  ):
+                      active_markets.append(market)
+
+                  if len(active_markets) >= 50:
+                      break
+
+              print(
+                  f"Page {page + 1}: "
+                  f"{len(markets)} markets checked"
+              )
+
+              if len(active_markets) >= 50:
+                  break
+
+              cursor = result.get("cursor")
+
+              if not cursor:
+                  break
 
           output = {
               "updated_at": datetime.now(timezone.utc).isoformat(),
-              "total_markets": len(markets),
-              "markets": markets
+              "total_markets": len(active_markets),
+              "markets": active_markets
           }
 
           with open("market_data.json", "w") as file:
               json.dump(output, file, indent=2)
 
           print("Market data updated successfully!")
-          print("Markets collected:", len(markets))
+          print("Open markets collected:", len(active_markets))
+
           PY
 
       - name: Save market data
