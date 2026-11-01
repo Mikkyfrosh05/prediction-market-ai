@@ -1,5 +1,3905 @@
 {
-  "updated_at": "2026-11-01T22:57:55.484964+00:00",
-  "total_markets": 0,
-  "markets": []
+  "updated_at": "2026-11-01T23:00:52.899608+00:00",
+  "total_markets": 50,
+  "markets": [
+    {
+      "id": 52261,
+      "imageUrl": "https://static.predict.fun/will-ethereum-hit-1k-or-3k-first-will-ethereum-hit-1-000-or-3-000-first",
+      "title": "Will Ethereum hit $1,000 or $3,000 first?",
+      "question": "Will Ethereum hit $1,000 or $3,000 first?",
+      "description": "This market will resolve to the lower price in the title if Ethereum\u2019s price dips to that level or below before it hits the higher title price between the creation of this market and December 31, 2026 at 11:59 PM ET. It will resolve to the higher price in the title if Ethereum\u2019s price first reaches that level or above before it dips to the lower title price during the same period.\n\nIf neither price level is reached within the market timeframe, the market will resolve 50\u201350.\n\nThe resolution source for this market is Binance, specifically the ETH/USDT \"High\" and \"Low\" prices currently available at https://www.binance.com/en/trade/ETH_USDT with \u201c1m\u201d and \u201cCandles\u201d selected on the top bar.\n\nPlease note that this market is about the price according to Binance ETH/USDT, not according to other sources or spot markets.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xc81244eb54a62a816687f2f38615b15573bbe682ed011b09f866fc83df032d3b",
+      "conditionId": "0xdd426617a2764705411c033903afbaff5339c1bb172d8c640de51f5c02ef50c7",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "$1,000",
+          "indexSet": 1,
+          "onChainId": "53727338341141758961983375514819431676140033602166521068469999613293808179494",
+          "status": null,
+          "bestBid": {
+            "price": 0.35,
+            "size": 400
+          },
+          "bestAsk": {
+            "price": 0.4,
+            "size": 32
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "$3,000",
+          "indexSet": 2,
+          "onChainId": "50652796412610643786819169498783735266437330197922294923802126678209883710070",
+          "status": null,
+          "bestBid": {
+            "price": 0.6,
+            "size": 32
+          },
+          "bestAsk": {
+            "price": 0.65,
+            "size": 400
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x094725e5691f06b1895496ab0823b3f843c3be680f870cb721958d4e4d280a55"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "will-ethereum-hit-1k-or-3k-first",
+      "createdAt": "2026-03-12T13:26:02.316Z",
+      "decimalPrecision": 2,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 40,
+          "startsAt": "2026-09-24T14:35:32.310Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 600,
+            "startsAt": "2026-08-20T08:11:49.851Z",
+            "endsAt": "2026-08-23T08:11:49.851Z"
+          },
+          {
+            "hourlyRate": 10,
+            "startsAt": "2026-08-23T08:11:49.851Z",
+            "endsAt": "2026-09-21T14:35:32.310Z"
+          },
+          {
+            "hourlyRate": 500,
+            "startsAt": "2026-09-21T14:35:32.310Z",
+            "endsAt": "2026-09-24T14:35:32.310Z"
+          },
+          {
+            "hourlyRate": 40,
+            "startsAt": "2026-09-24T14:35:32.310Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 190414,
+      "imageUrl": "https://static.predict.fun/will-justin-sun-address-no-be-blacklisted-by-2027-will-justin-suns-address-no-longer-be-blacklisted-by-wlfi-by-2027",
+      "title": "Will Justin Sun's address no longer be blacklisted by WLFI by 2027?",
+      "question": "Will Justin Sun's address no longer be blacklisted by WLFI by 2027?",
+      "description": "This market will resolve to \"Yes\" if at any point between April 13th 00:00 AM ET and Dec 31, 2026 11:59 PM ET Justin Sun\u2019s public address is removed from the blacklist on the official WLFI contract. Otherwise, it will resolve to \u201cNo\u201d.\n\nFor the purposes of this market:\n\nJustin Sun\u2019s address is 0x5AB26169051d0D96217949ADb91E86e51a5FDA74\n\nThe WLFI contract\u2019s address is 0xdA5e1988097297dCdc1f90D4dFE7909e847CBeF6\n\nThe current blacklist status can be checked in this URL by calling the \u201cisBlacklisted\u201d function with Justin Sun\u2019s address to check the \u201cblacklistStatus\u201d. https://etherscan.io/address/0xda5e1988097297dcdc1f90d4dfe7909e847cbef6#readProxyContract\n\nAs soon as the WLFI contract emits the event \u201cSetBlacklistStatus(0x5AB26169051d0D96217949ADb91E86e51a5FDA74, false)\u201d this market will immediately resolve to \u201cYes\u201d regardless of whether the address is later blacklisted again.\n\nOnly the blacklist status on Ethereum mainnet counts toward resolution for the addresses specified above. The blacklist status of any other address or blockchain will not count towards the resolution of this market.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x192ac4d26ffadf2e46cb7202ed25be1efbfce129f8c6a36bb5957a8740ee7c31",
+      "conditionId": "0x3b700331d4b21afc0a3533b14aae3765246c2c888a6e19e74720ac834c5a10bc",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "85556203901520498534267034841100021581180423205182682518978417509126723282624",
+          "status": null,
+          "bestBid": {
+            "price": 0.01,
+            "size": 1419.012902020202
+          },
+          "bestAsk": {
+            "price": 0.98,
+            "size": 39.7968
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "111969906208440861617284277294836555686517393902733584762558889090579643366134",
+          "status": null,
+          "bestBid": {
+            "price": 0.02,
+            "size": 39.7968
+          },
+          "bestAsk": {
+            "price": 0.99,
+            "size": 1419.012902020202
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [],
+      "kalshiMarketTicker": null,
+      "categorySlug": "will-justin-sun-address-no-be-blacklisted-by-2027",
+      "createdAt": "2026-04-13T16:11:24.555Z",
+      "decimalPrecision": 2,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 58416,
+      "imageUrl": "https://static.predict.fun/will-solana-hit-60-or-140-first-will-solana-hit-60-or-140-first",
+      "title": "Will Solana hit $60 or $140 first?",
+      "question": "Will Solana hit $60 or $140 first?",
+      "description": "This market will resolve to the lower price in the title if Solana\u2019s price dips to that level or below before it hits the higher title price between the creation of this market and December 31, 2026 at 11:59 PM ET. It will resolve to the higher price in the title if Solana\u2019s price first reaches that level or above before it dips to the lower title price during the same period.\n\nIf neither price level is reached within the market timeframe, the market will resolve 50\u201350.\n\nThe resolution source for this market is Binance, specifically the SOL/USDT \"High\" and \"Low\" prices currently available at https://www.binance.com/en/trade/SOL_USDT with \u201c1m\u201d and \u201cCandles\u201d selected on the top bar.\n\nPlease note that this market is about the price according to Binance SOL/USDT, not according to other sources or spot markets.\n\nCreated At: 2026-03-12T13:27:08.415139627Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x467f6d142682cc1f7092513d904ac997b546559b00435db99f84ca32350b740f",
+      "conditionId": "0x52c39a38987b04d118d82003becf9734dcd4c2a4d3ecae298bb38ed667b41676",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "$60",
+          "indexSet": 1,
+          "onChainId": "51188965685736968848840633000462324544960124817084207560938617391389955705058",
+          "status": null,
+          "bestBid": {
+            "price": 0.42,
+            "size": 52.275862068965516
+          },
+          "bestAsk": {
+            "price": 0.47,
+            "size": 566.03
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "$140",
+          "indexSet": 2,
+          "onChainId": "12275532166588743743679942135188582280838006476752073844466548277959183641746",
+          "status": null,
+          "bestBid": {
+            "price": 0.53,
+            "size": 566.03
+          },
+          "bestAsk": {
+            "price": 0.58,
+            "size": 52.275862068965516
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xe3d0a05304ed0f7e0689a93b0531a1c100d715df9c74549063c98980d2c1a407"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "will-solana-hit-60-or-140-first",
+      "createdAt": "2026-03-12T13:27:08.418Z",
+      "decimalPrecision": 2,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 40,
+          "startsAt": "2026-09-24T14:35:55.326Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 600,
+            "startsAt": "2026-08-20T08:12:34.617Z",
+            "endsAt": "2026-08-23T08:12:34.617Z"
+          },
+          {
+            "hourlyRate": 10,
+            "startsAt": "2026-08-23T08:12:34.617Z",
+            "endsAt": "2026-09-21T14:35:55.326Z"
+          },
+          {
+            "hourlyRate": 500,
+            "startsAt": "2026-09-21T14:35:55.326Z",
+            "endsAt": "2026-09-24T14:35:55.326Z"
+          },
+          {
+            "hourlyRate": 40,
+            "startsAt": "2026-09-24T14:35:55.326Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 10835,
+      "imageUrl": "https://static.predict.fun/will-the-us-confirm-that-aliens-exist-before-2027-will-the-us-confirm-that-aliens-exist-before-2027",
+      "title": "Will the US confirm that aliens exist before 2027?",
+      "question": "Will the US confirm that aliens exist before 2027?",
+      "description": "This market will resolve to \"Yes\" if the President of the United States, any member of the Cabinet of the United States, any member of the Joint Chiefs of Staff, or any US federal agency definitively states that extraterrestrial life or technology exists by December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to \"No\".\n\nThe primary resolution source for this market will be official information from the government of the United States, however a consensus of credible reporting will also be used.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x01d708819633215843cc70c06b9ef67548981ce2b2444a795d92c3c91042e83f",
+      "conditionId": "0xe8bd54b20478c0c47436c271935f6fc780f0ed6410df466f1cdea06aa4e1276f",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "43913266138716061999370819231995125816339102838741430587666640620946616511038",
+          "status": null,
+          "bestBid": {
+            "price": 0.025,
+            "size": 1955.194358974359
+          },
+          "bestAsk": {
+            "price": 0.026,
+            "size": 7438.960888767967
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95666191922701525064334130359292250282544945245687904032708488194449877618656",
+          "status": null,
+          "bestBid": {
+            "price": 0.974,
+            "size": 7438.960888767967
+          },
+          "bestAsk": {
+            "price": 0.975,
+            "size": 1955.194358974359
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x747dc809fb79e1b05be09c42d6179459a58de2ef3e40f02484a4e1260f741f75"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "will-the-us-confirm-that-aliens-exist-before-2027",
+      "createdAt": "2026-02-26T10:39:37.847Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 180,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 180,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 10909,
+      "imageUrl": "https://static.predict.fun/will-jesus-christ-return-before-2027-will-jesus-christ-return-before-2027",
+      "title": "Will Jesus Christ return before 2027?",
+      "question": "Will Jesus Christ return before 2027?",
+      "description": "This market will resolve to \"Yes\" if The Second Coming of Jesus Christ occurs by December 31, 2026, 11:59 PM ET. Otherwise, this market will resolve to \"No\".\n\nThe resolution source for this market will be a consensus of credible sources.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xe7516aeabb7bea7984c7ed6809ea76aa2eda14fd78fc34742be61152bbb6f72a",
+      "conditionId": "0x0685b885eca8f2744d4726be03cd0af5fcc8c1d078e19e406cd72c33acdcf151",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "48506319167796551402259986962903690800337075804319127979354715359832719534666",
+          "status": null,
+          "bestBid": {
+            "price": 0.002,
+            "size": 30365.205094929857
+          },
+          "bestAsk": {
+            "price": 0.006,
+            "size": 6335.91861812103
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95637417573336848067756319356527844561082404486469791004960410072163068233540",
+          "status": null,
+          "bestBid": {
+            "price": 0.994,
+            "size": 6335.91861812103
+          },
+          "bestAsk": {
+            "price": 0.998,
+            "size": 30365.205094929857
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x0b4cc3b739e1dfe5d73274740e7308b6fb389c5af040c3a174923d928d134bee"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "will-jesus-christ-return-before-2027",
+      "createdAt": "2026-02-26T15:24:28.417Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 60,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 12742,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-0-0-bps",
+      "title": "0 (0 bps)",
+      "question": "Will no Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:41.782331891Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x03c5fb41247f5b240d1ded17217146ad0880f13c70a2abc30759e5012ee7daa8",
+      "conditionId": "0xf628be173e70d913d4004a4412481c2761a2c25da9664d4cba9f2ba36ad45dc0",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "8763382621728719692440811850839837076229847708714973135748207839605096094236",
+          "status": null,
+          "bestBid": {
+            "price": 0.961,
+            "size": 3465.3168
+          },
+          "bestAsk": {
+            "price": 0.962,
+            "size": 1936.9245374220375
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "95324165559237286425840007654078557149874658616540132358365141259039209468963",
+          "status": null,
+          "bestBid": {
+            "price": 0.038,
+            "size": 1936.9245374220375
+          },
+          "bestAsk": {
+            "price": 0.039,
+            "size": 3465.3168
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 0,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xd4e77ba6f29fc093509d24f508631abd445ecf506bbdc9c4c80e60256a318527"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 60,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 12743,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-1-25-bps",
+      "title": "1 (25 bps)",
+      "question": "Will 1 Fed rate cut happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:41.896701362Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xf55073e4b060f5b6cd801af5baed99edc5fa71fbee892f01902a14630b1ab33b",
+      "conditionId": "0x92982aeda1169cef7f2a986d756ff22aba1522441b7b6f489999512bf339ee81",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "5871871681277715404108162193462981674984372572246852219434411639928849300441",
+          "status": null,
+          "bestBid": {
+            "price": 0.026,
+            "size": 143.68
+          },
+          "bestAsk": {
+            "price": 0.028,
+            "size": 695.1983421516754
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "82907577927559016423074205494120407256070557246882807223817290380999412143521",
+          "status": null,
+          "bestBid": {
+            "price": 0.972,
+            "size": 695.1983421516754
+          },
+          "bestAsk": {
+            "price": 0.974,
+            "size": 143.68
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 1,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x5e082f0b57f47a29044aa35b4c5658393122e659d5feae521c06b57cdd7f905c"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 60,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 12744,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-2-50-bps",
+      "title": "2 (50 bps)",
+      "question": "Will 2 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:41.987572209Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x415c6218aa38de0b46e4cd34fa17e47d5d67c010fd6670c6f7a69181ad06f428",
+      "conditionId": "0x382a6eb3a57dbb5d50362d5aba126d9be0cfc3c0351d5875a65c2537b57fb10d",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "59248366298135355944970197401564166458913687372450025580002685356719416206294",
+          "status": null,
+          "bestBid": {
+            "price": 0.002,
+            "size": 13702.109028036073
+          },
+          "bestAsk": {
+            "price": 0.003,
+            "size": 1641.6633333333334
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "35783378891215261970693018596088001670467843830677746273302757468328846196257",
+          "status": null,
+          "bestBid": {
+            "price": 0.997,
+            "size": 1641.6633333333334
+          },
+          "bestAsk": {
+            "price": 0.998,
+            "size": 13702.109028036073
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 2,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xe0d9f508a249e0070db06eb7d1e1fb17eb23c963f6fb722c4c3f81e23240c1cd"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 60,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 12745,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-3-75-bps",
+      "title": "3 (75 bps)",
+      "question": "Will 3 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.075293774Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x13cc971404c24b4a462ff14670717620ad98d60f2a74ca7c585f997e7e393eb9",
+      "conditionId": "0xb81ca98ce5ba74c16beb32f6bb2336b65c0c6cf9de08c1fa33559e478ee8e652",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "102232740152804807026472196567875735561192633320940885075452536533508891009619",
+          "status": null,
+          "bestBid": {
+            "price": 0.001,
+            "size": 10245.071894894896
+          },
+          "bestAsk": {
+            "price": 0.002,
+            "size": 10386.470000000001
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "7865812145382904053276418819703957281860251563252089600104168827186541279361",
+          "status": null,
+          "bestBid": {
+            "price": 0.998,
+            "size": 10386.470000000001
+          },
+          "bestAsk": {
+            "price": 0.999,
+            "size": 10245.071894894896
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 3,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x8d4966e84ae80f24b2e14643fdd45364e354229e11e2c17903b4b1763cfbe67c"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 60,
+          "startsAt": "2026-04-28T14:00:00.000Z",
+          "endsAt": "2027-01-01T05:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2027-01-01T05:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 12746,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-4-100-bps",
+      "title": "4 (100 bps)",
+      "question": "Will 4 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.163245031Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x0095ac9c4ee30e9cae859445a060dce3c25185550ac4565d81ef2cadae60ea47",
+      "conditionId": "0x3d8d77a962e61884a72883550522d8dd7e3730b3ea84762af3f142274e70a02c",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "5757844789045842809698619572368584467409427446620056400382506152410334368545",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 2162.802538
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "9137032765043806438424113260159961859146225701451950124802594504285694021408",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 2162.802538
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 4,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xaece8d6062d3e3eb9845b32441a4ab06eb2ef332c0228bc6a36add450647c7c4"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12747,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-5-125-bps",
+      "title": "5 (125 bps)",
+      "question": "Will 5 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.249240995Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x49d388dad4904772293a7bbbb5501a5a29e51abd6aac2c0812ea9c37211b92f9",
+      "conditionId": "0x9a60a8c4b4edfad5236f9e4b136eead124859eec37f1d9f043b39908507b2048",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "88826967583970687169432312335783100199059013404316006572716466991545921530869",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 3667.2999999999997
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "107187838735374320823408527177149087786329205324512481196774102015603815142373",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 3667.2999999999997
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 5,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x7ee722a07e0f84405f1267bc1c84eb95bd6348454453abf445618e778af8fd18"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12748,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-6-150-bps",
+      "title": "6 (150 bps)",
+      "question": "Will 6 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.329575048Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xa374f41cf9d51f94dbc2d8037015b4a087c71e71ca3558684bd0d6994349ed28",
+      "conditionId": "0x56cc0ef08550bdbd7b558c2ba5133ce869d821b0d6c8d15f5de2e1f10f692e69",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "24371950755737946932923172046795944945459695302494248320561761362418787029298",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.002,
+            "size": 1476.02082
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "51856596948587460541249833544488901094701090557013346960130485289748427339696",
+          "status": null,
+          "bestBid": {
+            "price": 0.998,
+            "size": 1476.02082
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 6,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x4914bfdd892a48c341b5e0f41ec10475a815f2277273110b16f95e21084bfe75"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12749,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-7-175-bps",
+      "title": "7 (175 bps)",
+      "question": "Will 7 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.409625773Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xc3fc831fce1db695d10a3380db6ba2effee169b799fe70e9d768b770ded832ea",
+      "conditionId": "0x55d1713a07adc127f5038c7a54f15e65463a8bac59acee10965af3c78dd7b0fc",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "34420448448647511542418207786095298656764881846633294742726726807539001910859",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 12434.33
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "20804898716277347909586286188734922712040318137639164203642928720724008155498",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 12434.33
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 7,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x2368d2604c9c2b95bc98c51bd50c66e5351caebf05b9fe79d3398c387fe29a89"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12750,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-8-200-bps",
+      "title": "8 (200 bps)",
+      "question": "Will 8 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.501823285Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xa1a4130a62968974ede5d3cac79204f981b0da7dbee1052925ef24cb38edccf8",
+      "conditionId": "0x2b7601e59ebb8d0abab5f9ad0c59405430e4fb7d6a09683ad9f6a999c890525f",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "65640659779749328725931714324561548359928311434429873363981223553324662028966",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 3770.83
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "27469133531564430766599961769666375333607268997442268796128952478286933189490",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 3770.83
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 8,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xfe28cb84a714b1a964290d7fd2587e71d57e905678c8ab64488449b24be78e52"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12751,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-9-225-bps",
+      "title": "9 (225 bps)",
+      "question": "Will 9 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.589853373Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xc35ece05123a9dca760973810f8d7cf83d35013dc2107e4c8adbaa5e8f4e145d",
+      "conditionId": "0x7cef12a7795ef01c7d1ff38c816a5004dd0cd9d20fe53485f60c93a4a1dc7c13",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "90444081476448492030053352579668632628678338414373220397201688690214365514995",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 29841.18
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "43745649644230164830895210480045417486269795657042948317164229824716798632997",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 29841.18
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 9,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x4ec6fcb43fe1a32163c7da09d54a99ab9bf6abdc6fd49939d7ad67d696a3248b"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12752,
+      "imageUrl": "https://static.predict.fun/market-images/41ff6bee-d8e7-4ec8-b573-afb86912a7d1.jpg",
+      "title": "10 (250 bps)",
+      "question": "Will 10 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.67434923Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x93da8f7ad75ab972dbd81776d6ae77d1dcc63f3b9f43b27493a0b1df0f4937de",
+      "conditionId": "0x47f589418bc23c808f0613064d39238f82bcca83611a9bc4ea62f7715a67f1d9",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "43580110668798966006839078747703819326684459104966555020330093929522092038806",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 4560.65
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "80503764461427110474642755214740819703493064063236395646878973946560377607713",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 4560.65
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 10,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x757c144993b3cb831e04c42bfcff8c18864c7da4f4688a5939d2f62e031cbc87"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12753,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-11-275-bps",
+      "title": "11 (275 bps)",
+      "question": "Will 11 Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.760346274Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xc7dc83135d1ab2d59bf67d8136b63b17033be478148ea8ac24a8a5d5a112189b",
+      "conditionId": "0xf74f8e08f7d68a32cebd41518ba5a134724b57973e7da803dfac3063611a1ab5",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "83336493172696643276304605059939642466740812219217328694363264908428184986279",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 26947.8
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "9044987888190023967170288231641377000142340554389312435398879033905097915771",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 26947.8
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 11,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x1adf074e048fa613f4ddbc0766088748a48d120a3a713b0183e219032a411ae3"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 12754,
+      "imageUrl": "https://static.predict.fun/how-many-fed-rate-cuts-in-2026-12-300-bps",
+      "title": "12+ (300+ bps)",
+      "question": "Will 12 or more Fed rate cuts happen in 2026?",
+      "description": "This market will resolve according to the exact amount of cuts of 25 basis points in 2026 by the Fed (including any cuts made during the December meeting).\n\nEmergency rate cuts outside of scheduled FOMC meetings will also count toward the total number of cuts in 2026. This market will remain open until December 31, 2026, 11:59 PM ET, to account for any such emergency actions.\n\nFor example, if the Fed cuts rates by 50 bps after a meeting, it would be considered 2 cuts (of 25 bps each).\n\nThis market will resolve early to \"No\" if the specified number of cuts becomes impossible \u2014 i.e., if more cuts have already occurred than the strike in question.\n\nNote that cuts between 1\u201324 bps (inclusive) will also be considered 1 rate cut.\n\nThe resolution source for this market will be FOMC statements after meetings scheduled in 2026 according to the official calendar: https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm. The level and change of the target federal funds rate is also published at the official website of the Federal Reserve at https://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nCreated At: 2026-03-02T12:00:42.852402693Z",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x9becfe9df58cb05e0c205b1b769834e1b50c76100113a93dc72efd783340707e",
+      "conditionId": "0x55c971d41f5c07226768434f0a43cd297b7362b88a8290e2f777b10b1163a170",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "41333478120842446376493849755346322124425319781591761234445237384137383238750",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.001,
+            "size": 30973.23
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "68080314613462640073875553917431582648379106908657005821172045560695592088949",
+          "status": null,
+          "bestBid": {
+            "price": 0.999,
+            "size": 30973.23
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 12,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xffa0accb74987c0dc33a70eb3780c1da160206bcfb3ef5d16c1667bc5c459c78"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "how-many-fed-rate-cuts-in-2026",
+      "createdAt": "2026-03-02T12:00:42.853Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30533,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-5-5",
+      "title": "\u2191 5.5%",
+      "question": "Will the Fed\u2019s upper bound reach 5.5% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x7897800668d344ae406c3a43094783e212947854459ea4c45a1b48ef7c60a6cc",
+      "conditionId": "0x69eba4d9197d8a824adad9ecd4f05338371553ed0e2cd16e6bddb2ca9c762ae4",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "83723338061809998204646786264246954784498184856475320160737870043181905364834",
+          "status": null,
+          "bestBid": {
+            "price": 0.011,
+            "size": 12
+          },
+          "bestAsk": {
+            "price": 0.36,
+            "size": 32
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "61285077230336949587723556596500148914202016670046962806725418005991312548510",
+          "status": null,
+          "bestBid": {
+            "price": 0.64,
+            "size": 32
+          },
+          "bestAsk": {
+            "price": 0.989,
+            "size": 12
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x360247ba6b67009d19be741be7187abd59c5005e14be0914eb4e485f3b342c40"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30524,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-5-25",
+      "title": "\u2191 5.25%",
+      "question": "Will the Fed\u2019s upper bound reach 5.25% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x3cd5d253bc5726a5e18f84a12bbba874b7efcf365ad091775aba4f713b516457",
+      "conditionId": "0xa6f757d02a07cca67a1645ad8fbde56fb51804b7d87d20465c597f5ad3e5f193",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "8484304367740673679991392810101712558604239410059137802713619098129494503763",
+          "status": null,
+          "bestBid": {
+            "price": 0.003,
+            "size": 1000
+          },
+          "bestAsk": {
+            "price": 0.149,
+            "size": 10
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "52328436326151512637421304358484100149435430807522880549554975453442236550125",
+          "status": null,
+          "bestBid": {
+            "price": 0.851,
+            "size": 10
+          },
+          "bestAsk": {
+            "price": 0.997,
+            "size": 1000
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x728246cda497e10289a7145245675e2baece6561ba784760b0914108e6e42c04"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30523,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-5-0",
+      "title": "\u2191 5.0%",
+      "question": "Will the Fed\u2019s upper bound reach 5.0% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xd0475f1bfc7d081b0faf97b94c2fa7f9a6a5716ee98aa976e088d6552e8cf858",
+      "conditionId": "0x0e77a3324bc02660aaabeb383ac7c38a00acda6b366373200799c37e3cb07475",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "53139768351742463985128750020204107433879051881020700976503754926183379999882",
+          "status": null,
+          "bestBid": {
+            "price": 0.01,
+            "size": 11.13
+          },
+          "bestAsk": {
+            "price": 0.126,
+            "size": 343.24
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "24141886638087390878246254192533243645956055420771550918329247609304444217219",
+          "status": null,
+          "bestBid": {
+            "price": 0.874,
+            "size": 343.24
+          },
+          "bestAsk": {
+            "price": 0.99,
+            "size": 11.13
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x0a95717208bdb1c1167877eb5b19085494f68ed9b074d8dfc7d76b549fcbe7bb"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30525,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-4-75",
+      "title": "\u2191 4.75%",
+      "question": "Will the Fed\u2019s upper bound reach 4.75% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x76d1ca57474a09788007f260d59d9e1ac5571bda5f3d314336dfbe369dac287f",
+      "conditionId": "0x72c1965c40aa85db21fdf221333c12d1a86e13b0ecfec11e1f956d1145db1958",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "104380469494097466683500393872209642160376068728497526826794357878310529143712",
+          "status": null,
+          "bestBid": {
+            "price": 0.005,
+            "size": 733
+          },
+          "bestAsk": {
+            "price": 0.064,
+            "size": 32
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "59290409080065049017708160919064093129204301591322103020529367574297079065380",
+          "status": null,
+          "bestBid": {
+            "price": 0.936,
+            "size": 32
+          },
+          "bestAsk": {
+            "price": 0.995,
+            "size": 733
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x784b640e50d8db8ff5b36904fe9ecd1b3a261f4d3a0cd20adcfb7156e066ca78"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30534,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-4-5",
+      "title": "\u2191 4.5%",
+      "question": "Will the Fed\u2019s upper bound reach 4.5% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x228996853f1ac1c87fab6614697812fc0d6ca78e437800901263aeda9776c4f4",
+      "conditionId": "0xe636b0c2fe3dd4a5e0b83c444a3d85a96edfc41cf25bcd49750a002420afe451",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "72778359709417848213573024551085414915286286088445311453132856629497495743440",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.996,
+            "size": 3852.6000000000004
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "108212990628124813137650752070004070155521056034148236047713709196250983601247",
+          "status": null,
+          "bestBid": {
+            "price": 0.004,
+            "size": 3852.6000000000004
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x4f330fc689830668acf7d6e6e24dcd7450dc0387855f63aecbfac64b6d458650"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30535,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2191-4-25",
+      "title": "\u2191 4.25%",
+      "question": "Will the Fed\u2019s upper bound reach 4.25% or higher before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x2ab12e3a9ac1e1bad421b178dbd08cd63bdcf78be4ea3fcaccefc2437c60ab5c",
+      "conditionId": "0xd19d28786025d0f1f69fc4bae61a5b36bda125317c79502a6626517fca5b553e",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "64466287320123673686041345364418728538443916009886133300429731092623063117612",
+          "status": null,
+          "bestBid": {
+            "price": 0.664,
+            "size": 22.23
+          },
+          "bestAsk": {
+            "price": 0.998,
+            "size": 29813
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "54064514355844912268218483257869730643177677415177551613936006724895844911144",
+          "status": null,
+          "bestBid": {
+            "price": 0.002,
+            "size": 29813
+          },
+          "bestAsk": {
+            "price": 0.336,
+            "size": 22.23
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x69f7294fab44b1a63575fcdff9b683d3c48a7f92a160aa274af8e2837a356e63"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 20,
+          "startsAt": "2026-05-14T15:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-14T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-14T15:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 30532,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-3-25",
+      "title": "\u2193 3.25%",
+      "question": "Will the Fed\u2019s lower bound reach 3.25% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xb62cdb99203042b643b497d6ced7907e745c32d7ffcb79f1d6dc4a9b7f13e023",
+      "conditionId": "0xa79b0fba767dad3eafa1a55ce5085478d193667564cbb4dc2ac808b8d0a38921",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "67135756524028319835153909442239266098736489707402504635117956401330563689905",
+          "status": null,
+          "bestBid": {
+            "price": 0.005,
+            "size": 300
+          },
+          "bestAsk": {
+            "price": 0.038,
+            "size": 944
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "63369964423466440459065884834142464832710657701222031720955763022622097634461",
+          "status": null,
+          "bestBid": {
+            "price": 0.962,
+            "size": 944
+          },
+          "bestAsk": {
+            "price": 0.995,
+            "size": 300
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x70d8f4e6079e98fd9a34a8f6ce00a7dd3a73a924c9d9fab0664d516f38c6f280"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 20,
+          "startsAt": "2026-05-14T15:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-14T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-14T15:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 30531,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-3-0",
+      "title": "\u2193 3.0%",
+      "question": "Will the Fed\u2019s lower bound reach 3.0% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x7e67c9b1b58257c7af6180e585e8df7aece093da439dcf842215e49b3b518e3b",
+      "conditionId": "0x4239c8f5f2b2832dc500140b2e243ec7be04af712cd47c15764c0ef26bc3996d",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "27648149559591968953319882154265206660035262876997875237919263601361566114677",
+          "status": null,
+          "bestBid": {
+            "price": 0.049,
+            "size": 0.00845
+          },
+          "bestAsk": {
+            "price": 0.059,
+            "size": 944
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "948082948638455636196413309893431837218958084902656039723722261247764444209",
+          "status": null,
+          "bestBid": {
+            "price": 0.941,
+            "size": 944
+          },
+          "bestAsk": {
+            "price": 0.951,
+            "size": 0.00845
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xdab002228af15d1cb3a161b3a584165eac9010d4419582c3c7d5d07d847c4256"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 20,
+          "startsAt": "2026-05-14T15:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-14T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-14T15:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 30541,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-2-75",
+      "title": "\u2193 2.75%",
+      "question": "Will the Fed\u2019s lower bound reach 2.75% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x7abde2831082f51213e87c9881de48b9c8438940aca132e6fe893e4decc4de16",
+      "conditionId": "0x568540579e2c0b0fbdce386ca70682c9ee70076f23f165fb4609ef62057ac882",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "50602954973996100642569758303214565672690824072899958555228330397568464539384",
+          "status": null,
+          "bestBid": {
+            "price": 0.02,
+            "size": 49.616
+          },
+          "bestAsk": {
+            "price": 0.027,
+            "size": 120.554
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "105747844352106249752950003642059971459611078015159547480951190172186936585233",
+          "status": null,
+          "bestBid": {
+            "price": 0.973,
+            "size": 120.554
+          },
+          "bestAsk": {
+            "price": 0.98,
+            "size": 49.616
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x2bb4294142c311763ca6be27ceffcef132f5ac8281f98a62abe02f6e6a8c0107"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 20,
+          "startsAt": "2026-05-14T15:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-14T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-14T15:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 30542,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-2-5",
+      "title": "\u2193 2.5%",
+      "question": "Will the Fed\u2019s lower bound reach 2.5% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xc91d763840fc6040b6f520197a9c328e7fe97c25fd45f430b9efe4f1240d3b67",
+      "conditionId": "0xb92f83007043e0e5f066809b05a9177d4a7a5a57f73230fc99842ac76f9f011e",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "89898898756876660606873598461447651086557665116759118767936545367104662249499",
+          "status": null,
+          "bestBid": {
+            "price": 0.023,
+            "size": 145.35
+          },
+          "bestAsk": {
+            "price": 0.024,
+            "size": 945
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "35354609045130735977136996916340232050532322626621612859392093658545611141355",
+          "status": null,
+          "bestBid": {
+            "price": 0.976,
+            "size": 945
+          },
+          "bestAsk": {
+            "price": 0.977,
+            "size": 145.35
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xaa6145fb75147c5dda9bda894ed80353b14f23149b285893dd41e1edc8c0d4c2"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 20,
+          "startsAt": "2026-05-14T15:00:00.000Z",
+          "endsAt": "2026-12-31T00:00:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-14T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-14T15:00:00.000Z",
+            "endsAt": "2026-12-31T00:00:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 30540,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-2-25",
+      "title": "\u2193 2.25%",
+      "question": "Will the Fed\u2019s lower bound reach 2.25% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x59629786d1986ce0dd88323656d708b6cec05b7d3d4802f49702f6fdd4bdb242",
+      "conditionId": "0xf7331cd3707f7fbd92879143a3e7726a37809c50176d4cd3985f340607f0751f",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "96587616397702205349312285760888921329782959422050102226381044323527241850678",
+          "status": null,
+          "bestBid": {
+            "price": 0.003,
+            "size": 349.9
+          },
+          "bestAsk": {
+            "price": 0.068,
+            "size": 321.88
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "84007414484957246288986934176881760903897853386410922048201717113636043974541",
+          "status": null,
+          "bestBid": {
+            "price": 0.932,
+            "size": 321.88
+          },
+          "bestAsk": {
+            "price": 0.997,
+            "size": 349.9
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x0bbbcca922e19937c88530c715742a6c4c5d951e3e91e2c37d3053ed6e820c81"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30526,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-2-0",
+      "title": "\u2193 2.0%",
+      "question": "Will the Fed\u2019s lower bound reach 2.0% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x4cfbca64a410326558e0d6a05290924aa1f03f663941543c961939801390bee2",
+      "conditionId": "0x8e77a1e80452e400c84bf61114e5fb1a5ad5ea2c81968cd9b92782e6c447bbe8",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "63827642087947515003957888142867893833907446154861022657140239319778888377679",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.297,
+            "size": 426.74
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "18784743285864754619830916869191543995099406526825980518056635911631231254207",
+          "status": null,
+          "bestBid": {
+            "price": 0.703,
+            "size": 426.74
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xbfc96144ac92b856a86dfde02939ccb9ec4bd997c424aa2f68b35dce0651f99f"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30528,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-1-75",
+      "title": "\u2193 1.75%",
+      "question": "Will the Fed\u2019s lower bound reach 1.75% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x8f010d423896586ea91bd5621d0ab2f356370c2faf9b217cc03012546026d4ce",
+      "conditionId": "0xe80b77daadc12df1ccc9cda7cf549fc1a62fc6c00182d05e13f8b1cbd574f638",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "41478671649419477510091601607830457878749519395291062777797726983194068656893",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.389,
+            "size": 490.99
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "61525062015275939327219729804260929078314879023486419364483236021522300930454",
+          "status": null,
+          "bestBid": {
+            "price": 0.611,
+            "size": 490.99
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x0c37533837ed4d3378494fcd9ea7043d03cc3af9443d68dfa0414984efcbaff9"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30537,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-1-5",
+      "title": "\u2193 1.5%",
+      "question": "Will the Fed\u2019s lower bound reach 1.5% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x5fec686a7ea065a91661dfa3b8f14cd9ae55b2485de39af31348ce84b2f2fd79",
+      "conditionId": "0x146c03ccb5ab3eb2f8bec0188b22d1776b5f955eb791899bf10ff2c322d20b80",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "32179107380265080572464299495754009869665308739442152739749698488203958904925",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.446,
+            "size": 72.202
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "82117638740587986721817636065276078581959475808583060661400546840716673287142",
+          "status": null,
+          "bestBid": {
+            "price": 0.554,
+            "size": 72.202
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xe8a621e745e7f05a582102109b45bb0fb23ce5d90848d977f75172eca041d448"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30527,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-1-25",
+      "title": "\u2193 1.25%",
+      "question": "Will the Fed\u2019s lower bound reach 1.25% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xec6d41b61db841ea66875673326248b394cbbaee84d4a437ee7364da427dae9d",
+      "conditionId": "0x40c713c8b2e054efa8d8dcfeae4c81472b17e1c6fc7f969401d29a472d682613",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "8694937059101356681859941133281728651656927107668852648437123051559023840981",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.067,
+            "size": 321.54
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "92445015382951186686450152887506006295769314515461669699238469171453469483766",
+          "status": null,
+          "bestBid": {
+            "price": 0.933,
+            "size": 321.54
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x803d1018e9b81b886b3ef242de57f0d6ebee3313d0728c57eed0a146d56a3bff"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30536,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-1-0",
+      "title": "\u2193 1.0%",
+      "question": "Will the Fed\u2019s lower bound reach 1.0% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x82ea31986fe8bfcbaf164643c273cc2d1ec6da165bbc780d7c4a1f7c2512cb1b",
+      "conditionId": "0x93e060dcb7f250412b7a8211cc453a48038e16cd61ef6dd346af18e7bf322e7f",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "17906806200841645286056054164270615109671103576093333078216991853707464064628",
+          "status": null,
+          "bestBid": {
+            "price": 0.001,
+            "size": 17.24
+          },
+          "bestAsk": {
+            "price": 0.057,
+            "size": 318.13
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "18102082951013768074027286297114205070296743634162078455348868844931633783787",
+          "status": null,
+          "bestBid": {
+            "price": 0.943,
+            "size": 318.13
+          },
+          "bestAsk": {
+            "price": 0.999,
+            "size": 17.24
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x9ee5565296fbc49e0a2965c48a04c04a80a2cfd966d4eee60504602c63c4e02b"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30538,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-0-75",
+      "title": "\u2193 0.75%",
+      "question": "Will the Fed\u2019s lower bound reach 0.75% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xe4a65f76087a386f55aa57106e939cf3647b4ec9973dba2067e0cd41ace1736a",
+      "conditionId": "0x0e8a635009308bc5e7dcb37ac56a0fa8b2847689ed999e7382559ffe74695e66",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "20479369312374873107843655171802745039335311355703075824195914024214643368803",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.119,
+            "size": 340.52
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "11738512284228752967219581912471592673754627083969454869255775946641484193087",
+          "status": null,
+          "bestBid": {
+            "price": 0.881,
+            "size": 340.52
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x58c9cde78e3a468af321f5a3d1063885a8f1e6635b0455a1ea9f211c018f5b83"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30529,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-0-5",
+      "title": "\u2193 0.5%",
+      "question": "Will the Fed\u2019s lower bound reach 0.5% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xd600d62a5002fb3de01b3651e8b86e75cc9fb5c9148844473574bd7275a55ba2",
+      "conditionId": "0x1abfdb805d570b9e02bffe0f3cf2d3409aadd94680af20a09d1d23cb57d8b6c4",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "9344005583562288636634380292304962708479951275951648026275481754398736327435",
+          "status": null,
+          "bestBid": {
+            "price": 0.013,
+            "size": 202.64
+          },
+          "bestAsk": {
+            "price": 0.989,
+            "size": 3886.8
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "19386885942513004488590290536748434086410734007244502502098976449798672958786",
+          "status": null,
+          "bestBid": {
+            "price": 0.011,
+            "size": 3886.8
+          },
+          "bestAsk": {
+            "price": 0.987,
+            "size": 202.64
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x4e15f0f425d28b87024ba9f19504e074da257e3d231d3222618a67c5c0f600ba"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30539,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-0-25",
+      "title": "\u2193 0.25%",
+      "question": "Will the Fed\u2019s lower bound reach 0.25% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x4ae4eba930fd9edcc22ada4d3725ea3c2982668348d7db5f613b95e8317ba40d",
+      "conditionId": "0xc1d513b9e25204ca5c11f6100187493325acb5595dab701eb731829287a7e221",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "64316912021293769196697896065776380724698986627041310268389004314570353274882",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.306,
+            "size": 432.27
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "17474306014765306782513791517570847285060258833174421239709484188410081339763",
+          "status": null,
+          "bestBid": {
+            "price": 0.694,
+            "size": 432.27
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x8be4f92d8396e675e220e15c1ca5bca527bc22dba01d586e2118096c1fe8a4a3"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 30530,
+      "imageUrl": "https://static.predict.fun/what-will-fed-rate-hit-before-2027-\u2193-0",
+      "title": "\u2193 0%",
+      "question": "Will the Fed\u2019s lower bound reach 0% or lower before 2027?",
+      "description": "The FED interest rates are defined in this market by the lower or the upper bound of the target federal funds range. The decisions on the target federal fund range are made by the Federal Open Market Committee (FOMC) meetings.\n\nThis market will resolve to \u201cYes\u201d if the lower or the upper bound of the target federal funds rate reaches the specified level at any point by December 31, 2026, 12:59 PM ET. Otherwise, this market will resolve to \u201cNo.\u201d\n\nEmergency rate cuts and hikes outside the regularly scheduled meetings will be considered.\n\nThe resolution source for this market is the official website of the Federal Reserve at:\nhttps://www.federalreserve.gov/monetarypolicy/openmarket.htm.\n\nThis market may resolve as soon as the relevant data showing the reached level is published.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xe4c32c54cfd817559af573f606885fff0759298b5660e985a7fc3027f0f1e8d5",
+      "conditionId": "0x0783003b3fee905b69d45d436a534a065720ae14232de422db4c3e25915dd479",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "82239524223519895976259753283360048241305784981313044556819714899962830611098",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.041,
+            "size": 100
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "19371053416728966598501499826294879950344131027952265653946228285039591141542",
+          "status": null,
+          "bestBid": {
+            "price": 0.959,
+            "size": 100
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x3983cda71404c649fd93c5efb200b83835bd67feb4593deab909417c93be5b5d"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "what-will-fed-rate-hit-before-2027",
+      "createdAt": "2026-03-02T13:32:56.458Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 3868604,
+      "imageUrl": "https://static.predict.fun/market-variant-tweet-count-market-image.jpg",
+      "title": "300-399",
+      "question": "Will Elon Musk tweet between 300 and 399 times between Oct 26th - Nov 2nd 2026?",
+      "description": "This market will resolve according to the number of times [@elonmusk](https://x.com/elonmusk) posts on X from Oct 26, 2026 12:00 PM ET to Nov 2, 2026 12:00 PM ET (exclusive).\n\n**Date Range (Exclusive):**\nTweets up to the last second before the end date will count. For example, if the market ends at 12:00 PM ET, any tweet up to 11:59:59 AM ET will count, but tweets at or after 12:00:00 PM ET will not count.\n\n**Posts That Count:**\n- Main feed posts\n- Quote posts\n- Reposts\n\n**Replies:**\nRequirements for rules to count:\n- The entire \"reply chain\" all the way up to the original post MUST belong to the tracked user.\n- Replies to reposts only count IF the original post is from the same user. Replies to reposts of other users' posts do not count.\n\n**Examples:**\n- Reply to own quote post that counts: [x.com/cz_binance/status/2015101858034110785](https://x.com/cz_binance/status/2015101858034110785)\n- Reply on main feed that counts: [x.com/elonmusk/status/1786073478711353576](https://x.com/elonmusk/status/1786073478711353576)\n- Reply chain that does not count: [x.com/elonmusk/status/2015300934029484133](https://x.com/elonmusk/status/2015300934029484133)\n- Reply to repost from different user that does not count: [x.com/elonmusk/status/2014774464047718450](https://x.com/elonmusk/status/2014774464047718450)\n\n**Additional Rules:**\n- Deleted posts will count as long as they remain available long enough to be captured by the tracker\n- Community reposts which are not counted by the tracker will not count toward the total\n- Post edits are treated by X as new posts and thus count toward the total\n\n**Resolution Source:**\nThe main resolution source for this market will be the 'Tweet Counter' figure for posts found at [predict.fun/x/elonmusk](https://predict.fun/x/elonmusk). If the tracker does not update correctly in accordance with the rules, X itself may be used as a secondary resolution source.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xb81ea477acf17dd2cb7fc4e066bf62db776e27cd3286c0a01f9da466a49880c1",
+      "conditionId": "0xbade7146afe893ba84b949f1a883b0573530af771555745afb969e4300e72a8f",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "112579132816858975656632069571888931254996995377680356112496919741951164077311",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": {
+            "price": 0.5,
+            "size": 1000
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "61325609357113411920305086021805144116176122185292605595495563979989421310752",
+          "status": null,
+          "bestBid": {
+            "price": 0.5,
+            "size": 1000
+          },
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 4,
+      "spreadThreshold": 0.03,
+      "shareThreshold": 200,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [],
+      "kalshiMarketTicker": null,
+      "categorySlug": "number-of-elon-musk-tweets-oct-26th-nov-2nd-2026",
+      "createdAt": "2026-10-26T12:02:08.242Z",
+      "decimalPrecision": 2,
+      "marketVariant": "TWEET_COUNT",
+      "variantData": {
+        "type": "TWEET_COUNT",
+        "xAccountUsername": "elonmusk",
+        "tweetCount": 394
+      },
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 3868605,
+      "imageUrl": "https://static.predict.fun/market-variant-tweet-count-market-image.jpg",
+      "title": "400-499",
+      "question": "Will Elon Musk tweet between 400 and 499 times between Oct 26th - Nov 2nd 2026?",
+      "description": "This market will resolve according to the number of times [@elonmusk](https://x.com/elonmusk) posts on X from Oct 26, 2026 12:00 PM ET to Nov 2, 2026 12:00 PM ET (exclusive).\n\n**Date Range (Exclusive):**\nTweets up to the last second before the end date will count. For example, if the market ends at 12:00 PM ET, any tweet up to 11:59:59 AM ET will count, but tweets at or after 12:00:00 PM ET will not count.\n\n**Posts That Count:**\n- Main feed posts\n- Quote posts\n- Reposts\n\n**Replies:**\nRequirements for rules to count:\n- The entire \"reply chain\" all the way up to the original post MUST belong to the tracked user.\n- Replies to reposts only count IF the original post is from the same user. Replies to reposts of other users' posts do not count.\n\n**Examples:**\n- Reply to own quote post that counts: [x.com/cz_binance/status/2015101858034110785](https://x.com/cz_binance/status/2015101858034110785)\n- Reply on main feed that counts: [x.com/elonmusk/status/1786073478711353576](https://x.com/elonmusk/status/1786073478711353576)\n- Reply chain that does not count: [x.com/elonmusk/status/2015300934029484133](https://x.com/elonmusk/status/2015300934029484133)\n- Reply to repost from different user that does not count: [x.com/elonmusk/status/2014774464047718450](https://x.com/elonmusk/status/2014774464047718450)\n\n**Additional Rules:**\n- Deleted posts will count as long as they remain available long enough to be captured by the tracker\n- Community reposts which are not counted by the tracker will not count toward the total\n- Post edits are treated by X as new posts and thus count toward the total\n\n**Resolution Source:**\nThe main resolution source for this market will be the 'Tweet Counter' figure for posts found at [predict.fun/x/elonmusk](https://predict.fun/x/elonmusk). If the tracker does not update correctly in accordance with the rules, X itself may be used as a secondary resolution source.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xdf31bf21e3806610b27e6611c72197f0c893ce91c7942216a30348025aeefd3b",
+      "conditionId": "0x301edd4a8f067caa95aafcbf19259438675f0943a54bec44375be92de9abb588",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "4725003825397139385738896332919528236539118161277916180053977459762534888565",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "10060885584109949109786504890581004967572646698695263361414431684111005857723",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 3,
+      "spreadThreshold": 0.03,
+      "shareThreshold": 200,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [],
+      "kalshiMarketTicker": null,
+      "categorySlug": "number-of-elon-musk-tweets-oct-26th-nov-2nd-2026",
+      "createdAt": "2026-10-26T12:02:08.242Z",
+      "decimalPrecision": 2,
+      "marketVariant": "TWEET_COUNT",
+      "variantData": {
+        "type": "TWEET_COUNT",
+        "xAccountUsername": "elonmusk",
+        "tweetCount": 394
+      },
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 3868606,
+      "imageUrl": "https://static.predict.fun/market-variant-tweet-count-market-image.jpg",
+      "title": "500+",
+      "question": "Will Elon Musk tweet 500 or more times between Oct 26th - Nov 2nd 2026?",
+      "description": "This market will resolve according to the number of times [@elonmusk](https://x.com/elonmusk) posts on X from Oct 26, 2026 12:00 PM ET to Nov 2, 2026 12:00 PM ET (exclusive).\n\n**Date Range (Exclusive):**\nTweets up to the last second before the end date will count. For example, if the market ends at 12:00 PM ET, any tweet up to 11:59:59 AM ET will count, but tweets at or after 12:00:00 PM ET will not count.\n\n**Posts That Count:**\n- Main feed posts\n- Quote posts\n- Reposts\n\n**Replies:**\nRequirements for rules to count:\n- The entire \"reply chain\" all the way up to the original post MUST belong to the tracked user.\n- Replies to reposts only count IF the original post is from the same user. Replies to reposts of other users' posts do not count.\n\n**Examples:**\n- Reply to own quote post that counts: [x.com/cz_binance/status/2015101858034110785](https://x.com/cz_binance/status/2015101858034110785)\n- Reply on main feed that counts: [x.com/elonmusk/status/1786073478711353576](https://x.com/elonmusk/status/1786073478711353576)\n- Reply chain that does not count: [x.com/elonmusk/status/2015300934029484133](https://x.com/elonmusk/status/2015300934029484133)\n- Reply to repost from different user that does not count: [x.com/elonmusk/status/2014774464047718450](https://x.com/elonmusk/status/2014774464047718450)\n\n**Additional Rules:**\n- Deleted posts will count as long as they remain available long enough to be captured by the tracker\n- Community reposts which are not counted by the tracker will not count toward the total\n- Post edits are treated by X as new posts and thus count toward the total\n\n**Resolution Source:**\nThe main resolution source for this market will be the 'Tweet Counter' figure for posts found at [predict.fun/x/elonmusk](https://predict.fun/x/elonmusk). If the tracker does not update correctly in accordance with the rules, X itself may be used as a secondary resolution source.",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": true,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x66623a7c3c99e9e515ff3fe0970d76f4db99d286bd989b11a70d447a364b789e",
+      "conditionId": "0x37102c6f0caf5428b73f028351800f98bbb777540a57ea4a6d17e8a2d651df58",
+      "resolverAddress": "0x26B366Ab634C43BdA6D784fDCe34F24A37DF8172",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "91518878419020137890472756744972377721823095867445551433166490833696400772946",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "66317950929241429097706088358345367551778125188631934173428566078847190585782",
+          "status": null,
+          "bestBid": null,
+          "bestAsk": null,
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": 2,
+      "spreadThreshold": 0.03,
+      "shareThreshold": 200,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [],
+      "kalshiMarketTicker": null,
+      "categorySlug": "number-of-elon-musk-tweets-oct-26th-nov-2nd-2026",
+      "createdAt": "2026-10-26T12:02:08.242Z",
+      "decimalPrecision": 2,
+      "marketVariant": "TWEET_COUNT",
+      "variantData": {
+        "type": "TWEET_COUNT",
+        "xAccountUsername": "elonmusk",
+        "tweetCount": 394
+      },
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": []
+      },
+      "stats": null
+    },
+    {
+      "id": 14348,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-150-m",
+      "title": "$150M",
+      "question": "Extended FDV above $150M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xe0458fe5f561ba6456c9a8ff0c682e1e6aeea501a5a8e13f998ecabe4faa82fe",
+      "conditionId": "0x850f11e6ea9ae8a952a50d6f05454f825d484f121e4ca6039c605b1a52d8f9ff",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "52273796343171441052843584221392739880432694193998951969923767922827656897598",
+          "status": null,
+          "bestBid": {
+            "price": 0.658,
+            "size": 10
+          },
+          "bestAsk": {
+            "price": 0.818,
+            "size": 300
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "16657824189309390213998623651564556173915990488743838438889150885619726091370",
+          "status": null,
+          "bestBid": {
+            "price": 0.182,
+            "size": 300
+          },
+          "bestAsk": {
+            "price": 0.342,
+            "size": 10
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x45514e0fcd922a740e67ab064a9042d3e964006712f9540947808ae82067ed23"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 5,
+          "startsAt": "2026-10-28T19:00:28.991Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 30,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2026-10-28T19:00:00.909Z"
+          },
+          {
+            "hourlyRate": 5,
+            "startsAt": "2026-10-28T19:00:28.991Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14347,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-300-m",
+      "title": "$300M",
+      "question": "Extended FDV above $300M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x15bd77508bd5121fdd5e5d24d37ed2375a45268a5d44c79a92ca2052082ae30d",
+      "conditionId": "0xa6754382356c7fa56488e5dd0434fff933813e9dc4df7a89306d4d4d228e991d",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "658663939326311569767317601502204650579148483292395482461331934440588926025",
+          "status": null,
+          "bestBid": {
+            "price": 0.248,
+            "size": 321.38
+          },
+          "bestAsk": {
+            "price": 0.319,
+            "size": 300
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "89485416893746722801691360499696107414436527961460169498618134134200239723536",
+          "status": null,
+          "bestBid": {
+            "price": 0.681,
+            "size": 300
+          },
+          "bestAsk": {
+            "price": 0.752,
+            "size": 321.38
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xcc59c2569d30b4b86993f3ff17bb900fffc56e7d98f1a5b02793fc9c133db99a"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 5,
+          "startsAt": "2026-10-28T20:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 30,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2026-10-28T20:00:00.000Z"
+          },
+          {
+            "hourlyRate": 5,
+            "startsAt": "2026-10-28T20:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14344,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-500-m",
+      "title": "$500M",
+      "question": "Extended FDV above $500M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x603f275040c6d9d8f0b64a7dbae3eb0184809ca0e53df85d9d58c8966f6da58f",
+      "conditionId": "0xe419573ec25138823aa22c11af6b0a41a3fb53ac92cc15406de83f8201723c4b",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "56886720048056738264026941739704039539842933095855530845860662005109296993206",
+          "status": null,
+          "bestBid": {
+            "price": 0.132,
+            "size": 109
+          },
+          "bestAsk": {
+            "price": 0.16,
+            "size": 300
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "101837168983446673941013862046307767743455298103537213665862115435202028155103",
+          "status": null,
+          "bestBid": {
+            "price": 0.84,
+            "size": 300
+          },
+          "bestAsk": {
+            "price": 0.868,
+            "size": 109
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x7fd2f50352ef2c9e7b462a46b893792d7a6bf510bf0bc2e1f07f85b1ea1e8ca8"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 5,
+          "startsAt": "2026-10-28T20:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 30,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2026-10-28T20:00:00.000Z"
+          },
+          {
+            "hourlyRate": 5,
+            "startsAt": "2026-10-28T20:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14342,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-800-m",
+      "title": "$800M",
+      "question": "Extended FDV above $800M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x5645c2b97f7787fdd45d737a1aecb9998a966ce68259f044559f1ac7727e23a9",
+      "conditionId": "0xfdf46bc057310f2978c5b3f3d96d79910b860ca86b49502dcccf925c2c6139b6",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "34297527342570397493113906590255969556627690678044135841155309051938477589244",
+          "status": null,
+          "bestBid": {
+            "price": 0.062,
+            "size": 69.03
+          },
+          "bestAsk": {
+            "price": 0.119,
+            "size": 340.52
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "13093660201440622667791397575976155645184916800054861976808646226600383276596",
+          "status": null,
+          "bestBid": {
+            "price": 0.881,
+            "size": 340.52
+          },
+          "bestAsk": {
+            "price": 0.938,
+            "size": 69.03
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x004230fb1f54a139d50ba2041e062a01461c931a6725ce482e3a9ab61b2925bb"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 0,
+          "startsAt": "2026-05-08T15:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 0,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14345,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-1-b",
+      "title": "$1B",
+      "question": "Extended FDV above $1B one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x22225352ca6cc873d8953d7714dc809def7f58b13e3920e64328935b18a73602",
+      "conditionId": "0x84ec382e6e80e37fc4daa8960c18c263ae2066b5abf22b45e8d97089ed07730c",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "28514069233490028565187638742496530042138961492393618259500575313844696955642",
+          "status": null,
+          "bestBid": {
+            "price": 0.049,
+            "size": 7.7411
+          },
+          "bestAsk": {
+            "price": 0.149,
+            "size": 352.52
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "19666589757382537133988634812132111685338590133356485308699024450125709429120",
+          "status": null,
+          "bestBid": {
+            "price": 0.851,
+            "size": 352.52
+          },
+          "bestAsk": {
+            "price": 0.951,
+            "size": 7.7411
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xd1d9c72da4ed36e09eb9019a0554451cb3a9e5681fc5d00ec94205f1d97a8ce5"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 0,
+          "startsAt": "2026-05-08T15:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 0,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14343,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-2-b",
+      "title": "$2B",
+      "question": "Extended FDV above $2B one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x5ec3045ab2a1d921134ec2389a8aae9149e6d5f8ea0d449a49795ad4a72816d9",
+      "conditionId": "0x087490c27507c4bd94611b2b61b8afd76e5943c580f8ff934b84c26105c0bc6d",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "55414175062826288309024049296057054809629237665242591969069832511266968365234",
+          "status": null,
+          "bestBid": {
+            "price": 0.006,
+            "size": 9680.480000000001
+          },
+          "bestAsk": {
+            "price": 0.018,
+            "size": 1269.3
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "25385664316346559676414392661154469127674813988908074023494797730722474979088",
+          "status": null,
+          "bestBid": {
+            "price": 0.982,
+            "size": 1269.3
+          },
+          "bestAsk": {
+            "price": 0.994,
+            "size": 9680.480000000001
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xc0f838d718bf25167ba687f574603cecac310eb7b33daa55b1ac0f9095ed5445"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 0,
+          "startsAt": "2026-05-08T15:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 0,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 14346,
+      "imageUrl": "https://static.predict.fun/extended-fdv-above-one-day-after-launch-3-b",
+      "title": "$3B",
+      "question": "Extended FDV above $3B one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Extended's token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Extended (https://x.com/extendedapp) doesn't launch a token by December 31, 2026, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0xe6109aac8fdd146c6a6bbf966b40b65f2946440d24dc4e1dba274d0b65679188",
+      "conditionId": "0x119adf9c3d8051d10e3a0ed92e37618939b27465b59aca0c5f9c2985853f30b9",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "40280321756925963370377832925943635749070474112886825253034685721669675643052",
+          "status": null,
+          "bestBid": {
+            "price": 0.003,
+            "size": 699.99
+          },
+          "bestAsk": {
+            "price": 0.039,
+            "size": 200
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "89762238354598066154787725783432473205243644861368719110229392292961484449083",
+          "status": null,
+          "bestBid": {
+            "price": 0.961,
+            "size": 200
+          },
+          "bestAsk": {
+            "price": 0.997,
+            "size": 699.99
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0x0e7b7cc2649466ce6dfed9cf49611630fe986b31fba84ec01107e0a50f1534bb"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "extended-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:43:01.006Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": {
+          "hourlyRate": 0,
+          "startsAt": "2026-05-08T15:00:00.000Z",
+          "endsAt": "2027-01-01T04:59:00.000Z"
+        },
+        "schedule": [
+          {
+            "hourlyRate": 120,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-08T15:00:00.000Z"
+          },
+          {
+            "hourlyRate": 0,
+            "startsAt": "2026-05-08T15:00:00.000Z",
+            "endsAt": "2027-01-01T04:59:00.000Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 15523,
+      "imageUrl": "https://static.predict.fun/abstract-fdv-above-one-day-after-launch-200-m",
+      "title": "$200M",
+      "question": "Abstract FDV above $200M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Abstract's governance token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Abstract doesn't launch a token by December 31, 2027, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x84f72c855054d9b246fd3dc5ba73e0627bc10660196423d8a277a202c71b753a",
+      "conditionId": "0xa123ca62de40404393f0cc53ea5b54cf19ee85beb1f627524fdfbdcd4f743326",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "105739005063319966465598212440101787103973811878821197393422307624778036830343",
+          "status": null,
+          "bestBid": {
+            "price": 0.033,
+            "size": 7899.320000000001
+          },
+          "bestAsk": {
+            "price": 0.059,
+            "size": 2260.6
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "86509286612550548007903347111257033210755902527468609958130001166327558796985",
+          "status": null,
+          "bestBid": {
+            "price": 0.941,
+            "size": 2260.6
+          },
+          "bestAsk": {
+            "price": 0.967,
+            "size": 7899.320000000001
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xc40b9080a94f13f2013636d9d04b845d2ffcf1b0349876f1c3abf19efc4867da"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "abstract-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:46:30.742Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-15T01:30:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-15T01:30:00.000Z",
+            "endsAt": "2026-10-28T19:05:16.075Z"
+          }
+        ]
+      },
+      "stats": null
+    },
+    {
+      "id": 15528,
+      "imageUrl": "https://static.predict.fun/abstract-fdv-above-one-day-after-launch-400-m",
+      "title": "$400M",
+      "question": "Abstract FDV above $400M one day after launch?",
+      "description": "This market will resolve to \"Yes\" if the Fully Diluted Valuation of Abstract's governance token is greater than the value specified in the title 1 day after launch. Otherwise, the market will resolve to \"No.\"\n\nThe token must be actively, publicly transferable and tradable to be considered a launch.\n\nThe FDV will be determined using the total token supply multiplied by the token price.\n\n\"1 day after launch\" is defined as 4:00 PM ET on the calendar day following launch. The resolution source for this market is the most liquid price source available. If Abstract doesn't launch a token by December 31, 2027, 11:59 PM ET, this market will resolve to \"No\".",
+      "tradingStatus": "OPEN",
+      "status": "REGISTERED",
+      "isVisible": true,
+      "isNegRisk": false,
+      "isYieldBearing": true,
+      "feeRateBps": 200,
+      "makerFeeBps": 0,
+      "resolution": null,
+      "oracleQuestionId": "0x41175192d2ad57161315f049c06939aba492dea38c7e6d50010cad9f6cce9990",
+      "conditionId": "0x96279d32fa79508f9e18fca47c739b7910e70c47c162ffe061dd509017058ac9",
+      "resolverAddress": "0x947cc06D38d3cB0a2BB5AdFB668b99B4FF53d7B4",
+      "outcomes": [
+        {
+          "name": "Yes",
+          "indexSet": 1,
+          "onChainId": "60246044556823942078723124911410193251791721257161370426966672333470093157746",
+          "status": null,
+          "bestBid": {
+            "price": 0.01,
+            "size": 837.9
+          },
+          "bestAsk": {
+            "price": 0.037,
+            "size": 284.18
+          },
+          "team": null,
+          "variantData": null
+        },
+        {
+          "name": "No",
+          "indexSet": 2,
+          "onChainId": "82601369797628291029057387659185372520873613612412943915540341299184106622418",
+          "status": null,
+          "bestBid": {
+            "price": 0.963,
+            "size": 284.18
+          },
+          "bestAsk": {
+            "price": 0.99,
+            "size": 837.9
+          },
+          "team": null,
+          "variantData": null
+        }
+      ],
+      "questionIndex": null,
+      "spreadThreshold": 0.06,
+      "shareThreshold": 100,
+      "isBoosted": false,
+      "boostStartsAt": null,
+      "boostEndsAt": null,
+      "polymarketConditionIds": [
+        "0xb3aa9da576d62423159f8259d785080ac25e65471586308660ce15671758eefb"
+      ],
+      "kalshiMarketTicker": null,
+      "categorySlug": "abstract-fdv-above-one-day-after-launch",
+      "createdAt": "2026-03-02T12:46:30.742Z",
+      "decimalPrecision": 3,
+      "marketVariant": "DEFAULT",
+      "variantData": null,
+      "team": null,
+      "marketType": null,
+      "rewards": {
+        "current": null,
+        "schedule": [
+          {
+            "hourlyRate": 60,
+            "startsAt": "2026-04-28T14:00:00.000Z",
+            "endsAt": "2026-05-15T01:30:00.000Z"
+          },
+          {
+            "hourlyRate": 20,
+            "startsAt": "2026-05-15T01:30:00.000Z",
+            "endsAt": "2026-10-28T19:05:25.907Z"
+          }
+        ]
+      },
+      "stats": null
+    }
+  ]
 }
