@@ -14,8 +14,9 @@ def get_markets():
         headers["x-api-key"] = api_key
 
     params = {
-        "first": CONFIG["MARKET_LIMIT"]
-    }
+    "first": CONFIG["MARKET_LIMIT"],
+    "status": "OPEN"
+}
 
     try:
         response = requests.get(
