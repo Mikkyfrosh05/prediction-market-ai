@@ -1,0 +1,185 @@
+name: Auto Settle Paper Trades
+
+on:
+  workflow_dispatch:
+    inputs:
+      market_id:
+        description: "Predict.fun market ID to settle"
+        required: true
+        default: "4104539"
+
+permissions:
+  contents: write
+
+jobs:
+  settle-trades:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout AI repository
+        uses: actions/checkout@v5
+
+      - name: Checkout private trading records
+        uses: actions/checkout@v5
+        with:
+          repository: Mikkyfrosh05/-prediction-market-private-data
+          token: ${{ secrets.GH_PRIVATE_DATA_TOKEN }}
+          path: private-data
+          ref: main
+
+      - name: Restore private trading records
+        run: |
+          for file in risk_state.json paper_trades.json
+          do
+            if [ -f "private-data/$file" ]; then
+              cp "private-data/$file" "$file"
+              echo "Restored $file"
+            else
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Verify resolution and settle paper trades
+        env:
+          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+          MARKET_ID: ${{ inputs.market_id }}
+        run: |
+          set -e
+
+          python - <<'PY'
+          import os
+          import requests
+
+          from paper_trader import PaperTrader
+
+          api_key = os.environ.get("PREDICT_API_KEY")
+          market_id = os.environ.get("MARKET_ID")
+
+          if not api_key:
+              raise RuntimeError("Predict.fun API key is missing.")
+
+          if not market_id:
+              raise RuntimeError("Market ID is missing.")
+
+          url = f"https://api.predict.fun/v1/markets/{market_id}"
+
+          headers = {
+              "x-api-key": api_key,
+              "accept": "application/json"
+          }
+
+          print("Checking Predict.fun market:", market_id)
+
+          response = requests.get(
+              url,
+              headers=headers,
+              timeout=20
+          )
+
+          response.raise_for_status()
+
+          result = response.json()
+
+          if not result.get("success"):
+              raise RuntimeError("Predict.fun returned an unsuccessful response.")
+
+          market = result.get("data", {})
+
+          print("Market:", market.get("title"))
+          print("Status:", market.get("status"))
+
+          if str(market.get("id")) != str(market_id):
+              raise RuntimeError("Returned market ID does not match.")
+
+          if market.get("status") != "RESOLVED":
+              raise RuntimeError(
+                  "Market is not resolved. No trades were settled."
+              )
+
+          resolution = market.get("resolution") or {}
+
+          if resolution.get("status") != "WON":
+              raise RuntimeError(
+                  "Official winning outcome is not confirmed."
+              )
+
+          outcome = str(resolution.get("name", "")).upper()
+
+          if outcome not in ["UP", "DOWN"]:
+              raise RuntimeError("Unknown winning outcome.")
+
+          print("\nOFFICIAL RESOLUTION CONFIRMED")
+          print("Winning outcome:", outcome)
+
+          bot = PaperTrader()
+
+          matching_open_trades = [
+              trade for trade in bot.trades
+              if str(trade.get("market_id")) == str(market_id)
+              and trade.get("status") == "OPEN"
+          ]
+
+          if not matching_open_trades:
+              print("No open paper trades found for this market.")
+              raise SystemExit(0)
+
+          print(
+              "Open paper trades found:",
+              len(matching_open_trades)
+          )
+
+          result = bot.settle_trade(market_id, outcome)
+
+          if isinstance(result, dict) and result.get("error"):
+              raise RuntimeError(result["error"])
+
+          if not result.get("success"):
+              raise RuntimeError("Settlement was not confirmed.")
+
+          print("\nPAPER SETTLEMENT COMPLETED")
+          print("Settled trades:", result["settled_count"])
+
+          for trade in result["trades"]:
+              print("--------------------------")
+              print("Trade ID:", trade["trade_id"])
+              print("Direction:", trade["side"])
+              print("Entry price:", trade["entry_price"])
+              print("Stake:", trade["stake"])
+              print("Payout:", trade["payout"])
+              print("Profit:", trade["profit"])
+              print("Status:", trade["status"])
+
+          print("\nUPDATED PAPER ACCOUNT")
+
+          for key, value in bot.get_status().items():
+              print(f"{key}: {value}")
+
+          print("\nReal trading remains DISABLED.")
+          PY
+
+      - name: Save updated records to private repository
+        run: |
+          set -e
+
+          cp risk_state.json private-data/
+          cp paper_trades.json private-data/
+
+          git -C private-data config user.name "Market Settlement Bot"
+          git -C private-data config user.email "actions@github.com"
+
+          git -C private-data add risk_state.json paper_trades.json
+
+          if ! git -C private-data diff --cached --quiet; then
+            git -C private-data commit -m "Settle resolved paper trades"
+            git -C private-data push origin HEAD:main
+            echo "Private trading records updated."
+          else
+            echo "No record changes to save."
+          fi
