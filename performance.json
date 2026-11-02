@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-11-02T10:38:57.106610+00:00",
+  "mode": "PAPER",
+  "account": {
+    "starting_balance": 100.0,
+    "balance": 100.3894,
+    "net_profit": 0.3894,
+    "daily_profit": 0.3894,
+    "reserved": 0.0
+  },
+  "performance": {
+    "total_trades": 2,
+    "open_trades": 0,
+    "settled_trades": 2,
+    "wins": 2,
+    "losses": 0,
+    "win_rate": 100.0,
+    "maximum_drawdown_percent": 0.0,
+    "total_fees": 0.08,
+    "total_slippage": 0.0
+  },
+  "trade_history": [
+    {
+      "title": "Bitcoin Up or Down - November 2, 4:35AM-4:40AM ET",
+      "side": "DOWN",
+      "entry_price": 0.9,
+      "stake": 2.0,
+      "profit": 0.1822,
+      "status": "SETTLED",
+      "outcome": "DOWN",
+      "opened_at": "2026-11-02T09:36:09.465010+00:00",
+      "settled_at": "2026-11-02T10:09:36.294812+00:00"
+    },
+    {
+      "title": "Bitcoin Up or Down - November 2, 4:35AM-4:40AM ET",
+      "side": "DOWN",
+      "entry_price": 0.89,
+      "stake": 2.0,
+      "profit": 0.2072,
+      "status": "SETTLED",
+      "outcome": "DOWN",
+      "opened_at": "2026-11-02T09:36:05.230817+00:00",
+      "settled_at": "2026-11-02T10:09:36.267059+00:00"
+    }
+  ],
+  "rejected_signals": []
+}
