@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T08:49:53.461344+00:00",
+  "updated_at": "2026-11-02T08:58:32.083896+00:00",
   "asset": "BTC",
   "timeframe": "5 minutes",
   "markets_scanned": 2,
@@ -12,8 +12,8 @@
       "starts_at": "2026-11-02T07:50:00.000Z",
       "ends_at": "2026-11-02T07:55:00.000Z",
       "active": false,
-      "elapsed_seconds": 3593.26,
-      "remaining_seconds": -3293.26,
+      "elapsed_seconds": 4111.87,
+      "remaining_seconds": -3811.87,
       "up_bid": 0.99,
       "up_ask": null,
       "down_bid": null,
@@ -26,7 +26,7 @@
       "maker_fee_bps": 0,
       "decimal_precision": 2,
       "orderbook_updated": 1793606102286,
-      "orderbook_age_seconds": 3290.98,
+      "orderbook_age_seconds": 3809.59,
       "base_outcome": "Up",
       "actual_outcome_prices_available": false
     },
@@ -38,8 +38,8 @@
       "starts_at": "2026-11-02T07:45:00.000Z",
       "ends_at": "2026-11-02T07:50:00.000Z",
       "active": false,
-      "elapsed_seconds": 3893.46,
-      "remaining_seconds": -3593.46,
+      "elapsed_seconds": 4412.08,
+      "remaining_seconds": -4112.08,
       "up_bid": null,
       "up_ask": 0.01,
       "down_bid": 0.99,
@@ -52,7 +52,7 @@
       "maker_fee_bps": 0,
       "decimal_precision": 2,
       "orderbook_updated": 1793605802638,
-      "orderbook_age_seconds": 3590.82,
+      "orderbook_age_seconds": 4109.45,
       "base_outcome": "Up",
       "actual_outcome_prices_available": false
     }
