@@ -1,44 +1,8 @@
 {
-  "updated_at": "2026-11-02T00:50:39.576469+00:00",
+  "updated_at": "2026-11-02T05:41:12.212416+00:00",
   "mode": "PAPER",
   "real_trading_enabled": false,
-  "markets_checked": 5,
+  "markets_checked": 0,
   "candidates_found": 0,
-  "results": [
-    {
-      "market_id": 4095708,
-      "title": "Bitcoin Up or Down - November 1, 7:50PM-7:55PM ET",
-      "decision": "NO TRADE",
-      "reason": "Waiting for at least 2 minutes 30 seconds",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": 4095734,
-      "title": "Bitcoin Up or Down - November 1, 7:55PM-8PM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": 4095785,
-      "title": "Bitcoin Up or Down - November 1, 8PM-8:05PM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": 4095678,
-      "title": "Bitcoin Up or Down - November 1, 7:45PM-7:50PM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": 4095663,
-      "title": "Bitcoin Up or Down - November 1, 7:40PM-7:45PM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    }
-  ]
+  "results": []
 }
