@@ -60,24 +60,24 @@ jobs:
         run: |
           set -e
 
-          for i in $(seq 1 10)
+          for i in $(seq 1 5)
           do
             echo "======================================"
-            echo "MARKET CHECK $i OF 10"
+            echo "MARKET CHECK $i OF 5"
             echo "======================================"
 
-            echo "Fetching BTC price..."
+            echo "Fetching fresh BTC price..."
             python btc_price_tracker.py
 
-            echo "Scanning Predict.fun markets..."
+            echo "Fetching fresh Predict.fun order books..."
             python main.py
 
             echo "Running BTC strategy engine..."
             python strategy_engine.py
 
-            if [ "$i" -lt 10 ]; then
-              echo "Waiting 25 seconds before next check..."
-              sleep 25
+            if [ "$i" -lt 5 ]; then
+              echo "Waiting 3 seconds before next check..."
+              sleep 3
             fi
           done
 
@@ -115,9 +115,6 @@ jobs:
           done
 
           git rm --cached --ignore-unmatch risk_state.json paper_trades.json
-
-          git config user.name "Market Data Bot"
-          git config user.email "actions@github.com"
 
           git add .gitignore orderbooks.json btc_price_data.json strategy_decisions.json
 
