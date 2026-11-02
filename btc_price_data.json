@@ -1,47 +1,11 @@
 {
-  "updated_at": "2026-11-02T07:42:14.140542+00:00",
+  "updated_at": "2026-11-02T07:46:15.622343+00:00",
   "asset": "BTC",
   "trading_pair": "BTCUSDT",
   "price_source": "BINANCE_BOOK_MID",
   "settlement_source": "CHAINLINK",
-  "current_price": 78050.005,
+  "current_price": 78000.005,
   "candles": [
-    {
-      "open_time": 1793599380000,
-      "open": 78408.54,
-      "high": 78408.54,
-      "low": 78340.0,
-      "close": 78344.0,
-      "volume": 6.36545,
-      "close_time": 1793599439999
-    },
-    {
-      "open_time": 1793599440000,
-      "open": 78344.01,
-      "high": 78357.46,
-      "low": 78335.56,
-      "close": 78335.56,
-      "volume": 3.26417,
-      "close_time": 1793599499999
-    },
-    {
-      "open_time": 1793599500000,
-      "open": 78335.57,
-      "high": 78382.09,
-      "low": 78335.56,
-      "close": 78382.08,
-      "volume": 10.43805,
-      "close_time": 1793599559999
-    },
-    {
-      "open_time": 1793599560000,
-      "open": 78382.09,
-      "high": 78382.09,
-      "low": 78360.0,
-      "close": 78369.21,
-      "volume": 4.93996,
-      "close_time": 1793599619999
-    },
     {
       "open_time": 1793599620000,
       "open": 78369.22,
@@ -896,6 +860,42 @@
       "close": 78050.01,
       "volume": 5.73699,
       "close_time": 1793605319999
+    },
+    {
+      "open_time": 1793605320000,
+      "open": 78050.01,
+      "high": 78063.52,
+      "low": 78050.0,
+      "close": 78063.51,
+      "volume": 2.5041,
+      "close_time": 1793605379999
+    },
+    {
+      "open_time": 1793605380000,
+      "open": 78063.51,
+      "high": 78063.52,
+      "low": 78044.93,
+      "close": 78044.94,
+      "volume": 5.67345,
+      "close_time": 1793605439999
+    },
+    {
+      "open_time": 1793605440000,
+      "open": 78044.94,
+      "high": 78052.01,
+      "low": 78043.03,
+      "close": 78052.0,
+      "volume": 4.99089,
+      "close_time": 1793605499999
+    },
+    {
+      "open_time": 1793605500000,
+      "open": 78052.0,
+      "high": 78052.01,
+      "low": 78000.0,
+      "close": 78000.01,
+      "volume": 18.16284,
+      "close_time": 1793605559999
     }
   ],
   "candle_count": 99
