@@ -111,6 +111,11 @@ button {
     margin: 5px 5px 5px 0;
 }
 
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 .panel {
     background: #111c2e;
     padding: 18px;
@@ -310,24 +315,37 @@ footer {
 
     <div class="panel">
 
-        <button class="start" onclick="showControl('START')">
+        <p>Trading control state:</p>
+
+        <div class="value yellow" id="controlState">
+            CHECKING...
+        </div>
+
+        <br>
+
+        <button class="start" id="startButton"
+            onclick="setControl('RUNNING')">
             START
         </button>
 
-        <button class="pause" onclick="showControl('PAUSE')">
+        <button class="pause" id="pauseButton"
+            onclick="setControl('PAUSED')">
             PAUSE
         </button>
 
-        <button class="stop" onclick="showControl('STOP')">
+        <button class="stop" id="stopButton"
+            onclick="setControl('STOPPED')">
             STOP
         </button>
 
         <p id="message">
-            Backend automation operates through GitHub Actions.
+            Connecting to Cloudflare control system...
         </p>
 
         <p class="muted">
-            These buttons are display-only and do not control GitHub Actions yet.
+            PAPER MODE ONLY. START permits new paper entries.
+            PAUSE and STOP prevent new entries.
+            Existing trades can still settle.
         </p>
 
     </div>
@@ -424,6 +442,9 @@ footer {
 const REPO = "Mikkyfrosh05/prediction-market-ai";
 const BRANCH = "main";
 
+const CONTROL_API =
+    "https://prediction-market-control.buremohpelumi.workers.dev";
+
 const FILES = {
     performance: "performance.json",
     markets: "market_data.json",
@@ -454,11 +475,161 @@ function formatDate(value) {
     return date.toLocaleString();
 }
 
-function showControl(action) {
+function getControlToken() {
+    return sessionStorage.getItem("control_token");
+}
+
+async function fetchControlStatus() {
+
+    const response = await fetch(
+        CONTROL_API + "/status",
+        { cache: "no-store" }
+    );
+
+    if (!response.ok) {
+        throw new Error("Cannot read Cloudflare control status.");
+    }
+
+    return await response.json();
+}
+
+function displayControlState(state) {
+
+    const element = document.getElementById("controlState");
+
+    element.textContent = state;
+
+    element.className = "value " + (
+        state === "RUNNING"
+            ? "green"
+            : state === "PAUSED"
+                ? "yellow"
+                : "red"
+    );
+
     setValue(
         "message",
-        action + " is not connected to backend automation yet."
+        "Cloudflare control state: " + state
     );
+}
+
+async function refreshControlStatus() {
+
+    try {
+
+        const result = await fetchControlStatus();
+
+        if (!result.success) {
+            throw new Error("Invalid control response.");
+        }
+
+        displayControlState(result.state);
+
+    } catch (error) {
+
+        setValue("controlState", "UNAVAILABLE");
+
+        setValue(
+            "message",
+            "Control connection unavailable: " + error.message
+        );
+
+    }
+}
+
+async function setControl(state) {
+
+    const buttons = [
+        "startButton",
+        "pauseButton",
+        "stopButton"
+    ];
+
+    buttons.forEach(id => {
+        document.getElementById(id).disabled = true;
+    });
+
+    try {
+
+        let token = getControlToken();
+
+        if (!token) {
+
+            token = prompt(
+                "Enter your private Cloudflare control password:"
+            );
+
+            if (!token) {
+                throw new Error("Control password required.");
+            }
+
+        }
+
+        setValue("message", "Sending " + state + " command...");
+
+        const response = await fetch(
+            CONTROL_API + "/control",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+
+                body: JSON.stringify({
+                    state: state
+                })
+            }
+        );
+
+        const result = await response.json();
+
+        if (response.status === 401) {
+
+            sessionStorage.removeItem("control_token");
+
+            throw new Error(
+                "Incorrect password. Please try again."
+            );
+
+        }
+
+        if (!response.ok || !result.success) {
+
+            throw new Error(
+                result.error || "Control command failed."
+            );
+
+        }
+
+        sessionStorage.setItem("control_token", token);
+
+        displayControlState(result.state);
+
+        setValue(
+            "message",
+            "Successfully changed trading state to " + state
+        );
+
+        alert(
+            "Trading control updated successfully: " + state
+        );
+
+    } catch (error) {
+
+        setValue("message", error.message);
+
+        alert(error.message);
+
+    } finally {
+
+        buttons.forEach(id => {
+            document.getElementById(id).disabled = false;
+        });
+
+    }
+
 }
 
 async function fetchJSON(path) {
@@ -653,6 +824,8 @@ async function loadDashboard() {
 
     setValue("status", "CONNECTING...");
 
+    const controlPromise = refreshControlStatus();
+
     try {
 
         const [
@@ -717,6 +890,8 @@ async function loadDashboard() {
         setHealth("strategyHealth", false);
 
     }
+
+    await controlPromise;
 
 }
 
