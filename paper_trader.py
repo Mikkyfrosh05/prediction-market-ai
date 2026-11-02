@@ -4,7 +4,6 @@ import uuid
 from datetime import datetime, timezone
 
 from risk_manager import (
-    load_state,
     can_trade,
     reserve_trade,
     settle_reserved_trade,
@@ -31,8 +30,14 @@ class PaperTrader:
 
                 self.trades = data.get("trades", [])
 
-            except (json.JSONDecodeError, OSError, TypeError):
+                if not isinstance(self.trades, list):
+                    raise ValueError("Invalid trades data")
+
+            except (json.JSONDecodeError, OSError, TypeError, ValueError):
                 print("Warning: Could not load previous paper trades.")
+                raise RuntimeError(
+                    "Paper trade history is invalid. Do not trade."
+                )
 
         else:
             self.save_data()
@@ -62,6 +67,9 @@ class PaperTrader:
         estimated_slippage=0.00
     ):
 
+        # Normalize market ID to prevent string/integer mismatches.
+        market_id = str(market_id)
+
         side = str(side).upper()
 
         if side not in ["UP", "DOWN"]:
@@ -85,11 +93,14 @@ class PaperTrader:
         if estimated_fee < 0 or estimated_slippage < 0:
             return {"error": "Invalid fee or slippage estimate."}
 
-        if any(
-            trade.get("market_id") == market_id
+        # Only one trade per market, regardless of ID data type.
+        existing_trade = any(
+            str(trade.get("market_id")) == market_id
             and trade.get("status") in ["OPEN", "SETTLED"]
             for trade in self.trades
-        ):
+        )
+
+        if existing_trade:
             return {
                 "error": "A trade already exists for this market."
             }
@@ -119,7 +130,7 @@ class PaperTrader:
 
         trade = {
             "trade_id": str(uuid.uuid4()),
-            "market_id": str(market_id),
+            "market_id": market_id,
             "title": title,
             "side": side,
             "entry_price": price,
@@ -144,6 +155,7 @@ class PaperTrader:
                 "CRITICAL: Trade reservation succeeded, "
                 "but trade file could not be saved."
             )
+
             return {
                 "error": "Trade file could not be saved. "
                          "Check risk_state.json before continuing."
@@ -153,6 +165,7 @@ class PaperTrader:
 
     def settle_trade(self, market_id, outcome):
 
+        market_id = str(market_id)
         outcome = str(outcome).upper()
 
         if outcome not in ["UP", "DOWN"]:
@@ -160,10 +173,12 @@ class PaperTrader:
                 "error": "Invalid outcome. Use UP or DOWN."
             }
 
+        settled_trades = []
+
         for trade in self.trades:
 
             if (
-                str(trade.get("market_id")) == str(market_id)
+                str(trade.get("market_id")) == market_id
                 and trade.get("status") == "OPEN"
             ):
 
@@ -182,30 +197,50 @@ class PaperTrader:
                     slippage=slippage
                 )
 
-                if settlement is False:
+                if isinstance(settlement, dict) and settlement.get("error"):
                     return {
-                        "error": "Risk manager could not settle trade."
+                        "error": settlement["error"],
+                        "settled_trades": settled_trades
                     }
 
-                if isinstance(settlement, dict) and settlement.get("error"):
-                    return settlement
+                if settlement is False:
+                    return {
+                        "error": "Risk manager could not settle trade.",
+                        "settled_trades": settled_trades
+                    }
 
                 trade["status"] = "SETTLED"
                 trade["outcome"] = outcome
                 trade["payout"] = round(payout, 4)
+
                 trade["profit"] = round(
                     payout - trade["stake"] - fees - slippage,
                     4
                 )
+
                 trade["settled_at"] = (
                     datetime.now(timezone.utc).isoformat()
                 )
 
-                self.save_data()
+                settled_trades.append(trade)
 
-                return trade
+                try:
+                    self.save_data()
 
-        return {"error": "Open trade not found."}
+                except OSError:
+                    return {
+                        "error": "Could not save settlement record.",
+                        "settled_trades": settled_trades
+                    }
+
+        if not settled_trades:
+            return {"error": "Open trade not found."}
+
+        return {
+            "success": True,
+            "settled_count": len(settled_trades),
+            "trades": settled_trades
+        }
 
     def get_status(self):
 
