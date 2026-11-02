@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from paper_trader import PaperTrader
 
 
-MIN_ELAPSED_SECONDS = 150
+MIN_ELAPSED_SECONDS = 0
 MIN_ENTRY_PRICE = 0.70
 MAX_ELAPSED_SECONDS = 300
 MIN_MOMENTUM_PERCENT = 0.05
