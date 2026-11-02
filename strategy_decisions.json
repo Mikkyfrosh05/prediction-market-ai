@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T00:26:52.815387+00:00",
+  "updated_at": "2026-11-02T00:27:42.958056+00:00",
   "mode": "PAPER",
   "real_trading_enabled": false,
   "markets_checked": 3,
@@ -9,7 +9,7 @@
       "market_id": 4094830,
       "title": "Bitcoin Up or Down - November 1, 7:25PM-7:30PM ET",
       "decision": "NO TRADE",
-      "reason": "Waiting for at least 2 minutes 30 seconds"
+      "reason": "No clear directional momentum"
     },
     {
       "market_id": 4094847,

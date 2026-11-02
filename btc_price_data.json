@@ -1,20 +1,11 @@
 {
-  "updated_at": "2026-11-02T00:26:51.981020+00:00",
+  "updated_at": "2026-11-02T00:27:41.726292+00:00",
   "asset": "BTC",
   "trading_pair": "BTCUSDT",
   "price_source": "BINANCE",
   "settlement_source": "CHAINLINK",
-  "current_price": 78144.01,
+  "current_price": 78164.01,
   "candles": [
-    {
-      "open_time": 1793573220000,
-      "open": 77824.01,
-      "high": 77824.01,
-      "low": 77812.0,
-      "close": 77812.0,
-      "volume": 0.79494,
-      "close_time": 1793573279999
-    },
     {
       "open_time": 1793573280000,
       "open": 77812.01,
@@ -896,6 +887,15 @@
       "close": 78164.96,
       "volume": 4.58907,
       "close_time": 1793579159999
+    },
+    {
+      "open_time": 1793579160000,
+      "open": 78164.96,
+      "high": 78164.96,
+      "low": 78144.0,
+      "close": 78144.0,
+      "volume": 7.10381,
+      "close_time": 1793579219999
     }
   ],
   "candle_count": 99
