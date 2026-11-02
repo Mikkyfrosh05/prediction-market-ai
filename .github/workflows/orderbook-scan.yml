@@ -109,6 +109,9 @@ jobs:
         run: |
           touch .gitignore
 
+          git config user.name "Market Data Bot"
+          git config user.email "actions@github.com"
+
           for file in risk_state.json paper_trades.json private-data/
           do
             grep -qxF "$file" .gitignore || echo "$file" >> .gitignore
