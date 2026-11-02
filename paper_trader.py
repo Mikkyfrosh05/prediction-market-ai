@@ -1,205 +1,256 @@
 import json
 import os
+import uuid
 from datetime import datetime, timezone
 
-STATE_FILE = "risk_state.json"
-
-STARTING_BALANCE = 100.00
-MAX_TRADE = 2.00
-MAX_DAILY_LOSS = 5.00
-
-
-def today():
-    return datetime.now(timezone.utc).date().isoformat()
+from risk_manager import (
+    load_state,
+    can_trade,
+    reserve_trade,
+    settle_reserved_trade,
+    get_status as get_risk_status
+)
 
 
-def load_state():
-    if os.path.exists(STATE_FILE):
+class PaperTrader:
+
+    def __init__(self):
+
+        self.filename = "paper_trades.json"
+        self.trades = []
+
+        self.load_data()
+
+    def load_data(self):
+
+        if os.path.exists(self.filename):
+
+            try:
+                with open(self.filename, "r") as file:
+                    data = json.load(file)
+
+                self.trades = data.get("trades", [])
+
+            except (json.JSONDecodeError, OSError, TypeError):
+                print("Warning: Could not load previous paper trades.")
+
+        else:
+            self.save_data()
+
+    def save_data(self):
+
+        data = {
+            "mode": "PAPER",
+            "trades": self.trades
+        }
+
+        temporary_file = self.filename + ".tmp"
+
+        with open(temporary_file, "w") as file:
+            json.dump(data, file, indent=4)
+
+        os.replace(temporary_file, self.filename)
+
+    def open_trade(
+        self,
+        market_id,
+        title,
+        side,
+        price,
+        stake=2.00,
+        estimated_fee=0.00,
+        estimated_slippage=0.00
+    ):
+
+        side = str(side).upper()
+
+        if side not in ["UP", "DOWN"]:
+            return {"error": "Invalid side. Use UP or DOWN."}
+
         try:
-            with open(STATE_FILE, "r") as file:
-                state = json.load(file)
+            price = float(price)
+            stake = float(stake)
+            estimated_fee = float(estimated_fee)
+            estimated_slippage = float(estimated_slippage)
 
-            required = ["balance", "daily_loss", "reserved"]
+        except (ValueError, TypeError):
+            return {"error": "Invalid trade values."}
 
-            if all(key in state for key in required):
-                return state
+        if not 0 < price < 1:
+            return {"error": "Invalid market price."}
 
-        except (json.JSONDecodeError, OSError):
-            print("Warning: Could not read risk state.")
+        if stake <= 0:
+            return {"error": "Stake must be greater than zero."}
 
-    return {
-        "balance": STARTING_BALANCE,
-        "reserved": 0.00,
-        "daily_loss": 0.00,
-        "trade_count": 0,
-        "wins": 0,
-        "losses": 0,
-        "date": today(),
-        "total_profit": 0.00,
-        "total_fees": 0.00,
-        "total_slippage": 0.00
-    }
+        if estimated_fee < 0 or estimated_slippage < 0:
+            return {"error": "Invalid fee or slippage estimate."}
 
+        if any(
+            trade.get("market_id") == market_id
+            and trade.get("status") in ["OPEN", "SETTLED"]
+            for trade in self.trades
+        ):
+            return {
+                "error": "A trade already exists for this market."
+            }
 
-def save_state(state):
-    temporary_file = STATE_FILE + ".tmp"
+        approved, reason = can_trade(
+            stake,
+            estimated_fee,
+            estimated_slippage
+        )
 
-    with open(temporary_file, "w") as file:
-        json.dump(state, file, indent=4)
+        if not approved:
+            return {"error": reason}
 
-    os.replace(temporary_file, STATE_FILE)
+        reservation = reserve_trade(
+            stake,
+            estimated_fee,
+            estimated_slippage
+        )
 
+        if reservation is False:
+            return {
+                "error": "Risk manager could not reserve funds."
+            }
 
-def reset_daily_limits(state):
-    if state.get("date") != today():
-        state["date"] = today()
-        state["daily_loss"] = 0.00
-        save_state(state)
+        if isinstance(reservation, dict) and reservation.get("error"):
+            return reservation
 
-    return state
+        trade = {
+            "trade_id": str(uuid.uuid4()),
+            "market_id": str(market_id),
+            "title": title,
+            "side": side,
+            "entry_price": price,
+            "stake": round(stake, 4),
+            "shares": round(stake / price, 8),
+            "estimated_fee": round(estimated_fee, 4),
+            "estimated_slippage": round(estimated_slippage, 4),
+            "reserved_total": round(
+                stake + estimated_fee + estimated_slippage, 4
+            ),
+            "status": "OPEN",
+            "opened_at": datetime.now(timezone.utc).isoformat()
+        }
 
+        self.trades.append(trade)
 
-def can_trade(stake, estimated_fee=0.00, estimated_slippage=0.00):
-    state = reset_daily_limits(load_state())
+        try:
+            self.save_data()
 
-    stake = float(stake)
-    fee = float(estimated_fee)
-    slippage = float(estimated_slippage)
+        except OSError:
+            print(
+                "CRITICAL: Trade reservation succeeded, "
+                "but trade file could not be saved."
+            )
+            return {
+                "error": "Trade file could not be saved. "
+                         "Check risk_state.json before continuing."
+            }
 
-    if stake <= 0:
-        return False, "Invalid trade amount"
+        return trade
 
-    if stake > MAX_TRADE:
-        return False, "Trade exceeds maximum trade limit"
+    def settle_trade(self, market_id, outcome):
 
-    if fee < 0 or slippage < 0:
-        return False, "Invalid cost estimate"
+        outcome = str(outcome).upper()
 
-    total_cost = stake + fee + slippage
+        if outcome not in ["UP", "DOWN"]:
+            return {
+                "error": "Invalid outcome. Use UP or DOWN."
+            }
 
-    available = state["balance"] - state["reserved"]
+        for trade in self.trades:
 
-    if total_cost > available:
-        return False, "Insufficient available virtual balance"
+            if (
+                str(trade.get("market_id")) == str(market_id)
+                and trade.get("status") == "OPEN"
+            ):
 
-    if state["daily_loss"] >= MAX_DAILY_LOSS:
-        return False, "Daily loss limit reached"
+                if trade["side"] == outcome:
+                    payout = trade["shares"]
+                else:
+                    payout = 0.0
 
-    if state["daily_loss"] + fee + slippage >= MAX_DAILY_LOSS:
-        return False, "Daily loss limit would be exceeded"
+                fees = trade["estimated_fee"]
+                slippage = trade["estimated_slippage"]
 
-    return True, "Trade approved"
+                settlement = settle_reserved_trade(
+                    stake=trade["stake"],
+                    payout=payout,
+                    fees=fees,
+                    slippage=slippage
+                )
 
+                if settlement is False:
+                    return {
+                        "error": "Risk manager could not settle trade."
+                    }
 
-def reserve_trade(stake, estimated_fee=0.00, estimated_slippage=0.00):
-    approved, reason = can_trade(
-        stake,
-        estimated_fee,
-        estimated_slippage
-    )
+                if isinstance(settlement, dict) and settlement.get("error"):
+                    return settlement
 
-    if not approved:
-        return False, reason
+                trade["status"] = "SETTLED"
+                trade["outcome"] = outcome
+                trade["payout"] = round(payout, 4)
+                trade["profit"] = round(
+                    payout - trade["stake"] - fees - slippage,
+                    4
+                )
+                trade["settled_at"] = (
+                    datetime.now(timezone.utc).isoformat()
+                )
 
-    state = reset_daily_limits(load_state())
+                self.save_data()
 
-    state["reserved"] += (
-        float(stake)
-        + float(estimated_fee)
-        + float(estimated_slippage)
-    )
+                return trade
 
-    save_state(state)
+        return {"error": "Open trade not found."}
 
-    return True, "Virtual funds reserved"
+    def get_status(self):
 
+        settled = [
+            trade for trade in self.trades
+            if trade.get("status") == "SETTLED"
+        ]
 
-def settle_reserved_trade(
-    stake,
-    payout,
-    fees=0.00,
-    slippage=0.00
-):
-    state = reset_daily_limits(load_state())
+        total_profit = sum(
+            trade.get("profit", 0)
+            for trade in settled
+        )
 
-    stake = float(stake)
-    payout = float(payout)
-    fees = float(fees)
-    slippage = float(slippage)
+        open_trades = sum(
+            trade.get("status") == "OPEN"
+            for trade in self.trades
+        )
 
-    reserved_amount = stake + fees + slippage
+        risk_status = get_risk_status()
 
-    if reserved_amount > state["reserved"] + 0.000001:
-        return False, "Reserved amount mismatch"
-
-    if min(stake, payout, fees, slippage) < 0:
-        return False, "Invalid settlement values"
-
-    net_profit = payout - stake - fees - slippage
-
-    state["reserved"] = max(
-        0.00,
-        state["reserved"] - reserved_amount
-    )
-
-    state["balance"] += payout - fees - slippage
-
-    state["trade_count"] += 1
-    state["total_profit"] += net_profit
-    state["total_fees"] += fees
-    state["total_slippage"] += slippage
-
-    if net_profit > 0:
-        state["wins"] += 1
-
-    elif net_profit < 0:
-        state["losses"] += 1
-        state["daily_loss"] += abs(net_profit)
-
-    save_state(state)
-
-    return True, {
-        "net_profit": round(net_profit, 4),
-        "balance": round(state["balance"], 2),
-        "daily_loss": round(state["daily_loss"], 2)
-    }
-
-
-def get_status():
-    state = reset_daily_limits(load_state())
-
-    trades = state["trade_count"]
-
-    win_rate = (
-        state["wins"] / trades * 100
-        if trades else 0
-    )
-
-    return {
-        "mode": "PAPER",
-        "balance": round(state["balance"], 2),
-        "reserved": round(state["reserved"], 2),
-        "available_balance": round(
-            state["balance"] - state["reserved"], 2
-        ),
-        "daily_loss": round(state["daily_loss"], 2),
-        "maximum_daily_loss": MAX_DAILY_LOSS,
-        "maximum_trade": MAX_TRADE,
-        "trades": trades,
-        "wins": state["wins"],
-        "losses": state["losses"],
-        "win_rate": round(win_rate, 2),
-        "total_profit": round(state["total_profit"], 2),
-        "total_fees": round(state["total_fees"], 2),
-        "total_slippage": round(state["total_slippage"], 2)
-    }
+        return {
+            "mode": "PAPER",
+            "balance": risk_status["balance"],
+            "reserved": risk_status.get("reserved", 0),
+            "total_trades": len(self.trades),
+            "open_trades": open_trades,
+            "settled_trades": len(settled),
+            "wins": risk_status["wins"],
+            "losses": risk_status["losses"],
+            "win_rate": risk_status["win_rate"],
+            "realized_profit": round(total_profit, 4),
+            "real_trading": False
+        }
 
 
 if __name__ == "__main__":
-    print("PAPER RISK MANAGER")
-    print("------------------")
 
-    for key, value in get_status().items():
+    bot = PaperTrader()
+
+    print("=" * 45)
+    print("BTC UP/DOWN PAPER TRADING ACCOUNT")
+    print("=" * 45)
+
+    for key, value in bot.get_status().items():
         print(f"{key}: {value}")
 
-    print("\nReal trading: DISABLED")
+    print("=" * 45)
+    print("Real trading: DISABLED")
