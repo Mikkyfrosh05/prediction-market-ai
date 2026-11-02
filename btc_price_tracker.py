@@ -10,7 +10,8 @@ API_URL = "https://data-api.binance.vision/api/v3"
 
 def get_btc_price():
 
-    url = f"{API_URL}/ticker/price"
+    # Fetch Binance best bid and best ask
+    url = f"{API_URL}/ticker/bookTicker"
 
     params = {
         "symbol": "BTCUSDT"
@@ -24,7 +25,16 @@ def get_btc_price():
 
     response.raise_for_status()
 
-    return float(response.json()["price"])
+    data = response.json()
+
+    bid = float(data["bidPrice"])
+
+    ask = float(data["askPrice"])
+
+    # Calculate midpoint
+    midpoint = (bid + ask) / 2
+
+    return midpoint
 
 
 def get_btc_candles():
@@ -104,7 +114,7 @@ def save_price_data():
 
             "trading_pair": "BTCUSDT",
 
-            "price_source": "BINANCE",
+            "price_source": "BINANCE_BOOK_MID",
 
             "settlement_source": "CHAINLINK",
 
@@ -127,7 +137,11 @@ def save_price_data():
         print("\nBTC PRICE TRACKER")
         print("----------------------------")
 
-        print("Current BTC price:", price)
+        print("Current BTC midpoint:", price)
+
+        print("Price source: BINANCE_BOOK_MID")
+
+        print("Settlement reference: CHAINLINK")
 
         print("Completed candles:", len(candles))
 
