@@ -1,41 +1,46 @@
 {
-  "updated_at": "2026-11-02T06:30:33.699664+00:00",
+  "updated_at": "2026-11-02T06:58:41.543615+00:00",
   "mode": "PAPER",
   "real_trading_enabled": false,
-  "markets_checked": 5,
+  "markets_checked": 4,
   "candidates_found": 0,
   "results": [
     {
-      "market_id": "4102335",
-      "title": "Bitcoin Up or Down - November 2, 1:30AM-1:35AM ET",
+      "market_id": "4102389",
+      "title": "Bitcoin Up or Down - November 2, 1:55AM-2AM ET",
       "decision": "NO TRADE",
-      "reason": "Waiting for at least 2 minutes 30 seconds",
-      "momentum_diagnostics": {}
+      "reason": "No clear directional momentum",
+      "momentum_diagnostics": {
+        "ema9": 78175.8,
+        "ema21": 78182.58,
+        "latest_completed_close": 78196.5,
+        "three_candle_start_close": 78154.0,
+        "three_candle_movement_percent": 0.05438,
+        "live_btc_price": 78176.005,
+        "live_vs_last_close_percent": -0.02621,
+        "market_start_price": 78154.005,
+        "current_btc_price": 78176.005,
+        "direction_vs_start_price": "UP",
+        "start_price_source": "PREDICT_FUN_LIVE_API"
+      }
     },
     {
-      "market_id": "4102357",
-      "title": "Bitcoin Up or Down - November 2, 1:35AM-1:40AM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": "4102360",
-      "title": "Bitcoin Up or Down - November 2, 1:40AM-1:45AM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": "4102331",
-      "title": "Bitcoin Up or Down - November 2, 1:25AM-1:30AM ET",
+      "market_id": "4102393",
+      "title": "Bitcoin Up or Down - November 2, 2AM-2:05AM ET",
       "decision": "NO TRADE",
       "reason": "Market is not active",
       "momentum_diagnostics": {}
     },
     {
-      "market_id": "4102328",
-      "title": "Bitcoin Up or Down - November 2, 1:20AM-1:25AM ET",
+      "market_id": "4102614",
+      "title": "Bitcoin Up or Down - November 2, 2:05AM-2:10AM ET",
+      "decision": "NO TRADE",
+      "reason": "Market is not active",
+      "momentum_diagnostics": {}
+    },
+    {
+      "market_id": "4102386",
+      "title": "Bitcoin Up or Down - November 2, 1:50AM-1:55AM ET",
       "decision": "NO TRADE",
       "reason": "Market is not active",
       "momentum_diagnostics": {}
