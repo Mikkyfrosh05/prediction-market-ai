@@ -218,3 +218,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+risk_state.json
+paper_trades.json
+private-data/
