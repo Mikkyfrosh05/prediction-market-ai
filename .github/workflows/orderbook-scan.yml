@@ -23,8 +23,28 @@ jobs:
 
     steps:
 
-      - name: Checkout repository
+      - name: Checkout public AI repository
         uses: actions/checkout@v5
+
+      - name: Checkout private trading records
+        uses: actions/checkout@v5
+        with:
+          repository: Mikkyfrosh05/prediction-market-private-data
+          token: ${{ secrets.GH_PRIVATE_DATA_TOKEN }}
+          path: private-data
+          ref: main
+
+      - name: Restore previous trading records
+        run: |
+          for file in risk_state.json paper_trades.json
+          do
+            if [ -f "private-data/$file" ]; then
+              cp "private-data/$file" "$file"
+              echo "Restored $file"
+            else
+              echo "$file does not exist yet."
+            fi
+          done
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -61,12 +81,43 @@ jobs:
             fi
           done
 
-      - name: Save market, BTC and strategy data
+      - name: Save records to private repository
         run: |
+          for file in risk_state.json paper_trades.json
+          do
+            if [ -f "$file" ]; then
+              cp "$file" private-data/
+              echo "Prepared $file for private storage."
+            fi
+          done
+
+          git -C private-data config user.name "Market Data Bot"
+          git -C private-data config user.email "actions@github.com"
+
+          git -C private-data add risk_state.json paper_trades.json
+
+          if ! git -C private-data diff --cached --quiet; then
+            git -C private-data commit -m "Update private trading records"
+            git -C private-data push origin HEAD:main
+          else
+            echo "No private trading record changes."
+          fi
+
+      - name: Protect private files and save market data
+        run: |
+          touch .gitignore
+
+          for file in risk_state.json paper_trades.json private-data/
+          do
+            grep -qxF "$file" .gitignore || echo "$file" >> .gitignore
+          done
+
+          git rm --cached --ignore-unmatch risk_state.json paper_trades.json
+
           git config user.name "Market Data Bot"
           git config user.email "actions@github.com"
 
-          git add orderbooks.json btc_price_data.json strategy_decisions.json
+          git add .gitignore orderbooks.json btc_price_data.json strategy_decisions.json
 
           git diff --cached --quiet || git commit -m "Update BTC market monitoring data"
 
