@@ -16,6 +16,7 @@ API_KEY = os.environ.get("PREDICT_API_KEY")
 if not API_KEY:
     raise ValueError("PREDICT_API_KEY is missing!")
 
+
 HEADERS = {
     "x-api-key": API_KEY
 }
@@ -41,52 +42,136 @@ def get_orderbook(market_id):
     return result["data"]
 
 
-def get_outcome_price(outcomes, outcome_name):
+def read_level(level):
 
-    for outcome in outcomes:
+    if not isinstance(level, (list, tuple)):
+        return None, None
 
-        name = outcome.get("name", "").strip().upper()
+    if len(level) < 2:
+        return None, None
 
-        if name != outcome_name.upper():
-            continue
+    try:
 
-        best_bid = outcome.get("bestBid") or {}
-        best_ask = outcome.get("bestAsk") or {}
+        price = float(level[0])
+        size = float(level[1])
 
-        return {
+        return price, size
 
-            "bid": float(best_bid["price"])
-            if best_bid.get("price") is not None
-            else None,
+    except (ValueError, TypeError):
 
-            "ask": float(best_ask["price"])
-            if best_ask.get("price") is not None
-            else None,
+        return None, None
 
-            "bid_size": float(best_bid.get("size", 0)),
 
-            "ask_size": float(best_ask.get("size", 0))
+def get_best_level(levels):
 
-        }
+    if not levels:
+        return None, None
 
-    return {
-        "bid": None,
-        "ask": None,
-        "bid_size": 0,
-        "ask_size": 0
+    return read_level(levels[0])
+
+
+def calculate_complement(price, precision):
+
+    if price is None:
+        return None
+
+    return round(
+        1.0 - price,
+        precision
+    )
+
+
+def map_orderbook_to_outcomes(market, book):
+
+    outcomes = market.get("outcomes", [])
+
+    if len(outcomes) < 2:
+        raise ValueError(
+            "Market does not contain two outcomes"
+        )
+
+    first_outcome = (
+        outcomes[0].get("name", "").strip().upper()
+    )
+
+    second_outcome = (
+        outcomes[1].get("name", "").strip().upper()
+    )
+
+    if {first_outcome, second_outcome} != {"UP", "DOWN"}:
+
+        raise ValueError(
+            f"Unexpected outcomes: {first_outcome}, {second_outcome}"
+        )
+
+    precision = int(
+        market.get("decimalPrecision", 2)
+    )
+
+    asks = book.get("asks", [])
+    bids = book.get("bids", [])
+
+    base_ask, base_ask_size = get_best_level(asks)
+
+    base_bid, base_bid_size = get_best_level(bids)
+
+    # First outcome uses the actual orderbook.
+
+    base = {
+
+        "bid": base_bid,
+
+        "ask": base_ask,
+
+        "bid_size": base_bid_size or 0,
+
+        "ask_size": base_ask_size or 0
+
     }
+
+    # Second outcome is the complementary outcome.
+    # Its bid comes from 1 - first outcome ask.
+    # Its ask comes from 1 - first outcome bid.
+
+    complementary = {
+
+        "bid": calculate_complement(
+            base_ask,
+            precision
+        ),
+
+        "ask": calculate_complement(
+            base_bid,
+            precision
+        ),
+
+        "bid_size": base_ask_size or 0,
+
+        "ask_size": base_bid_size or 0
+
+    }
+
+    if first_outcome == "UP":
+
+        up = base
+        down = complementary
+
+    else:
+
+        down = base
+        up = complementary
+
+    return up, down
 
 
 def scan_markets():
 
     markets = get_markets()
 
-    now = datetime.now(timezone.utc)
-
     scanned = []
 
     print("\nBTC OUTCOME ORDERBOOK SCANNER")
-    print("----------------------------")
+    print("--------------------------------")
 
     for market in markets:
 
@@ -97,21 +182,33 @@ def scan_markets():
 
         try:
 
-            # Read actual UP and DOWN outcome prices
-            outcomes = market.get("outcomes", [])
+            # Fetch a fresh orderbook snapshot.
 
-            up = get_outcome_price(
-                outcomes,
-                "UP"
-            )
-
-            down = get_outcome_price(
-                outcomes,
-                "DOWN"
-            )
-
-            # Fetch orderbook for additional market information
             book = get_orderbook(market_id)
+
+            # Confirm the returned book belongs
+            # to the requested market.
+
+            book_market_id = book.get("marketId")
+
+            if (
+                book_market_id is not None
+                and str(book_market_id) != str(market_id)
+            ):
+
+                raise ValueError(
+                    "Orderbook market ID mismatch"
+                )
+
+            # Derive actual UP and DOWN prices
+            # from the fresh orderbook.
+
+            up, down = map_orderbook_to_outcomes(
+                market,
+                book
+            )
+
+            now = datetime.now(timezone.utc)
 
             start = datetime.fromisoformat(
                 market["startsAt"].replace("Z", "+00:00")
@@ -131,6 +228,24 @@ def scan_markets():
 
             active = start <= now < end
 
+            update_timestamp = book.get(
+                "updateTimestampMs"
+            )
+
+            if update_timestamp is not None:
+
+                orderbook_age = round(
+                    (
+                        now.timestamp() * 1000
+                        - float(update_timestamp)
+                    ) / 1000,
+                    2
+                )
+
+            else:
+
+                orderbook_age = None
+
             item = {
 
                 "market_id": market_id,
@@ -147,10 +262,14 @@ def scan_markets():
 
                 "active": active,
 
-                "elapsed_seconds": round(elapsed_seconds, 2),
+                "elapsed_seconds": round(
+                    elapsed_seconds,
+                    2
+                ),
 
                 "remaining_seconds": round(
-                    remaining_seconds, 2
+                    remaining_seconds,
+                    2
                 ),
 
                 "up_bid": up["bid"],
@@ -169,17 +288,30 @@ def scan_markets():
 
                 "down_ask_size": down["ask_size"],
 
-                "fee_rate_bps": market.get("feeRateBps"),
-
-                "maker_fee_bps": market.get("makerFeeBps"),
-
-                "orderbook_updated": book.get(
-                    "updateTimestampMs"
+                "fee_rate_bps": market.get(
+                    "feeRateBps"
                 ),
 
+                "maker_fee_bps": market.get(
+                    "makerFeeBps"
+                ),
+
+                "decimal_precision": market.get(
+                    "decimalPrecision"
+                ),
+
+                "orderbook_updated": update_timestamp,
+
+                "orderbook_age_seconds": orderbook_age,
+
+                "base_outcome": market["outcomes"][0]["name"],
+
                 "actual_outcome_prices_available": (
+
                     up["ask"] is not None
+
                     and down["ask"] is not None
+
                 )
 
             }
@@ -188,13 +320,33 @@ def scan_markets():
 
             print("\nMarket:", item["title"])
 
+            print("Market ID:", market_id)
+
             print("Active:", active)
 
-            print("Elapsed:", item["elapsed_seconds"])
+            print(
+                "Elapsed:",
+                item["elapsed_seconds"]
+            )
+
+            print("Base outcome:", item["base_outcome"])
+
+            print("UP best bid:", item["up_bid"])
 
             print("UP best ask:", item["up_ask"])
 
+            print("DOWN best bid:", item["down_bid"])
+
             print("DOWN best ask:", item["down_ask"])
+
+            print("UP ask size:", item["up_ask_size"])
+
+            print("DOWN ask size:", item["down_ask_size"])
+
+            print(
+                "Orderbook age:",
+                item["orderbook_age_seconds"]
+            )
 
         except Exception as error:
 
