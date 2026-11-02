@@ -42,10 +42,13 @@ jobs:
           PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
         run: python main.py
 
-      - name: Save market and BTC data
+      - name: Run BTC Strategy Engine
+        run: python strategy_engine.py
+
+      - name: Save market, BTC and strategy data
         run: |
           git config user.name "Market Data Bot"
           git config user.email "actions@github.com"
-          git add orderbooks.json btc_price_data.json
-          git diff --cached --quiet || git commit -m "Update BTC market and price data"
+          git add orderbooks.json btc_price_data.json strategy_decisions.json
+          git diff --cached --quiet || git commit -m "Update BTC market and strategy data"
           git push
