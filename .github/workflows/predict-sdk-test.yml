@@ -1,0 +1,24 @@
+name: Predict SDK Installation Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sdk-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Predict SDK
+        run: pip install predict-sdk==0.0.22
+
+      - name: Verify SDK
+        run: |
+          python -c "from predict_sdk import OrderBuilder, ChainId, OrderBuilderOptions; print('Predict SDK installed successfully')"
