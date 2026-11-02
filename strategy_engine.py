@@ -9,7 +9,7 @@ from paper_trader import PaperTrader
 
 MIN_ELAPSED_SECONDS = 0
 MIN_ENTRY_PRICE = 0.70
-MAX_ELAPSED_SECONDS = 300
+MAX_ELAPSED_SECONDS = 270
 MIN_MOMENTUM_PERCENT = 0.05
 
 PAPER_TRADE_AMOUNT = 2.00
@@ -316,7 +316,7 @@ def evaluate_market(market, raw_market, candles, current_price):
 
     if elapsed < MIN_ELAPSED_SECONDS:
 
-        return None, "Waiting for at least 2 minutes 30 seconds", {}
+        return None, "Waiting for market activation", {}
 
     if elapsed >= MAX_ELAPSED_SECONDS:
 
