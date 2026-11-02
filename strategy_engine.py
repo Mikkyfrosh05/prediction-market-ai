@@ -7,23 +7,47 @@ from datetime import datetime, timezone
 from paper_trader import PaperTrader
 
 
+# ==========================================
+# STRATEGY CONFIGURATION
+# ==========================================
+
 MIN_ELAPSED_SECONDS = 0
+
 MIN_ENTRY_PRICE = 0.70
+
 MAX_ELAPSED_SECONDS = 270
+
 MIN_MOMENTUM_PERCENT = 0.05
 
 PAPER_TRADE_AMOUNT = 2.00
+
+# Live momentum confirmation
+LIVE_MOMENTUM_REQUIRED_SECONDS = 30
+
+LIVE_MOMENTUM_MIN_WINDOW = 25
+
+LIVE_MOMENTUM_MAX_WINDOW = 40
+
+LIVE_PRICE_MAX_AGE_SECONDS = 15
 
 API_URL = "https://api.predict.fun"
 
 PREDICT_API_KEY = os.getenv("PREDICT_API_KEY")
 
 
+# ==========================================
+# JSON FUNCTIONS
+# ==========================================
+
 def load_json(filename):
 
     with open(filename, "r") as file:
         return json.load(file)
 
+
+# ==========================================
+# EMA CALCULATION
+# ==========================================
 
 def calculate_ema(prices, period):
 
@@ -41,6 +65,10 @@ def calculate_ema(prices, period):
 
     return ema
 
+
+# ==========================================
+# MARKET STARTING PRICE
+# ==========================================
 
 def extract_start_price(data):
 
@@ -195,6 +223,110 @@ def find_market_start_price(market, raw_market):
     return None, source
 
 
+# ==========================================
+# LIVE MOMENTUM VALIDATION
+# ==========================================
+
+def validate_live_momentum(live_momentum):
+
+    if not isinstance(live_momentum, dict):
+
+        return False, "30-second live momentum data unavailable"
+
+    if not live_momentum.get("available"):
+
+        return False, live_momentum.get(
+            "reason",
+            "30-second momentum not available"
+        )
+
+    direction = live_momentum.get("direction")
+
+    if direction not in ["UP", "DOWN"]:
+
+        return False, "Live BTC momentum is FLAT or invalid"
+
+    try:
+
+        movement = float(
+            live_momentum["movement_percent"]
+        )
+
+        window = float(
+            live_momentum["window_seconds"]
+        )
+
+        current_price = float(
+            live_momentum["current_price"]
+        )
+
+        timestamp = int(
+            live_momentum["current_timestamp"]
+        )
+
+    except (KeyError, ValueError, TypeError):
+
+        return False, "Invalid live momentum measurements"
+
+    if current_price <= 0:
+
+        return False, "Invalid live BTC price"
+
+    if not (
+        LIVE_MOMENTUM_MIN_WINDOW
+        <= window
+        <= LIVE_MOMENTUM_MAX_WINDOW
+    ):
+
+        return False, (
+            "Live momentum measurement window is outside "
+            "the permitted range"
+        )
+
+    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+
+    age_seconds = (now_ms - timestamp) / 1000
+
+    if age_seconds < -2:
+
+        return False, "Live BTC timestamp is in the future"
+
+    if age_seconds > LIVE_PRICE_MAX_AGE_SECONDS:
+
+        return False, "Live BTC momentum data is stale"
+
+    if direction == "UP" and movement <= 0:
+
+        return False, "Invalid UP momentum measurement"
+
+    if direction == "DOWN" and movement >= 0:
+
+        return False, "Invalid DOWN momentum measurement"
+
+    diagnostics = {
+
+        "live_momentum_direction": direction,
+
+        "live_momentum_percent": round(movement, 6),
+
+        "live_momentum_window_seconds": round(window, 2),
+
+        "live_momentum_current_price": current_price,
+
+        "live_momentum_data_age_seconds": round(
+            age_seconds,
+            2
+        )
+
+    }
+
+    return True, "30-second live momentum confirmed", diagnostics
+
+
+# ==========================================
+# CANDLE MOMENTUM ANALYSIS
+# ==========================================
+
 def analyse_momentum(candles, current_price=None):
 
     if len(candles) < 30:
@@ -267,7 +399,7 @@ def analyse_momentum(candles, current_price=None):
 
     ):
 
-        return "UP", "Strong UP momentum confirmed", diagnostics
+        return "UP", "Strong UP candle momentum confirmed", diagnostics
 
     if (
 
@@ -279,20 +411,30 @@ def analyse_momentum(candles, current_price=None):
 
     ):
 
-        return "DOWN", "Strong DOWN momentum confirmed", diagnostics
+        return "DOWN", "Strong DOWN candle momentum confirmed", diagnostics
 
     if ema9 > ema21 and latest_close > ema9:
 
-        return None, "UP momentum is too weak", diagnostics
+        return None, "UP candle momentum is too weak", diagnostics
 
     if ema9 < ema21 and latest_close < ema9:
 
-        return None, "DOWN momentum is too weak", diagnostics
+        return None, "DOWN candle momentum is too weak", diagnostics
 
-    return None, "No clear directional momentum", diagnostics
+    return None, "No clear directional candle momentum", diagnostics
 
 
-def evaluate_market(market, raw_market, candles, current_price):
+# ==========================================
+# MARKET EVALUATION
+# ==========================================
+
+def evaluate_market(
+    market,
+    raw_market,
+    candles,
+    current_price,
+    live_momentum
+):
 
     now = datetime.now(timezone.utc)
 
@@ -360,6 +502,7 @@ def evaluate_market(market, raw_market, candles, current_price):
 
         return None, "BTC is exactly at market starting price", {}
 
+    # First evaluate completed candle momentum.
     direction, momentum_reason, diagnostics = analyse_momentum(
 
         candles,
@@ -380,14 +523,34 @@ def evaluate_market(market, raw_market, candles, current_price):
 
         return None, momentum_reason, diagnostics
 
+    # Validate the separate 30-second live momentum measurement.
+    live_valid, live_reason, live_diagnostics = validate_live_momentum(
+        live_momentum
+    )
+
+    diagnostics.update(live_diagnostics)
+
+    if not live_valid:
+
+        return None, live_reason, diagnostics
+
+    # Candle direction and live direction must agree.
+    live_direction = live_momentum["direction"]
+
+    if direction != live_direction:
+
+        return None, (
+            "Live 30-second momentum conflicts with candle momentum"
+        ), diagnostics
+
+    # Both momentum measurements must agree with market direction.
     if direction != price_direction:
 
         return None, (
-
             "Momentum conflicts with market starting-price direction"
-
         ), diagnostics
 
+    # Select the actual outcome buying price.
     if direction == "UP":
 
         entry_price = market.get("up_ask")
@@ -468,6 +631,8 @@ def evaluate_market(market, raw_market, candles, current_price):
 
         "momentum_reason": momentum_reason,
 
+        "live_momentum": live_diagnostics,
+
         "fee_rate_bps": market.get("fee_rate_bps"),
 
         "decision": "PAPER_TRADE_CANDIDATE"
@@ -476,6 +641,10 @@ def evaluate_market(market, raw_market, candles, current_price):
 
     return decision, "All entry conditions passed", diagnostics
 
+
+# ==========================================
+# FEE ESTIMATION
+# ==========================================
 
 def estimate_fee(market, stake):
 
@@ -504,6 +673,10 @@ def estimate_fee(market, stake):
 
         return None
 
+
+# ==========================================
+# PAPER TRADE EXECUTION
+# ==========================================
 
 def execute_paper_trade(decision, market, paper_trader):
 
@@ -538,6 +711,8 @@ def execute_paper_trade(decision, market, paper_trader):
     print("Estimated fee:", fee)
 
     print("Estimated slippage:", slippage)
+
+    print("Live momentum:", decision["live_momentum"])
 
     print("Mode: PAPER")
 
@@ -598,6 +773,10 @@ def execute_paper_trade(decision, market, paper_trader):
     }
 
 
+# ==========================================
+# MAIN ENGINE
+# ==========================================
+
 def main():
 
     print("=" * 50)
@@ -617,6 +796,8 @@ def main():
     candles = price_data.get("candles", [])
 
     current_price = price_data.get("current_price")
+
+    live_momentum = price_data.get("live_momentum", {})
 
     raw_markets = raw_market_data.get("markets", [])
 
@@ -650,7 +831,9 @@ def main():
 
             candles,
 
-            current_price
+            current_price,
+
+            live_momentum
 
         )
 
@@ -733,6 +916,22 @@ def main():
                 "Starting price source:",
 
                 diagnostics.get("start_price_source")
+
+            )
+
+            print(
+
+                "30-second momentum direction:",
+
+                diagnostics.get("live_momentum_direction")
+
+            )
+
+            print(
+
+                "30-second momentum movement:",
+
+                diagnostics.get("live_momentum_percent")
 
             )
 
