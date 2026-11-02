@@ -29,7 +29,7 @@ jobs:
       - name: Checkout private trading records
         uses: actions/checkout@v5
         with:
-          repository: Mikkyfrosh05/repository: Mikkyfrosh05/-prediction-market-private-data
+          repository: Mikkyfrosh05/-prediction-market-private-data
           token: ${{ secrets.GH_PRIVATE_DATA_TOKEN }}
           path: private-data
           ref: main
@@ -88,13 +88,15 @@ jobs:
             if [ -f "$file" ]; then
               cp "$file" private-data/
               echo "Prepared $file for private storage."
+            else
+              echo "$file does not exist yet."
             fi
           done
 
           git -C private-data config user.name "Market Data Bot"
           git -C private-data config user.email "actions@github.com"
 
-          git -C private-data add risk_state.json paper_trades.json
+          git -C private-data add -A
 
           if ! git -C private-data diff --cached --quiet; then
             git -C private-data commit -m "Update private trading records"
