@@ -111,21 +111,6 @@ button {
     margin: 5px 5px 5px 0;
 }
 
-.start {
-    background: #52e0ad;
-    color: #08150f;
-}
-
-.pause {
-    background: #ffbd59;
-    color: #171006;
-}
-
-.stop {
-    background: #ff6464;
-    color: white;
-}
-
 .panel {
     background: #111c2e;
     padding: 18px;
@@ -160,7 +145,7 @@ button {
     display: block;
     color: #8999b3;
     margin-top: 5px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .badge {
@@ -183,6 +168,21 @@ button {
 
 .badge.yellow {
     background: #47371e;
+}
+
+.start {
+    background: #52e0ad;
+    color: #08150f;
+}
+
+.pause {
+    background: #ffbd59;
+    color: #171006;
+}
+
+.stop {
+    background: #ff6464;
+    color: white;
 }
 
 .refresh {
@@ -283,6 +283,11 @@ footer {
         </div>
 
         <div class="metric-row">
+            <span>Total Slippage</span>
+            <strong id="slippage">--</strong>
+        </div>
+
+        <div class="metric-row">
             <span>Wins</span>
             <strong id="wins">--</strong>
         </div>
@@ -322,7 +327,7 @@ footer {
         </p>
 
         <p class="muted">
-            These buttons do not yet control GitHub Actions.
+            These buttons are display-only and do not control GitHub Actions yet.
         </p>
 
     </div>
@@ -356,6 +361,11 @@ footer {
     <h3>System Health</h3>
 
     <div class="panel">
+
+        <div class="metric-row">
+            <span>Performance Data</span>
+            <strong id="performanceHealth">Checking...</strong>
+        </div>
 
         <div class="metric-row">
             <span>Market Data</span>
@@ -395,7 +405,7 @@ footer {
     <div class="panel">
         <p>Maximum trade: $2</p>
         <p>Maximum daily loss: $5</p>
-        <p>Entry price threshold: $0.70</p>
+        <p>Minimum entry price: $0.70</p>
         <p>Market: BTC Up/Down 5-minute only</p>
         <p>Execution mode: PAPER</p>
     </div>
@@ -415,13 +425,12 @@ const REPO = "Mikkyfrosh05/prediction-market-ai";
 const BRANCH = "main";
 
 const FILES = {
+    performance: "performance.json",
     markets: "market_data.json",
     prices: "btc_price_data.json",
     orderbooks: "orderbooks.json",
     decisions: "strategy_decisions.json"
 };
-
-let botStatus = "MONITORING";
 
 function money(value) {
     const number = Number(value);
@@ -446,12 +455,10 @@ function formatDate(value) {
 }
 
 function showControl(action) {
-
     setValue(
         "message",
-        action + " request received by dashboard. Backend control is not connected yet."
+        action + " is not connected to backend automation yet."
     );
-
 }
 
 async function fetchJSON(path) {
@@ -470,22 +477,30 @@ async function fetchJSON(path) {
     return await response.json();
 }
 
-function renderTrades(data) {
+function setHealth(id, success) {
+    const element = document.getElementById(id);
+
+    element.textContent = success ? "CONNECTED" : "UNAVAILABLE";
+
+    element.className = success ? "green" : "red";
+}
+
+function renderTrades(trades) {
 
     const container = document.getElementById("activity");
 
-    const trades = Array.isArray(data) ? data : [];
-
-    if (!trades.length) {
+    if (!Array.isArray(trades) || !trades.length) {
         container.textContent = "No trading activity recorded.";
         return;
     }
 
-    container.innerHTML = trades.slice().reverse().slice(0, 15).map(trade => {
+    container.innerHTML = trades.slice(0, 20).map(trade => {
 
         const profit = Number(trade.profit || 0);
 
-        const status = String(trade.status || "UNKNOWN").toUpperCase();
+        const status = String(
+            trade.status || "UNKNOWN"
+        ).toUpperCase();
 
         const color =
             status === "SETTLED"
@@ -495,15 +510,17 @@ function renderTrades(data) {
         return `
             <div class="item">
                 <strong>${escapeHTML(trade.side || "UNKNOWN")}</strong>
+
                 <span class="badge ${color}">
                     ${escapeHTML(status)}
                 </span>
 
                 <small>
-                    Market: ${escapeHTML(trade.market_id || "--")}<br>
+                    ${escapeHTML(trade.title || "BTC Market")}<br>
                     Entry: ${money(trade.entry_price)}<br>
                     Stake: ${money(trade.stake)}<br>
-                    Profit: ${money(profit)}
+                    Profit: ${money(profit)}<br>
+                    Opened: ${escapeHTML(formatDate(trade.opened_at))}
                 </small>
             </div>
         `;
@@ -515,7 +532,9 @@ function renderMarkets(data) {
 
     const container = document.getElementById("markets");
 
-    const markets = data.markets || [];
+    const markets = Array.isArray(data.markets)
+        ? data.markets
+        : [];
 
     if (!markets.length) {
         container.textContent = "No active BTC markets found.";
@@ -539,43 +558,24 @@ function renderMarkets(data) {
     }).join("");
 }
 
-function renderRejections(data) {
+function renderRejections(rejections) {
 
     const container = document.getElementById("rejections");
 
-    let decisions = [];
-
-    if (Array.isArray(data)) {
-        decisions = data;
-    } else if (Array.isArray(data.decisions)) {
-        decisions = data.decisions;
-    } else if (Array.isArray(data.history)) {
-        decisions = data.history;
-    } else if (Array.isArray(data.rejections)) {
-        decisions = data.rejections;
-    }
-
-    if (!decisions.length) {
-        container.textContent =
-            "No rejection history available in the current strategy data.";
+    if (!Array.isArray(rejections) || !rejections.length) {
+        container.textContent = "No rejected signals recorded.";
         return;
     }
 
-    container.innerHTML = decisions.slice().reverse().slice(0, 15).map(item => {
-
-        const reason =
-            item.reason ||
-            item.rejection_reason ||
-            item.message ||
-            "No reason supplied";
+    container.innerHTML = rejections.slice(0, 20).map(item => {
 
         return `
             <div class="item">
-                <strong>${escapeHTML(item.direction || item.side || "SIGNAL")}</strong>
+                <strong>${escapeHTML(item.direction || "SIGNAL")}</strong>
 
                 <small>
-                    ${escapeHTML(reason)}<br>
-                    ${escapeHTML(item.timestamp || item.updated_at || "")}
+                    ${escapeHTML(item.reason || "No reason supplied")}<br>
+                    ${escapeHTML(formatDate(item.timestamp))}
                 </small>
             </div>
         `;
@@ -595,85 +595,57 @@ function escapeHTML(value) {
 
 }
 
-function calculateMetrics(state, trades) {
+function renderPerformance(data) {
 
-    const settledTrades = trades.filter(
-        trade => String(trade.status).toUpperCase() === "SETTLED"
-    );
+    if (data.mode !== "PAPER") {
+        throw new Error("Unexpected trading mode.");
+    }
 
-    const openTrades = trades.filter(
-        trade => String(trade.status).toUpperCase() === "OPEN"
-    );
+    const account = data.account || {};
+    const performance = data.performance || {};
 
-    const wins = settledTrades.filter(
-        trade => Number(trade.profit || 0) > 0
-    );
+    setValue("balance", money(account.balance));
 
-    const losses = settledTrades.filter(
-        trade => Number(trade.profit || 0) < 0
-    );
+    setValue("profit", money(account.net_profit));
 
-    const winRate = settledTrades.length
-        ? (wins.length / settledTrades.length) * 100
-        : 0;
+    setValue("dailyProfit", money(account.daily_profit));
 
-    setValue("balance", money(state.balance));
-    setValue("profit", money(state.total_profit));
-    setValue("positions", openTrades.length);
-    setValue("trades", trades.length);
-    setValue("settled", settledTrades.length);
-    setValue("wins", wins.length);
-    setValue("losses", losses.length);
-    setValue("winRate", winRate.toFixed(1) + "%");
-    setValue("fees", money(state.total_fees));
-    setValue("reserved", money(state.reserved));
+    setValue("positions", performance.open_trades ?? 0);
+
+    setValue("trades", performance.total_trades ?? 0);
+
+    setValue("settled", performance.settled_trades ?? 0);
+
+    setValue("winRate", Number(
+        performance.win_rate || 0
+    ).toFixed(1) + "%");
+
+    setValue("drawdown", Number(
+        performance.maximum_drawdown_percent || 0
+    ).toFixed(2) + "%");
+
+    setValue("fees", money(performance.total_fees));
+
+    setValue("slippage", money(performance.total_slippage));
+
+    setValue("wins", performance.wins ?? 0);
+
+    setValue("losses", performance.losses ?? 0);
+
+    setValue("reserved", money(account.reserved));
 
     const profitElement = document.getElementById("profit");
 
     profitElement.className =
-        "value " + (Number(state.total_profit) >= 0 ? "green" : "red");
+        "value " + (
+            Number(account.net_profit || 0) >= 0
+                ? "green"
+                : "red"
+        );
 
-    setValue(
-        "dailyProfit",
-        state.date === new Date().toISOString().slice(0, 10)
-            ? money(Number(state.total_profit || 0))
-            : "$0.00"
-    );
+    renderTrades(data.trade_history || []);
 
-    calculateDrawdown(settledTrades);
-}
-
-function calculateDrawdown(trades) {
-
-    let balance = 100;
-    let peak = 100;
-    let maximum = 0;
-
-    const sorted = trades.slice().sort((a, b) => {
-
-        return new Date(a.settled_at || a.timestamp || 0) -
-               new Date(b.settled_at || b.timestamp || 0);
-
-    });
-
-    for (const trade of sorted) {
-
-        balance += Number(trade.profit || 0);
-
-        peak = Math.max(peak, balance);
-
-        if (peak > 0) {
-
-            const drawdown =
-                ((peak - balance) / peak) * 100;
-
-            maximum = Math.max(maximum, drawdown);
-
-        }
-
-    }
-
-    setValue("drawdown", maximum.toFixed(2) + "%");
+    renderRejections(data.rejected_signals || []);
 
 }
 
@@ -684,17 +656,14 @@ async function loadDashboard() {
     try {
 
         const [
-            state,
-            trades,
+            performance,
             markets,
             prices,
             orderbooks,
             decisions
         ] = await Promise.all([
 
-            fetchJSON("risk_state.json"),
-
-            fetchJSON("paper_trades.json"),
+            fetchJSON(FILES.performance),
 
             fetchJSON(FILES.markets),
 
@@ -706,28 +675,27 @@ async function loadDashboard() {
 
         ]);
 
-        if (!Array.isArray(trades)) {
-            throw new Error("Invalid paper trade data.");
-        }
+        renderPerformance(performance);
 
-        calculateMetrics(state, trades);
-
-        renderTrades(trades);
         renderMarkets(markets);
-        renderRejections(decisions);
 
-        setValue("marketHealth", "CONNECTED");
-        setValue("priceHealth", "CONNECTED");
-        setValue("orderHealth", "CONNECTED");
-        setValue("strategyHealth", "CONNECTED");
+        setHealth("performanceHealth", true);
+        setHealth("marketHealth", true);
+        setHealth("priceHealth", true);
+        setHealth("orderHealth", true);
+        setHealth("strategyHealth", true);
 
         const updateTime =
+            performance.generated_at ||
             markets.updated_at ||
-            prices.updated_at ||
-            null;
+            prices.updated_at;
 
         setValue("healthTime", formatDate(updateTime));
-        setValue("lastUpdate", "Last refreshed: " + new Date().toLocaleString());
+
+        setValue(
+            "lastUpdate",
+            "Last refreshed: " + new Date().toLocaleString()
+        );
 
         setValue("status", "PAPER MODE - MONITORING");
 
@@ -738,14 +706,15 @@ async function loadDashboard() {
         setValue("status", "DATA CONNECTION ERROR");
 
         setValue(
-            "message",
-            "Unable to load all dashboard records: " + error.message
+            "lastUpdate",
+            error.message
         );
 
-        setValue("marketHealth", "CHECK REQUIRED");
-        setValue("priceHealth", "CHECK REQUIRED");
-        setValue("orderHealth", "CHECK REQUIRED");
-        setValue("strategyHealth", "CHECK REQUIRED");
+        setHealth("performanceHealth", false);
+        setHealth("marketHealth", false);
+        setHealth("priceHealth", false);
+        setHealth("orderHealth", false);
+        setHealth("strategyHealth", false);
 
     }
 
