@@ -1,24 +1,30 @@
 {
-  "updated_at": "2026-11-02T00:34:16.623975+00:00",
+  "updated_at": "2026-11-02T00:40:06.966763+00:00",
   "mode": "PAPER",
   "real_trading_enabled": false,
-  "markets_checked": 4,
+  "markets_checked": 5,
   "candidates_found": 0,
   "results": [
     {
-      "market_id": 4094847,
-      "title": "Bitcoin Up or Down - November 1, 7:30PM-7:35PM ET",
+      "market_id": 4095663,
+      "title": "Bitcoin Up or Down - November 1, 7:40PM-7:45PM ET",
       "decision": "NO TRADE",
-      "reason": "DOWN price is 0.52; waiting for at least 0.70",
-      "momentum_diagnostics": {
-        "ema9": 78124.1,
-        "ema21": 78154.68,
-        "latest_completed_close": 78072.01,
-        "three_candle_start_close": 78122.01,
-        "three_candle_movement_percent": -0.064,
-        "live_btc_price": 78054.01,
-        "live_vs_last_close_percent": -0.02306
-      }
+      "reason": "Waiting for at least 2 minutes 30 seconds",
+      "momentum_diagnostics": {}
+    },
+    {
+      "market_id": 4095678,
+      "title": "Bitcoin Up or Down - November 1, 7:45PM-7:50PM ET",
+      "decision": "NO TRADE",
+      "reason": "Market is not active",
+      "momentum_diagnostics": {}
+    },
+    {
+      "market_id": 4095708,
+      "title": "Bitcoin Up or Down - November 1, 7:50PM-7:55PM ET",
+      "decision": "NO TRADE",
+      "reason": "Market is not active",
+      "momentum_diagnostics": {}
     },
     {
       "market_id": 4094867,
@@ -28,15 +34,8 @@
       "momentum_diagnostics": {}
     },
     {
-      "market_id": 4095663,
-      "title": "Bitcoin Up or Down - November 1, 7:40PM-7:45PM ET",
-      "decision": "NO TRADE",
-      "reason": "Market is not active",
-      "momentum_diagnostics": {}
-    },
-    {
-      "market_id": 4094830,
-      "title": "Bitcoin Up or Down - November 1, 7:25PM-7:30PM ET",
+      "market_id": 4094847,
+      "title": "Bitcoin Up or Down - November 1, 7:30PM-7:35PM ET",
       "decision": "NO TRADE",
       "reason": "Market is not active",
       "momentum_diagnostics": {}
