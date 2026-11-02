@@ -7,7 +7,6 @@
 <title>Prediction Market AI</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -65,6 +64,7 @@ header p {
     padding: 18px;
     border-radius: 12px;
     border: 1px solid #24334b;
+    min-width: 0;
 }
 
 .card p {
@@ -75,6 +75,7 @@ header p {
 .value {
     font-size: 23px;
     font-weight: bold;
+    overflow-wrap: anywhere;
 }
 
 .green {
@@ -83,6 +84,14 @@ header p {
 
 .red {
     color: #ff6464;
+}
+
+.yellow {
+    color: #ffbd59;
+}
+
+.muted {
+    color: #8999b3;
 }
 
 .section {
@@ -123,6 +132,62 @@ button {
     border-radius: 12px;
     margin-top: 12px;
     border: 1px solid #24334b;
+    overflow-wrap: anywhere;
+}
+
+.metric-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 0;
+    border-bottom: 1px solid #24334b;
+}
+
+.metric-row:last-child {
+    border-bottom: none;
+}
+
+.item {
+    padding: 13px 0;
+    border-bottom: 1px solid #24334b;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item small {
+    display: block;
+    color: #8999b3;
+    margin-top: 5px;
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: bold;
+    background: #26344b;
+    margin-top: 5px;
+}
+
+.badge.green {
+    background: #123c30;
+}
+
+.badge.red {
+    background: #451f29;
+}
+
+.badge.yellow {
+    background: #47371e;
+}
+
+.refresh {
+    background: #263d59;
+    color: white;
 }
 
 footer {
@@ -136,167 +201,559 @@ footer {
     .grid {
         grid-template-columns: 1fr 1fr;
     }
-}
 
+    .value {
+        font-size: 20px;
+    }
+}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<h2>◈ Prediction Market AI</h2>
-
-<p>Autonomous Trading Intelligence</p>
-
+    <h2>◈ Prediction Market AI</h2>
+    <p>Autonomous Trading Intelligence</p>
 </header>
 
 <div class="container">
 
 <div class="status">
     ● SYSTEM STATUS:
-    <span id="status">PAPER MODE - IDLE</span>
-</div>
-
-<div class="grid">
-
-<div class="card">
-<p>Virtual Balance</p>
-<div class="value green" id="balance">$100.00</div>
-</div>
-
-<div class="card">
-<p>Total Profit/Loss</p>
-<div class="value" id="profit">$0.00</div>
-</div>
-
-<div class="card">
-<p>Open Positions</p>
-<div class="value" id="positions">0</div>
-</div>
-
-<div class="card">
-<p>Total Trades</p>
-<div class="value" id="trades">0</div>
-</div>
-
+    <span id="status">CONNECTING...</span>
+    <p id="lastUpdate" class="muted">Waiting for data...</p>
 </div>
 
 <div class="section">
+    <h3>Account Overview</h3>
 
-<h3>AI Controls</h3>
+    <div class="grid">
 
-<div class="panel">
+        <div class="card">
+            <p>Virtual Balance</p>
+            <div class="value green" id="balance">--</div>
+        </div>
 
-<button class="start" onclick="startBot()">
-START
-</button>
+        <div class="card">
+            <p>Net Profit/Loss</p>
+            <div class="value" id="profit">--</div>
+        </div>
 
-<button class="pause" onclick="pauseBot()">
-PAUSE
-</button>
+        <div class="card">
+            <p>Open Positions</p>
+            <div class="value" id="positions">--</div>
+        </div>
 
-<button class="stop" onclick="stopBot()">
-STOP
-</button>
+        <div class="card">
+            <p>Total Trades</p>
+            <div class="value" id="trades">--</div>
+        </div>
 
-<p id="message">
-Trading engine is awaiting connection.
-</p>
+        <div class="card">
+            <p>Win Rate</p>
+            <div class="value green" id="winRate">--</div>
+        </div>
 
-</div>
+        <div class="card">
+            <p>Settled Trades</p>
+            <div class="value" id="settled">--</div>
+        </div>
 
-</div>
-
-<div class="section">
-
-<h3>Market Opportunities</h3>
-
-<div class="panel" id="markets">
-
-No market data available yet.
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h3>Trading Activity</h3>
-
-<div class="panel" id="activity">
-
-No trades recorded.
-
-</div>
-
+    </div>
 </div>
 
 <div class="section">
+    <h3>Performance Statistics</h3>
 
-<h3>Risk Management</h3>
+    <div class="panel">
 
-<div class="panel">
+        <div class="metric-row">
+            <span>Today's Profit/Loss</span>
+            <strong id="dailyProfit">--</strong>
+        </div>
 
-<p>Maximum trade: $2</p>
-<p>Maximum daily loss: $5</p>
-<p>Execution mode: PAPER</p>
+        <div class="metric-row">
+            <span>Maximum Drawdown</span>
+            <strong id="drawdown">--</strong>
+        </div>
 
+        <div class="metric-row">
+            <span>Total Fees</span>
+            <strong id="fees">--</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Wins</span>
+            <strong id="wins">--</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Losses</span>
+            <strong id="losses">--</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Reserved Balance</span>
+            <strong id="reserved">--</strong>
+        </div>
+
+    </div>
 </div>
 
+<div class="section">
+    <h3>AI Controls</h3>
+
+    <div class="panel">
+
+        <button class="start" onclick="showControl('START')">
+            START
+        </button>
+
+        <button class="pause" onclick="showControl('PAUSE')">
+            PAUSE
+        </button>
+
+        <button class="stop" onclick="showControl('STOP')">
+            STOP
+        </button>
+
+        <p id="message">
+            Backend automation operates through GitHub Actions.
+        </p>
+
+        <p class="muted">
+            These buttons do not yet control GitHub Actions.
+        </p>
+
+    </div>
+</div>
+
+<div class="section">
+    <h3>Market Opportunities</h3>
+
+    <div class="panel" id="markets">
+        Loading market data...
+    </div>
+</div>
+
+<div class="section">
+    <h3>Recent Trading Activity</h3>
+
+    <div class="panel" id="activity">
+        Loading trade history...
+    </div>
+</div>
+
+<div class="section">
+    <h3>Rejected Signals</h3>
+
+    <div class="panel" id="rejections">
+        Loading strategy decisions...
+    </div>
+</div>
+
+<div class="section">
+    <h3>System Health</h3>
+
+    <div class="panel">
+
+        <div class="metric-row">
+            <span>Market Data</span>
+            <strong id="marketHealth">Checking...</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>BTC Price Tracker</span>
+            <strong id="priceHealth">Checking...</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Order Book Data</span>
+            <strong id="orderHealth">Checking...</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Strategy Decisions</span>
+            <strong id="strategyHealth">Checking...</strong>
+        </div>
+
+        <div class="metric-row">
+            <span>Last Successful Data Update</span>
+            <strong id="healthTime">--</strong>
+        </div>
+
+    </div>
+
+    <button class="refresh" onclick="loadDashboard()">
+        REFRESH DATA
+    </button>
+</div>
+
+<div class="section">
+    <h3>Risk Management</h3>
+
+    <div class="panel">
+        <p>Maximum trade: $2</p>
+        <p>Maximum daily loss: $5</p>
+        <p>Entry price threshold: $0.70</p>
+        <p>Market: BTC Up/Down 5-minute only</p>
+        <p>Execution mode: PAPER</p>
+    </div>
 </div>
 
 </div>
 
 <footer>
-
-Prediction Market AI · Experimental Trading System
-
+    Prediction Market AI · Experimental Trading System
+    <br><br>
+    PAPER TRADING ONLY
 </footer>
 
 <script>
 
-let botStatus = "IDLE";
+const REPO = "Mikkyfrosh05/prediction-market-ai";
+const BRANCH = "main";
 
-function updateStatus() {
+const FILES = {
+    markets: "market_data.json",
+    prices: "btc_price_data.json",
+    orderbooks: "orderbooks.json",
+    decisions: "strategy_decisions.json"
+};
 
-    document.getElementById("status").textContent =
-        "PAPER MODE - " + botStatus;
+let botStatus = "MONITORING";
+
+function money(value) {
+    const number = Number(value);
+
+    if (!Number.isFinite(number)) return "--";
+
+    return "$" + number.toFixed(2);
+}
+
+function setValue(id, value) {
+    document.getElementById(id).textContent = value;
+}
+
+function formatDate(value) {
+    if (!value) return "--";
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) return "--";
+
+    return date.toLocaleString();
+}
+
+function showControl(action) {
+
+    setValue(
+        "message",
+        action + " request received by dashboard. Backend control is not connected yet."
+    );
 
 }
 
-function startBot() {
+async function fetchJSON(path) {
 
-    botStatus = "START REQUESTED";
+    const url =
+        `https://raw.githubusercontent.com/${REPO}/${BRANCH}/${path}?t=${Date.now()}`;
 
-    updateStatus();
+    const response = await fetch(url, {
+        cache: "no-store"
+    });
 
-    document.getElementById("message").textContent =
-        "Dashboard start request recorded. Backend connection required.";
+    if (!response.ok) {
+        throw new Error(path + " returned HTTP " + response.status);
+    }
+
+    return await response.json();
+}
+
+function renderTrades(data) {
+
+    const container = document.getElementById("activity");
+
+    const trades = Array.isArray(data) ? data : [];
+
+    if (!trades.length) {
+        container.textContent = "No trading activity recorded.";
+        return;
+    }
+
+    container.innerHTML = trades.slice().reverse().slice(0, 15).map(trade => {
+
+        const profit = Number(trade.profit || 0);
+
+        const status = String(trade.status || "UNKNOWN").toUpperCase();
+
+        const color =
+            status === "SETTLED"
+                ? (profit >= 0 ? "green" : "red")
+                : "yellow";
+
+        return `
+            <div class="item">
+                <strong>${escapeHTML(trade.side || "UNKNOWN")}</strong>
+                <span class="badge ${color}">
+                    ${escapeHTML(status)}
+                </span>
+
+                <small>
+                    Market: ${escapeHTML(trade.market_id || "--")}<br>
+                    Entry: ${money(trade.entry_price)}<br>
+                    Stake: ${money(trade.stake)}<br>
+                    Profit: ${money(profit)}
+                </small>
+            </div>
+        `;
+
+    }).join("");
+}
+
+function renderMarkets(data) {
+
+    const container = document.getElementById("markets");
+
+    const markets = data.markets || [];
+
+    if (!markets.length) {
+        container.textContent = "No active BTC markets found.";
+        return;
+    }
+
+    container.innerHTML = markets.slice(0, 10).map(market => {
+
+        return `
+            <div class="item">
+                <strong>${escapeHTML(market.title || "BTC Market")}</strong>
+
+                <small>
+                    Market ID: ${escapeHTML(market.id || "--")}<br>
+                    Trading status: ${escapeHTML(market.tradingStatus || "--")}<br>
+                    Market status: ${escapeHTML(market.status || "--")}
+                </small>
+            </div>
+        `;
+
+    }).join("");
+}
+
+function renderRejections(data) {
+
+    const container = document.getElementById("rejections");
+
+    let decisions = [];
+
+    if (Array.isArray(data)) {
+        decisions = data;
+    } else if (Array.isArray(data.decisions)) {
+        decisions = data.decisions;
+    } else if (Array.isArray(data.history)) {
+        decisions = data.history;
+    } else if (Array.isArray(data.rejections)) {
+        decisions = data.rejections;
+    }
+
+    if (!decisions.length) {
+        container.textContent =
+            "No rejection history available in the current strategy data.";
+        return;
+    }
+
+    container.innerHTML = decisions.slice().reverse().slice(0, 15).map(item => {
+
+        const reason =
+            item.reason ||
+            item.rejection_reason ||
+            item.message ||
+            "No reason supplied";
+
+        return `
+            <div class="item">
+                <strong>${escapeHTML(item.direction || item.side || "SIGNAL")}</strong>
+
+                <small>
+                    ${escapeHTML(reason)}<br>
+                    ${escapeHTML(item.timestamp || item.updated_at || "")}
+                </small>
+            </div>
+        `;
+
+    }).join("");
+}
+
+function escapeHTML(value) {
+
+    return String(value ?? "").replace(/[&<>"']/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+    })[character]);
 
 }
 
-function pauseBot() {
+function calculateMetrics(state, trades) {
 
-    botStatus = "PAUSE REQUESTED";
+    const settledTrades = trades.filter(
+        trade => String(trade.status).toUpperCase() === "SETTLED"
+    );
 
-    updateStatus();
+    const openTrades = trades.filter(
+        trade => String(trade.status).toUpperCase() === "OPEN"
+    );
 
-    document.getElementById("message").textContent =
-        "Dashboard pause request recorded. Backend connection required.";
+    const wins = settledTrades.filter(
+        trade => Number(trade.profit || 0) > 0
+    );
+
+    const losses = settledTrades.filter(
+        trade => Number(trade.profit || 0) < 0
+    );
+
+    const winRate = settledTrades.length
+        ? (wins.length / settledTrades.length) * 100
+        : 0;
+
+    setValue("balance", money(state.balance));
+    setValue("profit", money(state.total_profit));
+    setValue("positions", openTrades.length);
+    setValue("trades", trades.length);
+    setValue("settled", settledTrades.length);
+    setValue("wins", wins.length);
+    setValue("losses", losses.length);
+    setValue("winRate", winRate.toFixed(1) + "%");
+    setValue("fees", money(state.total_fees));
+    setValue("reserved", money(state.reserved));
+
+    const profitElement = document.getElementById("profit");
+
+    profitElement.className =
+        "value " + (Number(state.total_profit) >= 0 ? "green" : "red");
+
+    setValue(
+        "dailyProfit",
+        state.date === new Date().toISOString().slice(0, 10)
+            ? money(Number(state.total_profit || 0))
+            : "$0.00"
+    );
+
+    calculateDrawdown(settledTrades);
+}
+
+function calculateDrawdown(trades) {
+
+    let balance = 100;
+    let peak = 100;
+    let maximum = 0;
+
+    const sorted = trades.slice().sort((a, b) => {
+
+        return new Date(a.settled_at || a.timestamp || 0) -
+               new Date(b.settled_at || b.timestamp || 0);
+
+    });
+
+    for (const trade of sorted) {
+
+        balance += Number(trade.profit || 0);
+
+        peak = Math.max(peak, balance);
+
+        if (peak > 0) {
+
+            const drawdown =
+                ((peak - balance) / peak) * 100;
+
+            maximum = Math.max(maximum, drawdown);
+
+        }
+
+    }
+
+    setValue("drawdown", maximum.toFixed(2) + "%");
 
 }
 
-function stopBot() {
+async function loadDashboard() {
 
-    botStatus = "STOP REQUESTED";
+    setValue("status", "CONNECTING...");
 
-    updateStatus();
+    try {
 
-    document.getElementById("message").textContent =
-        "Dashboard stop request recorded. Backend connection required.";
+        const [
+            state,
+            trades,
+            markets,
+            prices,
+            orderbooks,
+            decisions
+        ] = await Promise.all([
+
+            fetchJSON("risk_state.json"),
+
+            fetchJSON("paper_trades.json"),
+
+            fetchJSON(FILES.markets),
+
+            fetchJSON(FILES.prices),
+
+            fetchJSON(FILES.orderbooks),
+
+            fetchJSON(FILES.decisions)
+
+        ]);
+
+        if (!Array.isArray(trades)) {
+            throw new Error("Invalid paper trade data.");
+        }
+
+        calculateMetrics(state, trades);
+
+        renderTrades(trades);
+        renderMarkets(markets);
+        renderRejections(decisions);
+
+        setValue("marketHealth", "CONNECTED");
+        setValue("priceHealth", "CONNECTED");
+        setValue("orderHealth", "CONNECTED");
+        setValue("strategyHealth", "CONNECTED");
+
+        const updateTime =
+            markets.updated_at ||
+            prices.updated_at ||
+            null;
+
+        setValue("healthTime", formatDate(updateTime));
+        setValue("lastUpdate", "Last refreshed: " + new Date().toLocaleString());
+
+        setValue("status", "PAPER MODE - MONITORING");
+
+    } catch (error) {
+
+        console.error(error);
+
+        setValue("status", "DATA CONNECTION ERROR");
+
+        setValue(
+            "message",
+            "Unable to load all dashboard records: " + error.message
+        );
+
+        setValue("marketHealth", "CHECK REQUIRED");
+        setValue("priceHealth", "CHECK REQUIRED");
+        setValue("orderHealth", "CHECK REQUIRED");
+        setValue("strategyHealth", "CHECK REQUIRED");
+
+    }
 
 }
+
+loadDashboard();
+
+setInterval(loadDashboard, 30000);
 
 </script>
 
