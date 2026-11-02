@@ -1,10 +1,10 @@
 import json
 from datetime import datetime, timezone
 
-
 MIN_ELAPSED_SECONDS = 150
 MIN_ENTRY_PRICE = 0.70
 MAX_ELAPSED_SECONDS = 300
+
 
 def load_json(filename):
     with open(filename, "r") as file:
@@ -21,9 +21,10 @@ def calculate_ema(prices, period):
     return ema
 
 
-def analyse_momentum(candles):
+def analyse_momentum(candles, current_price=None):
+
     if len(candles) < 30:
-        return None, "Not enough completed BTC candles"
+        return None, "Not enough completed BTC candles", {}
 
     closes = [float(candle["close"]) for candle in candles]
 
@@ -33,18 +34,41 @@ def analyse_momentum(candles):
     latest_close = closes[-1]
     previous_close = closes[-4]
 
-    momentum = ((latest_close - previous_close) / previous_close) * 100
+    movement = (
+        (latest_close - previous_close) / previous_close
+    ) * 100
 
-    if ema9 > ema21 and latest_close > ema9 and momentum > 0:
-        return "UP", "EMA and short-term momentum confirm UP"
+    live_difference = None
 
-    if ema9 < ema21 and latest_close < ema9 and momentum < 0:
-        return "DOWN", "EMA and short-term momentum confirm DOWN"
+    if current_price is not None:
+        live_difference = (
+            (float(current_price) - latest_close) / latest_close
+        ) * 100
 
-    return None, "No clear directional momentum"
+    diagnostics = {
+        "ema9": round(ema9, 2),
+        "ema21": round(ema21, 2),
+        "latest_completed_close": round(latest_close, 2),
+        "three_candle_start_close": round(previous_close, 2),
+        "three_candle_movement_percent": round(movement, 5),
+        "live_btc_price": current_price,
+        "live_vs_last_close_percent": (
+            round(live_difference, 5)
+            if live_difference is not None else None
+        )
+    }
+
+    if ema9 > ema21 and latest_close > ema9 and movement > 0:
+        return "UP", "EMA and short-term momentum confirm UP", diagnostics
+
+    if ema9 < ema21 and latest_close < ema9 and movement < 0:
+        return "DOWN", "EMA and short-term momentum confirm DOWN", diagnostics
+
+    return None, "No clear directional momentum", diagnostics
 
 
-def evaluate_market(market, candles):
+def evaluate_market(market, candles, current_price):
+
     now = datetime.now(timezone.utc)
 
     start = datetime.fromisoformat(
@@ -58,18 +82,21 @@ def evaluate_market(market, candles):
     elapsed = (now - start).total_seconds()
 
     if not (start <= now < end):
-        return None, "Market is not active"
+        return None, "Market is not active", {}
 
     if elapsed < MIN_ELAPSED_SECONDS:
-        return None, "Waiting for at least 2 minutes 30 seconds"
+        return None, "Waiting for at least 2 minutes 30 seconds", {}
 
     if elapsed >= MAX_ELAPSED_SECONDS:
-        return None, "Market is too close to settlement"
+        return None, "Market is too close to settlement", {}
 
-    direction, momentum_reason = analyse_momentum(candles)
+    direction, momentum_reason, diagnostics = analyse_momentum(
+        candles,
+        current_price
+    )
 
     if direction is None:
-        return None, momentum_reason
+        return None, momentum_reason, diagnostics
 
     if direction == "UP":
         entry_price = market.get("up_ask")
@@ -79,7 +106,7 @@ def evaluate_market(market, candles):
         available_size = market.get("down_ask_size")
 
     if entry_price is None:
-        return None, "Actual outcome buying price unavailable"
+        return None, "Actual outcome buying price unavailable", diagnostics
 
     entry_price = float(entry_price)
 
@@ -87,10 +114,10 @@ def evaluate_market(market, candles):
         return None, (
             f"{direction} price is {entry_price:.2f}; "
             "waiting for at least 0.70"
-        )
+        ), diagnostics
 
     if available_size is None or float(available_size) <= 0:
-        return None, "Insufficient visible liquidity"
+        return None, "Insufficient visible liquidity", diagnostics
 
     decision = {
         "market_id": market["market_id"],
@@ -99,18 +126,17 @@ def evaluate_market(market, candles):
         "entry_price": entry_price,
         "available_size": float(available_size),
         "elapsed_seconds": round(elapsed, 2),
-        "remaining_seconds": round(
-            (end - now).total_seconds(), 2
-        ),
+        "remaining_seconds": round((end - now).total_seconds(), 2),
         "momentum_reason": momentum_reason,
         "fee_rate_bps": market.get("fee_rate_bps"),
         "decision": "PAPER_TRADE_CANDIDATE"
     }
 
-    return decision, "All initial entry conditions passed"
+    return decision, "All initial entry conditions passed", diagnostics
 
 
 def main():
+
     print("=" * 50)
     print("BTC 5-MINUTE STRATEGY ENGINE")
     print("=" * 50)
@@ -120,18 +146,25 @@ def main():
 
     markets = orderbook_data.get("orderbooks", [])
     candles = price_data.get("candles", [])
+    current_price = price_data.get("current_price")
 
     results = []
     candidates = []
 
     for market in markets:
-        decision, reason = evaluate_market(market, candles)
+
+        decision, reason, diagnostics = evaluate_market(
+            market,
+            candles,
+            current_price
+        )
 
         result = {
             "market_id": market.get("market_id"),
             "title": market.get("title"),
             "decision": "NO TRADE",
-            "reason": reason
+            "reason": reason,
+            "momentum_diagnostics": diagnostics
         }
 
         if decision:
@@ -144,6 +177,28 @@ def main():
         print("\nMarket:", market.get("title"))
         print("Decision:", result["decision"])
         print("Reason:", reason)
+
+        if diagnostics:
+            print("EMA 9:", diagnostics["ema9"])
+            print("EMA 21:", diagnostics["ema21"])
+            print(
+                "Latest completed close:",
+                diagnostics["latest_completed_close"]
+            )
+            print(
+                "Three-candle movement:",
+                diagnostics["three_candle_movement_percent"],
+                "%"
+            )
+            print(
+                "Live BTC price:",
+                diagnostics["live_btc_price"]
+            )
+            print(
+                "Live vs last close:",
+                diagnostics["live_vs_last_close_percent"],
+                "%"
+            )
 
         if decision:
             print("Direction:", decision["direction"])
