@@ -1,9 +1,8 @@
-import traceback
-import os
 import json
+import os
 import requests
+import traceback
 
-from decimal import Decimal
 from datetime import datetime, timezone
 
 from config import CONFIG
@@ -42,25 +41,40 @@ def get_orderbook(market_id):
     return result["data"]
 
 
-def get_price(levels):
+def get_outcome_price(outcomes, outcome_name):
 
-    if not levels:
-        return None, 0.0
+    for outcome in outcomes:
 
-    price = float(levels[0][0])
-    quantity = float(levels[0][1])
+        name = outcome.get("name", "").strip().upper()
 
-    return price, quantity
+        if name != outcome_name.upper():
+            continue
 
+        best_bid = outcome.get("bestBid") or {}
+        best_ask = outcome.get("bestAsk") or {}
 
-def complement_price(price, precision):
+        return {
 
-    if price is None:
-        return None
+            "bid": float(best_bid["price"])
+            if best_bid.get("price") is not None
+            else None,
 
-    result = Decimal("1") - Decimal(str(price))
+            "ask": float(best_ask["price"])
+            if best_ask.get("price") is not None
+            else None,
 
-    return float(round(result, precision))
+            "bid_size": float(best_bid.get("size", 0)),
+
+            "ask_size": float(best_ask.get("size", 0))
+
+        }
+
+    return {
+        "bid": None,
+        "ask": None,
+        "bid_size": 0,
+        "ask_size": 0
+    }
 
 
 def scan_markets():
@@ -69,21 +83,10 @@ def scan_markets():
 
     now = datetime.now(timezone.utc)
 
-    # Only scan currently active and upcoming rounds.
-    markets = [
-        market for market in markets
-        if market.get("startsAt")
-        and market.get("endsAt")
-        and datetime.fromisoformat(
-            market["endsAt"].replace("Z", "+00:00")
-        ) > now
-    ]
-
     scanned = []
 
-    print("\nBTC ORDERBOOK SCANNER")
+    print("\nBTC OUTCOME ORDERBOOK SCANNER")
     print("----------------------------")
-    print("Markets to scan:", len(markets))
 
     for market in markets:
 
@@ -94,66 +97,104 @@ def scan_markets():
 
         try:
 
+            # Read actual UP and DOWN outcome prices
+            outcomes = market.get("outcomes", [])
+
+            up = get_outcome_price(
+                outcomes,
+                "UP"
+            )
+
+            down = get_outcome_price(
+                outcomes,
+                "DOWN"
+            )
+
+            # Fetch orderbook for additional market information
             book = get_orderbook(market_id)
 
-            if not isinstance(book, dict):
-                raise ValueError("Invalid orderbook response")
-
-            bids = book.get("bids") or []
-            asks = book.get("asks") or []
-
-            precision = market.get("decimalPrecision", 4)
-
-            yes_bid, yes_bid_size = get_price(bids)
-            yes_ask, yes_ask_size = get_price(asks)
-
-            no_bid = complement_price(
-                yes_ask,
-                precision
+            start = datetime.fromisoformat(
+                market["startsAt"].replace("Z", "+00:00")
             )
 
-            no_ask = complement_price(
-                yes_bid,
-                precision
+            end = datetime.fromisoformat(
+                market["endsAt"].replace("Z", "+00:00")
             )
+
+            elapsed_seconds = (
+                now - start
+            ).total_seconds()
+
+            remaining_seconds = (
+                end - now
+            ).total_seconds()
+
+            active = start <= now < end
 
             item = {
 
                 "market_id": market_id,
 
                 "title": market.get("title"),
-                "question": market.get("question"),
 
                 "asset": "BTC",
+
                 "timeframe": "5 minutes",
 
                 "starts_at": market.get("startsAt"),
+
                 "ends_at": market.get("endsAt"),
 
-                "yes_bid": yes_bid,
-                "yes_ask": yes_ask,
+                "active": active,
 
-                "no_bid": no_bid,
-                "no_ask": no_ask,
+                "elapsed_seconds": round(elapsed_seconds, 2),
 
-                "yes_bid_quantity": yes_bid_size,
-                "yes_ask_quantity": yes_ask_size,
+                "remaining_seconds": round(
+                    remaining_seconds, 2
+                ),
+
+                "up_bid": up["bid"],
+
+                "up_ask": up["ask"],
+
+                "down_bid": down["bid"],
+
+                "down_ask": down["ask"],
+
+                "up_bid_size": up["bid_size"],
+
+                "up_ask_size": up["ask_size"],
+
+                "down_bid_size": down["bid_size"],
+
+                "down_ask_size": down["ask_size"],
 
                 "fee_rate_bps": market.get("feeRateBps"),
+
                 "maker_fee_bps": market.get("makerFeeBps"),
 
                 "orderbook_updated": book.get(
                     "updateTimestampMs"
+                ),
+
+                "actual_outcome_prices_available": (
+                    up["ask"] is not None
+                    and down["ask"] is not None
                 )
+
             }
 
             scanned.append(item)
 
             print("\nMarket:", item["title"])
-            print("ID:", market_id)
-            print("UP/YES bid:", yes_bid)
-            print("UP/YES ask:", yes_ask)
-            print("Complementary prices:", no_bid, no_ask)
+
+            print("Active:", active)
+
+            print("Elapsed:", item["elapsed_seconds"])
+
+            print("UP best ask:", item["up_ask"])
+
+            print("DOWN best ask:", item["down_ask"])
 
         except Exception as error:
 
@@ -165,7 +206,9 @@ def scan_markets():
 
     output = {
 
-        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(
+            timezone.utc
+        ).isoformat(),
 
         "asset": "BTC",
 
@@ -174,6 +217,7 @@ def scan_markets():
         "markets_scanned": len(scanned),
 
         "orderbooks": scanned
+
     }
 
     with open("orderbooks.json", "w") as file:
@@ -184,8 +228,9 @@ def scan_markets():
             indent=2
         )
 
-    print("\nORDERBOOK SCAN COMPLETED")
-    print("Successfully scanned:", len(scanned))
+    print("\nSCANNING COMPLETED")
+
+    print("Markets scanned:", len(scanned))
 
 
 if __name__ == "__main__":
