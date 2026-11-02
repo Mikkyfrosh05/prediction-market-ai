@@ -1,137 +1,205 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
+
+STATE_FILE = "risk_state.json"
+
+STARTING_BALANCE = 100.00
+MAX_TRADE = 2.00
+MAX_DAILY_LOSS = 5.00
 
 
-class PaperTrader:
+def today():
+    return datetime.now(timezone.utc).date().isoformat()
 
-    def __init__(self, starting_balance=100.0):
 
-        self.starting_balance = starting_balance
-        self.balance = starting_balance
-        self.trades = []
+def load_state():
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, "r") as file:
+                state = json.load(file)
 
-        self.filename = "paper_trades.json"
+            required = ["balance", "daily_loss", "reserved"]
 
-        self.load_data()
+            if all(key in state for key in required):
+                return state
 
-    def load_data(self):
+        except (json.JSONDecodeError, OSError):
+            print("Warning: Could not read risk state.")
 
-        if os.path.exists(self.filename):
+    return {
+        "balance": STARTING_BALANCE,
+        "reserved": 0.00,
+        "daily_loss": 0.00,
+        "trade_count": 0,
+        "wins": 0,
+        "losses": 0,
+        "date": today(),
+        "total_profit": 0.00,
+        "total_fees": 0.00,
+        "total_slippage": 0.00
+    }
 
-            try:
-                with open(self.filename, "r") as file:
-                    data = json.load(file)
 
-                self.balance = data["balance"]
-                self.trades = data["trades"]
+def save_state(state):
+    temporary_file = STATE_FILE + ".tmp"
 
-            except (json.JSONDecodeError, KeyError):
-                print("Could not load previous trading data.")
+    with open(temporary_file, "w") as file:
+        json.dump(state, file, indent=4)
 
-    def save_data(self):
+    os.replace(temporary_file, STATE_FILE)
 
-        data = {
-            "balance": self.balance,
-            "trades": self.trades
-        }
 
-        with open(self.filename, "w") as file:
-            json.dump(data, file, indent=4)
+def reset_daily_limits(state):
+    if state.get("date") != today():
+        state["date"] = today()
+        state["daily_loss"] = 0.00
+        save_state(state)
 
-    def open_trade(self, market_id, title, side, price, stake):
+    return state
 
-        if side not in ["YES", "NO"]:
-            return {"error": "Invalid trading side"}
 
-        if not 0 < price < 1:
-            return {"error": "Invalid market price"}
+def can_trade(stake, estimated_fee=0.00, estimated_slippage=0.00):
+    state = reset_daily_limits(load_state())
 
-        if stake <= 0 or stake > self.balance:
-            return {"error": "Insufficient balance"}
+    stake = float(stake)
+    fee = float(estimated_fee)
+    slippage = float(estimated_slippage)
 
-        shares = stake / price
+    if stake <= 0:
+        return False, "Invalid trade amount"
 
-        trade = {
-            "market_id": market_id,
-            "title": title,
-            "side": side,
-            "entry_price": price,
-            "stake": stake,
-            "shares": shares,
-            "status": "OPEN",
-            "opened_at": datetime.utcnow().isoformat()
-        }
+    if stake > MAX_TRADE:
+        return False, "Trade exceeds maximum trade limit"
 
-        self.balance -= stake
-        self.trades.append(trade)
+    if fee < 0 or slippage < 0:
+        return False, "Invalid cost estimate"
 
-        self.save_data()
+    total_cost = stake + fee + slippage
 
-        return trade
+    available = state["balance"] - state["reserved"]
 
-    def settle_trade(self, market_id, outcome):
+    if total_cost > available:
+        return False, "Insufficient available virtual balance"
 
-        if outcome not in ["YES", "NO"]:
-            return {"error": "Invalid outcome"}
+    if state["daily_loss"] >= MAX_DAILY_LOSS:
+        return False, "Daily loss limit reached"
 
-        for trade in self.trades:
+    if state["daily_loss"] + fee + slippage >= MAX_DAILY_LOSS:
+        return False, "Daily loss limit would be exceeded"
 
-            if (
-                trade["market_id"] == market_id
-                and trade["status"] == "OPEN"
-            ):
+    return True, "Trade approved"
 
-                if trade["side"] == outcome:
 
-                    payout = trade["shares"]
+def reserve_trade(stake, estimated_fee=0.00, estimated_slippage=0.00):
+    approved, reason = can_trade(
+        stake,
+        estimated_fee,
+        estimated_slippage
+    )
 
-                else:
+    if not approved:
+        return False, reason
 
-                    payout = 0.0
+    state = reset_daily_limits(load_state())
 
-                profit = payout - trade["stake"]
+    state["reserved"] += (
+        float(stake)
+        + float(estimated_fee)
+        + float(estimated_slippage)
+    )
 
-                self.balance += payout
+    save_state(state)
 
-                trade["status"] = "SETTLED"
-                trade["outcome"] = outcome
-                trade["payout"] = round(payout, 4)
-                trade["profit"] = round(profit, 4)
+    return True, "Virtual funds reserved"
 
-                self.save_data()
 
-                return trade
+def settle_reserved_trade(
+    stake,
+    payout,
+    fees=0.00,
+    slippage=0.00
+):
+    state = reset_daily_limits(load_state())
 
-        return {"error": "Open trade not found"}
+    stake = float(stake)
+    payout = float(payout)
+    fees = float(fees)
+    slippage = float(slippage)
 
-    def get_status(self):
+    reserved_amount = stake + fees + slippage
 
-        settled = [
-            trade for trade in self.trades
-            if trade["status"] == "SETTLED"
-        ]
+    if reserved_amount > state["reserved"] + 0.000001:
+        return False, "Reserved amount mismatch"
 
-        total_profit = sum(
-            trade["profit"] for trade in settled
-        )
+    if min(stake, payout, fees, slippage) < 0:
+        return False, "Invalid settlement values"
 
-        return {
-            "balance": round(self.balance, 2),
-            "total_trades": len(self.trades),
-            "open_trades": sum(
-                t["status"] == "OPEN" for t in self.trades
-            ),
-            "settled_trades": len(settled),
-            "realized_profit": round(total_profit, 2)
-        }
+    net_profit = payout - stake - fees - slippage
+
+    state["reserved"] = max(
+        0.00,
+        state["reserved"] - reserved_amount
+    )
+
+    state["balance"] += payout - fees - slippage
+
+    state["trade_count"] += 1
+    state["total_profit"] += net_profit
+    state["total_fees"] += fees
+    state["total_slippage"] += slippage
+
+    if net_profit > 0:
+        state["wins"] += 1
+
+    elif net_profit < 0:
+        state["losses"] += 1
+        state["daily_loss"] += abs(net_profit)
+
+    save_state(state)
+
+    return True, {
+        "net_profit": round(net_profit, 4),
+        "balance": round(state["balance"], 2),
+        "daily_loss": round(state["daily_loss"], 2)
+    }
+
+
+def get_status():
+    state = reset_daily_limits(load_state())
+
+    trades = state["trade_count"]
+
+    win_rate = (
+        state["wins"] / trades * 100
+        if trades else 0
+    )
+
+    return {
+        "mode": "PAPER",
+        "balance": round(state["balance"], 2),
+        "reserved": round(state["reserved"], 2),
+        "available_balance": round(
+            state["balance"] - state["reserved"], 2
+        ),
+        "daily_loss": round(state["daily_loss"], 2),
+        "maximum_daily_loss": MAX_DAILY_LOSS,
+        "maximum_trade": MAX_TRADE,
+        "trades": trades,
+        "wins": state["wins"],
+        "losses": state["losses"],
+        "win_rate": round(win_rate, 2),
+        "total_profit": round(state["total_profit"], 2),
+        "total_fees": round(state["total_fees"], 2),
+        "total_slippage": round(state["total_slippage"], 2)
+    }
 
 
 if __name__ == "__main__":
+    print("PAPER RISK MANAGER")
+    print("------------------")
 
-    bot = PaperTrader()
+    for key, value in get_status().items():
+        print(f"{key}: {value}")
 
-    print("PAPER TRADING ACCOUNT")
-    print("---------------------")
-
-    print(bot.get_status())
+    print("\nReal trading: DISABLED")
