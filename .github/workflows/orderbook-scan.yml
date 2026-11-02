@@ -307,6 +307,21 @@ jobs:
           echo "Total checks performed: $CHECK"
           echo "======================================"
 
+      - name: Generate performance statistics
+        run: |
+          set -e
+
+          echo "Generating paper trading performance..."
+
+          python performance_tracker.py
+
+          if [ ! -f performance.json ]; then
+            echo "ERROR: performance.json was not generated."
+            exit 1
+          fi
+
+          echo "Performance statistics generated successfully."
+
       - name: Save records to private repository
         run: |
           set -e
@@ -333,7 +348,7 @@ jobs:
             echo "No private trading record changes."
           fi
 
-      - name: Protect private files and save monitoring data
+      - name: Protect private files and publish monitoring data
         run: |
           set -e
 
@@ -349,8 +364,8 @@ jobs:
 
           git rm --cached --ignore-unmatch risk_state.json paper_trades.json
 
-          git add .gitignore market_data.json orderbooks.json btc_price_data.json strategy_decisions.json
+          git add .gitignore market_data.json orderbooks.json btc_price_data.json strategy_decisions.json performance.json
 
-          git diff --cached --quiet || git commit -m "Update BTC monitoring data"
+          git diff --cached --quiet || git commit -m "Update BTC monitoring and performance data"
 
           git push
