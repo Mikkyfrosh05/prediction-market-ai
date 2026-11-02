@@ -1,16 +1,22 @@
 import requests
 import json
 import time
+import os
 
 from datetime import datetime, timezone
 
 
 API_URL = "https://data-api.binance.vision/api/v3"
 
+# Keep the latest 10 minutes of live price samples.
+HISTORY_SECONDS = 600
+
+# Desired live momentum measurement.
+MOMENTUM_WINDOW_SECONDS = 30
+
 
 def get_btc_price():
 
-    # Fetch Binance best bid and best ask
     url = f"{API_URL}/ticker/bookTicker"
 
     params = {
@@ -28,10 +34,8 @@ def get_btc_price():
     data = response.json()
 
     bid = float(data["bidPrice"])
-
     ask = float(data["askPrice"])
 
-    # Calculate midpoint
     midpoint = (bid + ask) / 2
 
     return midpoint
@@ -65,7 +69,7 @@ def get_btc_candles():
 
         close_time = candle[6]
 
-        # Ignore candles that have not closed yet
+        # Ignore incomplete candles.
         if close_time >= now_ms:
             continue
 
@@ -90,6 +94,170 @@ def get_btc_candles():
     return candles
 
 
+def load_previous_samples():
+
+    if not os.path.exists("btc_price_data.json"):
+        return []
+
+    try:
+
+        with open("btc_price_data.json", "r") as file:
+            previous_data = json.load(file)
+
+        samples = previous_data.get("price_history", [])
+
+        if isinstance(samples, list):
+            return samples
+
+        return []
+
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def update_price_history(current_price):
+
+    now_ms = int(time.time() * 1000)
+
+    samples = load_previous_samples()
+
+    # Add the latest live price.
+    samples.append({
+
+        "timestamp": now_ms,
+
+        "time": datetime.now(
+            timezone.utc
+        ).isoformat(),
+
+        "price": current_price
+
+    })
+
+    # Remove samples older than 10 minutes.
+    cutoff_ms = now_ms - (
+        HISTORY_SECONDS * 1000
+    )
+
+    samples = [
+
+        sample for sample in samples
+
+        if isinstance(sample, dict)
+
+        and isinstance(sample.get("timestamp"), (int, float))
+
+        and isinstance(sample.get("price"), (int, float))
+
+        and sample["timestamp"] >= cutoff_ms
+
+    ]
+
+    return samples
+
+
+def calculate_live_momentum(samples):
+
+    if not samples:
+
+        return {
+            "available": False,
+            "reason": "No price history available"
+        }
+
+    now_ms = int(time.time() * 1000)
+
+    current_sample = samples[-1]
+
+    current_price = float(current_sample["price"])
+
+    target_timestamp = now_ms - (
+        MOMENTUM_WINDOW_SECONDS * 1000
+    )
+
+    # Find the sample closest to 30 seconds ago,
+    # preferring a sample at or before the target.
+    eligible_samples = [
+
+        sample for sample in samples
+
+        if sample["timestamp"] <= target_timestamp
+
+    ]
+
+    if not eligible_samples:
+
+        return {
+
+            "available": False,
+
+            "reason": "Not enough historical samples yet",
+
+            "samples_available": len(samples),
+
+            "required_window_seconds": MOMENTUM_WINDOW_SECONDS
+
+        }
+
+    reference_sample = max(
+        eligible_samples,
+        key=lambda sample: sample["timestamp"]
+    )
+
+    reference_price = float(reference_sample["price"])
+
+    elapsed_seconds = (
+        now_ms - reference_sample["timestamp"]
+    ) / 1000
+
+    if reference_price <= 0:
+
+        return {
+            "available": False,
+            "reason": "Invalid reference price"
+        }
+
+    movement_percent = (
+        (current_price - reference_price)
+        / reference_price
+    ) * 100
+
+    if movement_percent > 0:
+
+        direction = "UP"
+
+    elif movement_percent < 0:
+
+        direction = "DOWN"
+
+    else:
+
+        direction = "FLAT"
+
+    return {
+
+        "available": True,
+
+        "window_seconds": round(elapsed_seconds, 2),
+
+        "reference_price": reference_price,
+
+        "current_price": current_price,
+
+        "movement_percent": round(
+            movement_percent,
+            6
+        ),
+
+        "direction": direction,
+
+        "reference_timestamp": reference_sample["timestamp"],
+
+        "current_timestamp": now_ms
+
+    }
+
+
 def save_price_data():
 
     try:
@@ -103,6 +271,14 @@ def save_price_data():
             print("Insufficient completed candles.")
 
             return
+
+        # Preserve previous live price samples.
+        price_history = update_price_history(price)
+
+        # Calculate 30-second live momentum.
+        live_momentum = calculate_live_momentum(
+            price_history
+        )
 
         output = {
 
@@ -119,6 +295,16 @@ def save_price_data():
             "settlement_source": "CHAINLINK",
 
             "current_price": price,
+
+            "current_price_timestamp": int(
+                time.time() * 1000
+            ),
+
+            "live_momentum": live_momentum,
+
+            "price_history": price_history,
+
+            "price_history_count": len(price_history),
 
             "candles": candles,
 
@@ -145,9 +331,45 @@ def save_price_data():
 
         print("Completed candles:", len(candles))
 
-        print("First candle:", candles[0]["open_time"])
+        print("Live price samples:", len(price_history))
 
-        print("Latest candle:", candles[-1]["close_time"])
+        if live_momentum.get("available"):
+
+            print("\n30-SECOND LIVE MOMENTUM")
+
+            print(
+                "Reference price:",
+                live_momentum["reference_price"]
+            )
+
+            print(
+                "Current price:",
+                live_momentum["current_price"]
+            )
+
+            print(
+                "Movement:",
+                live_momentum["movement_percent"],
+                "%"
+            )
+
+            print(
+                "Direction:",
+                live_momentum["direction"]
+            )
+
+            print(
+                "Measurement window:",
+                live_momentum["window_seconds"],
+                "seconds"
+            )
+
+        else:
+
+            print(
+                "\n30-second momentum:",
+                live_momentum.get("reason")
+            )
 
         print("\nBTC data saved successfully!")
 
