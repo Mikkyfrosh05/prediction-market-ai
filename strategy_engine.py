@@ -22,6 +22,46 @@ def calculate_ema(prices, period):
     return ema
 
 
+def find_market_start_price(market, raw_market):
+    """
+    Finds the BTC starting price from the Predict.fun market data.
+    """
+
+    candidates = [
+        market.get("crypto_start_price"),
+        market.get("start_price"),
+        market.get("startPrice"),
+        raw_market.get("crypto_start_price"),
+        raw_market.get("start_price"),
+        raw_market.get("startPrice")
+    ]
+
+    for source in [market, raw_market]:
+        for key in ["variantData", "variantDetails", "variant_data"]:
+            variant = source.get(key)
+
+            if isinstance(variant, dict):
+                candidates.extend([
+                    variant.get("startPrice"),
+                    variant.get("start_price")
+                ])
+
+    for value in candidates:
+        if value is None:
+            continue
+
+        try:
+            price = float(value)
+
+            if price > 0:
+                return price
+
+        except (ValueError, TypeError):
+            continue
+
+    return None
+
+
 def analyse_momentum(candles, current_price=None):
 
     if len(candles) < 30:
@@ -82,7 +122,7 @@ def analyse_momentum(candles, current_price=None):
     return None, "No clear directional momentum", diagnostics
 
 
-def evaluate_market(market, candles, current_price):
+def evaluate_market(market, raw_market, candles, current_price):
 
     now = datetime.now(timezone.utc)
 
@@ -105,17 +145,53 @@ def evaluate_market(market, candles, current_price):
     if elapsed >= MAX_ELAPSED_SECONDS:
         return None, "Market is too close to settlement", {}
 
+    # Get the actual market starting price.
+    market_start_price = find_market_start_price(
+        market,
+        raw_market
+    )
+
+    if market_start_price is None:
+        return None, "Market starting BTC price unavailable", {}
+
+    # Compare current BTC price with market starting price.
+    if current_price is None:
+        return None, "Current BTC price unavailable", {}
+
+    current_price = float(current_price)
+
+    if current_price > market_start_price:
+        price_direction = "UP"
+
+    elif current_price < market_start_price:
+        price_direction = "DOWN"
+
+    else:
+        return None, "BTC is exactly at market starting price", {}
+
     direction, momentum_reason, diagnostics = analyse_momentum(
         candles,
         current_price
     )
 
+    diagnostics["market_start_price"] = market_start_price
+    diagnostics["current_btc_price"] = current_price
+    diagnostics["direction_vs_start_price"] = price_direction
+
     if direction is None:
         return None, momentum_reason, diagnostics
 
+    # Require momentum and starting-price direction to agree.
+    if direction != price_direction:
+        return None, (
+            "Momentum conflicts with market starting-price direction"
+        ), diagnostics
+
+    # Get the actual Predict.fun buying price.
     if direction == "UP":
         entry_price = market.get("up_ask")
         available_size = market.get("up_ask_size")
+
     else:
         entry_price = market.get("down_ask")
         available_size = market.get("down_ask_size")
@@ -140,6 +216,9 @@ def evaluate_market(market, candles, current_price):
         "direction": direction,
         "entry_price": entry_price,
         "available_size": float(available_size),
+        "market_start_price": market_start_price,
+        "current_btc_price": current_price,
+        "price_direction": price_direction,
         "elapsed_seconds": round(elapsed, 2),
         "remaining_seconds": round((end - now).total_seconds(), 2),
         "momentum_reason": momentum_reason,
@@ -147,7 +226,7 @@ def evaluate_market(market, candles, current_price):
         "decision": "PAPER_TRADE_CANDIDATE"
     }
 
-    return decision, "All initial entry conditions passed", diagnostics
+    return decision, "All entry conditions passed", diagnostics
 
 
 def main():
@@ -158,24 +237,37 @@ def main():
 
     orderbook_data = load_json("orderbooks.json")
     price_data = load_json("btc_price_data.json")
+    raw_market_data = load_json("market_data.json")
 
     markets = orderbook_data.get("orderbooks", [])
     candles = price_data.get("candles", [])
     current_price = price_data.get("current_price")
+
+    raw_markets = raw_market_data.get("markets", [])
+
+    raw_market_lookup = {
+        str(market.get("id", market.get("market_id"))): market
+        for market in raw_markets
+    }
 
     results = []
     candidates = []
 
     for market in markets:
 
+        market_id = str(market.get("market_id"))
+
+        raw_market = raw_market_lookup.get(market_id, {})
+
         decision, reason, diagnostics = evaluate_market(
             market,
+            raw_market,
             candles,
             current_price
         )
 
         result = {
-            "market_id": market.get("market_id"),
+            "market_id": market_id,
             "title": market.get("title"),
             "decision": "NO TRADE",
             "reason": reason,
@@ -183,8 +275,10 @@ def main():
         }
 
         if decision:
+
             result.update(decision)
             result["decision"] = "PAPER_TRADE_CANDIDATE"
+
             candidates.append(decision)
 
         results.append(result)
@@ -194,34 +288,20 @@ def main():
         print("Reason:", reason)
 
         if diagnostics:
-            print("EMA 9:", diagnostics["ema9"])
-            print("EMA 21:", diagnostics["ema21"])
-
             print(
-                "Latest completed close:",
-                diagnostics["latest_completed_close"]
+                "Market starting BTC price:",
+                diagnostics.get("market_start_price")
             )
 
             print(
-                "Three-candle movement:",
-                diagnostics["three_candle_movement_percent"],
-                "%"
+                "Current BTC price:",
+                diagnostics.get("current_btc_price")
             )
 
             print(
-                "Live BTC price:",
-                diagnostics["live_btc_price"]
+                "Direction relative to starting price:",
+                diagnostics.get("direction_vs_start_price")
             )
-
-            print(
-                "Live vs last close:",
-                diagnostics["live_vs_last_close_percent"],
-                "%"
-            )
-
-        if decision:
-            print("Direction:", decision["direction"])
-            print("Entry price:", decision["entry_price"])
 
     output = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
