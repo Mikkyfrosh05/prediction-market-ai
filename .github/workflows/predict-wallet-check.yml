@@ -1,0 +1,29 @@
+name: Predict Wallet Connection Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  wallet-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Test Predict wallet API
+        env:
+          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+          PREDICT_ACCOUNT_ADDRESS: ${{ vars.PREDICT_ACCOUNT_ADDRESS }}
+        run: python predict_wallet.py
