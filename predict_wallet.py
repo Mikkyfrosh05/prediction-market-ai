@@ -1,66 +1,80 @@
 import os
-import requests
 import sys
+import requests
+
+from predict_sdk import OrderBuilder, ChainId, OrderBuilderOptions
 
 API_BASE = "https://api.predict.fun"
 
 API_KEY = os.getenv("PREDICT_API_KEY")
-ACCOUNT_ADDRESS = os.getenv("PREDICT_ACCOUNT_ADDRESS")
+ACCOUNT = os.getenv("PREDICT_ACCOUNT_ADDRESS")
+PRIVATE_KEY = os.getenv("PRIVY_WALLET_PRIVATE_KEY")
 
 
-def check_configuration():
-    if not API_KEY:
-        print("ERROR: PREDICT_API_KEY is missing.")
+def main():
+    if not all([API_KEY, ACCOUNT, PRIVATE_KEY]):
+        print("Missing required environment configuration.")
         sys.exit(1)
 
-    if not ACCOUNT_ADDRESS:
-        print("ERROR: PREDICT_ACCOUNT_ADDRESS is missing.")
-        sys.exit(1)
+    print("Initialising Predict Smart Wallet...")
 
-    print("Wallet configuration found.")
-    print(f"Predict Account: {ACCOUNT_ADDRESS}")
-
-
-def get_auth_message():
-    print("\nRequesting authentication message...")
+    builder = OrderBuilder.make(
+        ChainId.BNB_MAINNET,
+        PRIVATE_KEY,
+        OrderBuilderOptions(predict_account=ACCOUNT)
+    )
 
     headers = {
         "x-api-key": API_KEY
     }
 
-    try:
-        response = requests.get(
-            f"{API_BASE}/v1/auth/message",
-            headers=headers,
-            timeout=15
-        )
+    print("Requesting authentication message...")
 
-        response.raise_for_status()
-        result = response.json()
+    response = requests.get(
+        f"{API_BASE}/v1/auth/message",
+        headers=headers,
+        timeout=20
+    )
+    response.raise_for_status()
 
-        if not result.get("success"):
-            print("Authentication message request failed.")
-            return
+    message = response.json()["data"]["message"]
 
-        message = result.get("data", {}).get("message")
+    print("Signing authentication message...")
 
-        if not message:
-            print("No authentication message returned.")
-            return
+    signature = builder.sign_predict_account_message(message)
 
-        print("\nAuthentication message received.")
-        print("Message:")
-        print(message)
+    print("Requesting JWT authentication...")
 
-        print("\nWallet API connection: SUCCESS")
-        print("No signature generated.")
-        print("No orders submitted.")
-        print("No funds moved.")
+    response = requests.post(
+        f"{API_BASE}/v1/auth",
+        headers={
+            **headers,
+            "Content-Type": "application/json"
+        },
+        json={
+            "signer": ACCOUNT,
+            "signature": signature,
+            "message": message
+        },
+        timeout=20
+    )
 
-    except requests.RequestException as error:
-        print(f"API connection failed: {error}")
+    response.raise_for_status()
+
+    result = response.json()
+
+    token = result.get("data", {}).get("token")
+
+    if not result.get("success") or not token:
+        print("Authentication was not confirmed.")
+        sys.exit(1)
+
+    print("PREDICT SMART WALLET AUTHENTICATION: SUCCESS")
+    print("JWT received. Token hidden.")
+    print("No orders submitted.")
+    print("No approvals performed.")
+    print("No funds moved.")
 
 
 if __name__ == "__main__":
-    check_configuration()
-    get_auth_message()
+    main()
