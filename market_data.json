@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-02T09:08:05.367402+00:00",
+  "updated_at": "2026-11-02T09:36:57.798088+00:00",
   "asset": "BTC",
   "market_type": "CRYPTO_UP_DOWN",
   "timeframe": "5 minutes",
@@ -7,15 +7,15 @@
   "total_markets": 3,
   "markets": [
     {
-      "boostEndsAt": "2026-11-02T09:10:00.000Z",
-      "boostStartsAt": "2026-11-02T09:05:00.000Z",
-      "categorySlug": "btc-updown-5m-1793610300",
-      "conditionId": "0x96f5239a5f2f1b9bfe1ad6f49bf436823ab48d761848f4a2b7d717023511572c",
-      "createdAt": "2026-11-01T09:05:01.000Z",
+      "boostEndsAt": "2026-11-02T09:40:00.000Z",
+      "boostStartsAt": "2026-11-02T09:35:00.000Z",
+      "categorySlug": "btc-updown-5m-1793612100",
+      "conditionId": "0xfda7d67fbf64cd25ca42d062f1fbdf68a71b044c5d5656384d8c41c327ea1e40",
+      "createdAt": "2026-11-01T09:35:01.000Z",
       "decimalPrecision": 2,
       "description": "This market will resolve to \"Up\" if the BTC/USDT price at the end of the time range specified in the title is greater than the price at the beginning of that range.\r\n\r\nIt will resolve to \"Down\" if the BTC/USDT price at the end of the time range is lower than the price at the beginning of that range.\r\n\r\nIf the two prices are exactly equal, the market will resolve 50-50.\r\n\r\nThe primary resolution source for this market is Chainlink, specifically the BTC/USDT data stream available at https://data.chain.link/streams/btc-usdt-topofbook-datalink.\r\n\r\nThe Chainlink stream uses the mid-price, which is calculated as the average price between the bid and ask prices from Binance's Top of Book, converted into the quote currency.\r\n\r\nThis market is based solely on the price reported by the Chainlink BTC/USDT data stream, not on other sources or spot markets.\r\n\r\nIf Chainlink data is unavailable or otherwise unusable for resolution, the market will resolve based on a consensus of reliable sources.",
       "feeRateBps": 200,
-      "id": 4104165,
+      "id": 4104539,
       "imageUrl": "https://static.predict.fun/automarket-btc-usd-5-minutes-gold",
       "isBoosted": false,
       "isNegRisk": false,
@@ -25,57 +25,57 @@
       "makerFeeBps": 0,
       "marketType": null,
       "marketVariant": "CRYPTO_UP_DOWN",
-      "oracleQuestionId": "0x25f3982622a8b4974fc8d464d0efaeee710dc0b125a7bee5e21899e143ff46a7",
+      "oracleQuestionId": "0x19bd12d15f090f01f410f73f8cf609d21de90eba65d14a189b14562e8a7390f0",
       "outcomes": [
         {
           "bestAsk": {
-            "price": 0.82,
-            "size": 230.82590361445784
+            "price": 0.06,
+            "size": 283.5958
           },
           "bestBid": {
-            "price": 0.81,
-            "size": 502.17846153846153
+            "price": 0.05,
+            "size": 871.5216105263157
           },
           "indexSet": 1,
           "name": "Up",
-          "onChainId": "15417151422037045770667048578968912298163415985730213882196526645667410657471",
+          "onChainId": "110936615599821929147101616769601490052589150116666599530773869531145855717508",
           "status": null,
           "team": null,
           "variantData": null
         },
         {
           "bestAsk": {
-            "price": 0.19,
-            "size": 502.17846153846153
+            "price": 0.95,
+            "size": 871.5216105263157
           },
           "bestBid": {
-            "price": 0.18,
-            "size": 230.82590361445784
+            "price": 0.94,
+            "size": 283.5958
           },
           "indexSet": 2,
           "name": "Down",
-          "onChainId": "21791775080303137055248400105448743303804014449604048840136480851277832592300",
+          "onChainId": "68027584550737325678816611495915136999387805284192191303518604397443933862519",
           "status": null,
           "team": null,
           "variantData": null
         }
       ],
       "polymarketConditionIds": [],
-      "question": "Bitcoin Up or Down - November 2, 4:05AM-4:10AM ET",
+      "question": "Bitcoin Up or Down - November 2, 4:35AM-4:40AM ET",
       "questionIndex": null,
       "resolution": null,
       "resolverAddress": "0x77620FAb2969dF2D5696F1f081940E416Cf17cA5",
       "rewards": {
         "current": {
-          "endsAt": "2026-11-02T09:10:00.000Z",
+          "endsAt": "2026-11-02T09:40:00.000Z",
           "hourlyRate": 3000,
-          "startsAt": "2026-11-02T09:05:00.000Z"
+          "startsAt": "2026-11-02T09:35:00.000Z"
         },
         "schedule": [
           {
-            "endsAt": "2026-11-02T09:10:00.000Z",
+            "endsAt": "2026-11-02T09:40:00.000Z",
             "hourlyRate": 3000,
-            "startsAt": "2026-11-02T09:05:00.000Z"
+            "startsAt": "2026-11-02T09:35:00.000Z"
           }
         ]
       },
@@ -84,37 +84,37 @@
       "spreadThreshold": 0.06,
       "status": "REGISTERED",
       "team": null,
-      "title": "Bitcoin Up or Down - November 2, 4:05AM-4:10AM ET",
+      "title": "Bitcoin Up or Down - November 2, 4:35AM-4:40AM ET",
       "tradingStatus": "OPEN",
       "variantData": {
         "endPrice": null,
         "priceFeedId": "0x0003ef42b4d20a19409a187c39670a6f5be7ce17fc78c290d25eb45bbf769d37",
         "priceFeedProvider": "CHAINLINK",
         "priceFeedSymbol": "BTCUSDT",
-        "startPrice": 78313.385,
+        "startPrice": 78126.025,
         "type": "CRYPTO_UP_DOWN"
       },
-      "category_id": 700350,
-      "category_slug": "btc-updown-5m-1793610300",
-      "category_title": "Bitcoin Up or Down - November 2, 4:05AM-4:10AM ET",
-      "startsAt": "2026-11-02T09:05:00.000Z",
-      "endsAt": "2026-11-02T09:10:00.000Z",
+      "category_id": 700426,
+      "category_slug": "btc-updown-5m-1793612100",
+      "category_title": "Bitcoin Up or Down - November 2, 4:35AM-4:40AM ET",
+      "startsAt": "2026-11-02T09:35:00.000Z",
+      "endsAt": "2026-11-02T09:40:00.000Z",
       "duration_seconds": 300,
       "price_feed_symbol": "BTCUSDT",
       "crypto_variant": "CRYPTO_UP_DOWN",
-      "crypto_start_price": 78313.385,
+      "crypto_start_price": 78126.025,
       "crypto_end_price": null
     },
     {
-      "boostEndsAt": "2026-11-02T09:15:00.000Z",
-      "boostStartsAt": "2026-11-02T09:10:00.000Z",
-      "categorySlug": "btc-updown-5m-1793610600",
-      "conditionId": "0x07f37d82a0e7b43d68cc476f2da8a5f578a9d65cd6cd78a55aa2ae24da0e63de",
-      "createdAt": "2026-11-01T09:10:01.000Z",
+      "boostEndsAt": "2026-11-02T09:45:00.000Z",
+      "boostStartsAt": "2026-11-02T09:40:00.000Z",
+      "categorySlug": "btc-updown-5m-1793612400",
+      "conditionId": "0x068d3a188646f5bae9984a6fa0ba9b31594925ec190b86ebc88cbcee9c0b494e",
+      "createdAt": "2026-11-01T09:40:02.000Z",
       "decimalPrecision": 2,
       "description": "This market will resolve to \"Up\" if the BTC/USDT price at the end of the time range specified in the title is greater than the price at the beginning of that range.\r\n\r\nIt will resolve to \"Down\" if the BTC/USDT price at the end of the time range is lower than the price at the beginning of that range.\r\n\r\nIf the two prices are exactly equal, the market will resolve 50-50.\r\n\r\nThe primary resolution source for this market is Chainlink, specifically the BTC/USDT data stream available at https://data.chain.link/streams/btc-usdt-topofbook-datalink.\r\n\r\nThe Chainlink stream uses the mid-price, which is calculated as the average price between the bid and ask prices from Binance's Top of Book, converted into the quote currency.\r\n\r\nThis market is based solely on the price reported by the Chainlink BTC/USDT data stream, not on other sources or spot markets.\r\n\r\nIf Chainlink data is unavailable or otherwise unusable for resolution, the market will resolve based on a consensus of reliable sources.",
       "feeRateBps": 200,
-      "id": 4104275,
+      "id": 4104839,
       "imageUrl": "https://static.predict.fun/automarket-btc-usd-5-minutes-gold",
       "isBoosted": false,
       "isNegRisk": false,
@@ -124,43 +124,43 @@
       "makerFeeBps": 0,
       "marketType": null,
       "marketVariant": "CRYPTO_UP_DOWN",
-      "oracleQuestionId": "0x427cd8056731d3eb73f457f6b28c66efe3fac56970a048e57c79bba1321ce4b7",
+      "oracleQuestionId": "0xd93f23b400a0c78bba28e1e969a77097f982ffa002c6db1f07a34a578f748674",
       "outcomes": [
         {
           "bestAsk": {
-            "price": 0.5,
-            "size": 304.10717148
+            "price": 0.52,
+            "size": 1344.920275
           },
           "bestBid": {
-            "price": 0.49,
-            "size": 1041.3265549019607
+            "price": 0.51,
+            "size": 312.3469387755102
           },
           "indexSet": 1,
           "name": "Up",
-          "onChainId": "38943338194734780932593030707288566257435088584700166493848770515082555040110",
+          "onChainId": "23356700682567687260508751926085401249407910554831920081419367392492903481720",
           "status": null,
           "team": null,
           "variantData": null
         },
         {
           "bestAsk": {
-            "price": 0.51,
-            "size": 1041.3265549019607
+            "price": 0.49,
+            "size": 312.3469387755102
           },
           "bestBid": {
-            "price": 0.5,
-            "size": 304.10717148
+            "price": 0.48,
+            "size": 1344.920275
           },
           "indexSet": 2,
           "name": "Down",
-          "onChainId": "61786449193464328410362609467562921814721758669368726305934741553015136790463",
+          "onChainId": "88177763429405887537835242962336798418668270288595021115017529608112293766863",
           "status": null,
           "team": null,
           "variantData": null
         }
       ],
       "polymarketConditionIds": [],
-      "question": "Bitcoin Up or Down - November 2, 4:10AM-4:15AM ET",
+      "question": "Bitcoin Up or Down - November 2, 4:40AM-4:45AM ET",
       "questionIndex": null,
       "resolution": null,
       "resolverAddress": "0x77620FAb2969dF2D5696F1f081940E416Cf17cA5",
@@ -168,9 +168,9 @@
         "current": null,
         "schedule": [
           {
-            "endsAt": "2026-11-02T09:15:00.000Z",
+            "endsAt": "2026-11-02T09:45:00.000Z",
             "hourlyRate": 3000,
-            "startsAt": "2026-11-02T09:10:00.000Z"
+            "startsAt": "2026-11-02T09:40:00.000Z"
           }
         ]
       },
@@ -179,7 +179,7 @@
       "spreadThreshold": 0.06,
       "status": "REGISTERED",
       "team": null,
-      "title": "Bitcoin Up or Down - November 2, 4:10AM-4:15AM ET",
+      "title": "Bitcoin Up or Down - November 2, 4:40AM-4:45AM ET",
       "tradingStatus": "OPEN",
       "variantData": {
         "endPrice": null,
@@ -189,11 +189,11 @@
         "startPrice": null,
         "type": "CRYPTO_UP_DOWN"
       },
-      "category_id": 700353,
-      "category_slug": "btc-updown-5m-1793610600",
-      "category_title": "Bitcoin Up or Down - November 2, 4:10AM-4:15AM ET",
-      "startsAt": "2026-11-02T09:10:00.000Z",
-      "endsAt": "2026-11-02T09:15:00.000Z",
+      "category_id": 700458,
+      "category_slug": "btc-updown-5m-1793612400",
+      "category_title": "Bitcoin Up or Down - November 2, 4:40AM-4:45AM ET",
+      "startsAt": "2026-11-02T09:40:00.000Z",
+      "endsAt": "2026-11-02T09:45:00.000Z",
       "duration_seconds": 300,
       "price_feed_symbol": "BTCUSDT",
       "crypto_variant": "CRYPTO_UP_DOWN",
@@ -201,15 +201,15 @@
       "crypto_end_price": null
     },
     {
-      "boostEndsAt": "2026-11-02T09:20:00.000Z",
-      "boostStartsAt": "2026-11-02T09:15:00.000Z",
-      "categorySlug": "btc-updown-5m-1793610900",
-      "conditionId": "0xd31b891fdd4845eba102401c06c492b319a2f82e593524d2d960cc1814b8a828",
-      "createdAt": "2026-11-01T09:15:01.000Z",
+      "boostEndsAt": "2026-11-02T09:50:00.000Z",
+      "boostStartsAt": "2026-11-02T09:45:00.000Z",
+      "categorySlug": "btc-updown-5m-1793612700",
+      "conditionId": "0x376b9a34397f0ec359f38c449a9cc4d5328b0164c9645d9ffe3bee2e8574252d",
+      "createdAt": "2026-11-01T09:45:02.000Z",
       "decimalPrecision": 2,
       "description": "This market will resolve to \"Up\" if the BTC/USDT price at the end of the time range specified in the title is greater than the price at the beginning of that range.\r\n\r\nIt will resolve to \"Down\" if the BTC/USDT price at the end of the time range is lower than the price at the beginning of that range.\r\n\r\nIf the two prices are exactly equal, the market will resolve 50-50.\r\n\r\nThe primary resolution source for this market is Chainlink, specifically the BTC/USDT data stream available at https://data.chain.link/streams/btc-usdt-topofbook-datalink.\r\n\r\nThe Chainlink stream uses the mid-price, which is calculated as the average price between the bid and ask prices from Binance's Top of Book, converted into the quote currency.\r\n\r\nThis market is based solely on the price reported by the Chainlink BTC/USDT data stream, not on other sources or spot markets.\r\n\r\nIf Chainlink data is unavailable or otherwise unusable for resolution, the market will resolve based on a consensus of reliable sources.",
       "feeRateBps": 200,
-      "id": 4104303,
+      "id": 4104843,
       "imageUrl": "https://static.predict.fun/automarket-btc-usd-5-minutes-gold",
       "isBoosted": false,
       "isNegRisk": false,
@@ -219,43 +219,43 @@
       "makerFeeBps": 0,
       "marketType": null,
       "marketVariant": "CRYPTO_UP_DOWN",
-      "oracleQuestionId": "0x3582e8ec5b8f9e58bb8e4ec0025320408b9d0d3e498ae04b3d1dd897d12896cc",
+      "oracleQuestionId": "0x41b2a8454d5cdfc1f6b7df7b181750e2f6db669fb4693626aa8ab2a5aebb7071",
       "outcomes": [
         {
           "bestAsk": {
-            "price": 0.5,
-            "size": 352
+            "price": 0.51,
+            "size": 1029.1703921568628
           },
           "bestBid": {
-            "price": 0.49,
-            "size": 1474.1100000000001
+            "price": 0.5,
+            "size": 292
           },
           "indexSet": 1,
           "name": "Up",
-          "onChainId": "112575167095089336985809071193105962308567126401166296379986578048871253762090",
+          "onChainId": "5023429804925817610836051418319063560832126377501361897362764556707826705669",
           "status": null,
           "team": null,
           "variantData": null
         },
         {
           "bestAsk": {
-            "price": 0.51,
-            "size": 1474.1100000000001
+            "price": 0.5,
+            "size": 292
           },
           "bestBid": {
-            "price": 0.5,
-            "size": 352
+            "price": 0.49,
+            "size": 1029.1703921568628
           },
           "indexSet": 2,
           "name": "Down",
-          "onChainId": "13896095682069146390383097680113814347443547734346033893488619494145583448023",
+          "onChainId": "97945597061299431169598367389008019719155875755324971942551593802429934806276",
           "status": null,
           "team": null,
           "variantData": null
         }
       ],
       "polymarketConditionIds": [],
-      "question": "Bitcoin Up or Down - November 2, 4:15AM-4:20AM ET",
+      "question": "Bitcoin Up or Down - November 2, 4:45AM-4:50AM ET",
       "questionIndex": null,
       "resolution": null,
       "resolverAddress": "0x77620FAb2969dF2D5696F1f081940E416Cf17cA5",
@@ -263,9 +263,9 @@
         "current": null,
         "schedule": [
           {
-            "endsAt": "2026-11-02T09:20:00.000Z",
+            "endsAt": "2026-11-02T09:50:00.000Z",
             "hourlyRate": 3000,
-            "startsAt": "2026-11-02T09:15:00.000Z"
+            "startsAt": "2026-11-02T09:45:00.000Z"
           }
         ]
       },
@@ -274,7 +274,7 @@
       "spreadThreshold": 0.06,
       "status": "REGISTERED",
       "team": null,
-      "title": "Bitcoin Up or Down - November 2, 4:15AM-4:20AM ET",
+      "title": "Bitcoin Up or Down - November 2, 4:45AM-4:50AM ET",
       "tradingStatus": "OPEN",
       "variantData": {
         "endPrice": null,
@@ -284,11 +284,11 @@
         "startPrice": null,
         "type": "CRYPTO_UP_DOWN"
       },
-      "category_id": 700360,
-      "category_slug": "btc-updown-5m-1793610900",
-      "category_title": "Bitcoin Up or Down - November 2, 4:15AM-4:20AM ET",
-      "startsAt": "2026-11-02T09:15:00.000Z",
-      "endsAt": "2026-11-02T09:20:00.000Z",
+      "category_id": 700462,
+      "category_slug": "btc-updown-5m-1793612700",
+      "category_title": "Bitcoin Up or Down - November 2, 4:45AM-4:50AM ET",
+      "startsAt": "2026-11-02T09:45:00.000Z",
+      "endsAt": "2026-11-02T09:50:00.000Z",
       "duration_seconds": 300,
       "price_feed_symbol": "BTCUSDT",
       "crypto_variant": "CRYPTO_UP_DOWN",
