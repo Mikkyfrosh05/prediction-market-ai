@@ -280,10 +280,10 @@ jobs:
                         echo ""
             echo "STEP 4: Checking trading control state..."
 
-            CONTROL_STATE=$(curl -fsS \
-              -H "Origin: https://mikkyfrosh05.github.io" \
-              "https://prediction-market-control.buremohpelumi.workers.dev/status" \
-              | python -c "import sys,json; print(json.load(sys.stdin).get('state','STOPPED'))")
+            CONTROL_STATE=$(curl -fsS --max-time 10 \
+  -H "Origin: https://mikkyfrosh05.github.io" \
+  "https://prediction-market-control.buremohpelumi.workers.dev/status" \
+  | python -c "import sys,json; print(json.load(sys.stdin).get('state','STOPPED'))") || CONTROL_STATE="STOPPED"
 
             echo "Trading control state: $CONTROL_STATE"
 
