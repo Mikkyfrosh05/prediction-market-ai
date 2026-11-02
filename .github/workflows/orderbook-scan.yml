@@ -34,21 +34,40 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
-      - name: Run BTC Price Tracker
-        run: python btc_price_tracker.py
-
-      - name: Run Prediction Market AI
+      - name: Repeated BTC Market Monitoring
         env:
           PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
-        run: python main.py
+        run: |
+          set -e
 
-      - name: Run BTC Strategy Engine
-        run: python strategy_engine.py
+          for i in $(seq 1 10)
+          do
+            echo "======================================"
+            echo "MARKET CHECK $i OF 10"
+            echo "======================================"
+
+            echo "Fetching BTC price..."
+            python btc_price_tracker.py
+
+            echo "Scanning Predict.fun markets..."
+            python main.py
+
+            echo "Running BTC strategy engine..."
+            python strategy_engine.py
+
+            if [ "$i" -lt 10 ]; then
+              echo "Waiting 25 seconds before next check..."
+              sleep 25
+            fi
+          done
 
       - name: Save market, BTC and strategy data
         run: |
           git config user.name "Market Data Bot"
           git config user.email "actions@github.com"
+
           git add orderbooks.json btc_price_data.json strategy_decisions.json
-          git diff --cached --quiet || git commit -m "Update BTC market and strategy data"
+
+          git diff --cached --quiet || git commit -m "Update BTC market monitoring data"
+
           git push
