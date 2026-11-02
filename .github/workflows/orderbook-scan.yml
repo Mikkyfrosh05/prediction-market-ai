@@ -29,7 +29,7 @@ jobs:
       - name: Checkout private trading records
         uses: actions/checkout@v5
         with:
-          repository: Mikkyfrosh05/prediction-market-private-data
+          repository: Mikkyfrosh05/repository: Mikkyfrosh05/-prediction-market-private-data
           token: ${{ secrets.GH_PRIVATE_DATA_TOKEN }}
           path: private-data
           ref: main
