@@ -1,0 +1,21 @@
+{
+  "updated_at": "2026-11-02T00:12:58.903663+00:00",
+  "mode": "PAPER",
+  "real_trading_enabled": false,
+  "markets_checked": 2,
+  "candidates_found": 0,
+  "results": [
+    {
+      "market_id": 4098195,
+      "title": "Bitcoin Up or Down - November 1, 11:15PM-11:20PM ET",
+      "decision": "NO TRADE",
+      "reason": "Market is not active"
+    },
+    {
+      "market_id": 4098283,
+      "title": "Bitcoin Up or Down - November 1, 11:20PM-11:25PM ET",
+      "decision": "NO TRADE",
+      "reason": "Market is not active"
+    }
+  ]
+}
