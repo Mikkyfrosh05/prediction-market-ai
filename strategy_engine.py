@@ -59,11 +59,25 @@ def analyse_momentum(candles, current_price=None):
         )
     }
 
-    if ema9 > ema21 and latest_close > ema9 and movement > 0:
-        return "UP", "EMA and short-term momentum confirm UP", diagnostics
+    if (
+        ema9 > ema21
+        and latest_close > ema9
+        and movement >= MIN_MOMENTUM_PERCENT
+    ):
+        return "UP", "Strong UP momentum confirmed", diagnostics
 
-    if ema9 < ema21 and latest_close < ema9 and movement < 0:
-        return "DOWN", "EMA and short-term momentum confirm DOWN", diagnostics
+    if (
+        ema9 < ema21
+        and latest_close < ema9
+        and movement <= -MIN_MOMENTUM_PERCENT
+    ):
+        return "DOWN", "Strong DOWN momentum confirmed", diagnostics
+
+    if ema9 > ema21 and latest_close > ema9:
+        return None, "UP momentum is too weak", diagnostics
+
+    if ema9 < ema21 and latest_close < ema9:
+        return None, "DOWN momentum is too weak", diagnostics
 
     return None, "No clear directional momentum", diagnostics
 
@@ -182,19 +196,23 @@ def main():
         if diagnostics:
             print("EMA 9:", diagnostics["ema9"])
             print("EMA 21:", diagnostics["ema21"])
+
             print(
                 "Latest completed close:",
                 diagnostics["latest_completed_close"]
             )
+
             print(
                 "Three-candle movement:",
                 diagnostics["three_candle_movement_percent"],
                 "%"
             )
+
             print(
                 "Live BTC price:",
                 diagnostics["live_btc_price"]
             )
+
             print(
                 "Live vs last close:",
                 diagnostics["live_vs_last_close_percent"],
