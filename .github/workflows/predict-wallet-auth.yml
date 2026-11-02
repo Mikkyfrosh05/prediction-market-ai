@@ -1,0 +1,35 @@
+name: Predict Smart Wallet Authentication
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: predict-wallet-auth
+  cancel-in-progress: false
+
+jobs:
+  authenticate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install predict-sdk==0.0.22 requests
+
+      - name: Authenticate Predict Smart Wallet
+        env:
+          PREDICT_API_KEY: ${{ secrets.PREDICT_API_KEY }}
+          PREDICT_ACCOUNT_ADDRESS: ${{ vars.PREDICT_ACCOUNT_ADDRESS }}
+          PRIVY_WALLET_PRIVATE_KEY: ${{ secrets.PRIVY_WALLET_PRIVATE_KEY }}
+        run: python predict_wallet.py
