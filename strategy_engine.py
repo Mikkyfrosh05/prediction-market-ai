@@ -4,11 +4,15 @@ import requests
 
 from datetime import datetime, timezone
 
+from paper_trader import PaperTrader
+
 
 MIN_ELAPSED_SECONDS = 150
 MIN_ENTRY_PRICE = 0.70
 MAX_ELAPSED_SECONDS = 300
 MIN_MOMENTUM_PERCENT = 0.05
+
+PAPER_TRADE_AMOUNT = 2.00
 
 API_URL = "https://api.predict.fun"
 
@@ -123,8 +127,6 @@ def fetch_market_start_price(market_id):
 
         data = response.json()
 
-        # Handle different possible response wrappers.
-
         possible_objects = [data]
 
         if isinstance(data, dict):
@@ -144,7 +146,7 @@ def fetch_market_start_price(market_id):
 
                 return price, "PREDICT_FUN_LIVE_API"
 
-        return None, "Starting price not published by Predict.fun yet"
+        return None, "Starting price not published yet"
 
     except requests.RequestException as error:
 
@@ -157,8 +159,6 @@ def fetch_market_start_price(market_id):
 
 def find_market_start_price(market, raw_market):
 
-    # First check the locally saved market information.
-
     price = extract_start_price(market)
 
     if price is not None:
@@ -170,8 +170,6 @@ def find_market_start_price(market, raw_market):
     if price is not None:
 
         return price, "SAVED_MARKET_DATA"
-
-    # If unavailable, request fresh market details.
 
     market_id = market.get("market_id")
 
@@ -324,8 +322,6 @@ def evaluate_market(market, raw_market, candles, current_price):
 
         return None, "Market is too close to settlement", {}
 
-    # Retrieve the market's actual starting BTC price.
-
     market_start_price, price_source = find_market_start_price(
 
         market,
@@ -380,8 +376,6 @@ def evaluate_market(market, raw_market, candles, current_price):
 
     diagnostics["start_price_source"] = price_source
 
-    # Momentum and market direction must agree.
-
     if direction is None:
 
         return None, momentum_reason, diagnostics
@@ -393,8 +387,6 @@ def evaluate_market(market, raw_market, candles, current_price):
             "Momentum conflicts with market starting-price direction"
 
         ), diagnostics
-
-    # Read the actual Predict.fun buying price.
 
     if direction == "UP":
 
@@ -414,6 +406,10 @@ def evaluate_market(market, raw_market, candles, current_price):
 
     entry_price = float(entry_price)
 
+    if not 0 < entry_price < 1:
+
+        return None, "Invalid outcome buying price", diagnostics
+
     if entry_price < MIN_ENTRY_PRICE:
 
         return None, (
@@ -428,6 +424,18 @@ def evaluate_market(market, raw_market, candles, current_price):
 
         return None, "Insufficient visible liquidity", diagnostics
 
+    required_shares = PAPER_TRADE_AMOUNT / entry_price
+
+    if float(available_size) < required_shares:
+
+        return None, (
+
+            "Visible order-book size is insufficient "
+
+            "for the simulated trade"
+
+        ), diagnostics
+
     decision = {
 
         "market_id": market["market_id"],
@@ -439,6 +447,8 @@ def evaluate_market(market, raw_market, candles, current_price):
         "entry_price": entry_price,
 
         "available_size": float(available_size),
+
+        "required_shares": round(required_shares, 8),
 
         "market_start_price": market_start_price,
 
@@ -465,6 +475,127 @@ def evaluate_market(market, raw_market, candles, current_price):
     }
 
     return decision, "All entry conditions passed", diagnostics
+
+
+def estimate_fee(market, stake):
+
+    fee_rate_bps = market.get("fee_rate_bps")
+
+    if fee_rate_bps is None:
+
+        return None
+
+    try:
+
+        fee_rate_bps = float(fee_rate_bps)
+
+        if fee_rate_bps < 0:
+            return None
+
+        return round(
+
+            stake * fee_rate_bps / 10000,
+
+            4
+
+        )
+
+    except (ValueError, TypeError):
+
+        return None
+
+
+def execute_paper_trade(decision, market, paper_trader):
+
+    print("\nPAPER TRADE EXECUTION")
+
+    print("-" * 45)
+
+    stake = PAPER_TRADE_AMOUNT
+
+    fee = estimate_fee(market, stake)
+
+    if fee is None:
+
+        return {
+
+            "status": "REJECTED",
+
+            "reason": "Market fee information unavailable"
+
+        }
+
+    slippage = 0.00
+
+    print("Market:", decision["market_title"])
+
+    print("Direction:", decision["direction"])
+
+    print("Entry price:", decision["entry_price"])
+
+    print("Stake:", stake)
+
+    print("Estimated fee:", fee)
+
+    print("Estimated slippage:", slippage)
+
+    print("Mode: PAPER")
+
+    result = paper_trader.open_trade(
+
+        market_id=decision["market_id"],
+
+        title=decision["market_title"],
+
+        side=decision["direction"],
+
+        price=decision["entry_price"],
+
+        stake=stake,
+
+        estimated_fee=fee,
+
+        estimated_slippage=slippage
+
+    )
+
+    if isinstance(result, dict) and result.get("error"):
+
+        print("PAPER TRADE REJECTED:", result["error"])
+
+        return {
+
+            "status": "REJECTED",
+
+            "reason": result["error"]
+
+        }
+
+    print("PAPER TRADE OPENED")
+
+    print("Trade ID:", result["trade_id"])
+
+    print("Shares:", result["shares"])
+
+    return {
+
+        "status": "OPEN",
+
+        "trade_id": result["trade_id"],
+
+        "side": result["side"],
+
+        "entry_price": result["entry_price"],
+
+        "stake": result["stake"],
+
+        "shares": result["shares"],
+
+        "estimated_fee": result["estimated_fee"],
+
+        "reserved_total": result["reserved_total"]
+
+    }
 
 
 def main():
@@ -497,9 +628,13 @@ def main():
 
     }
 
+    paper_trader = PaperTrader()
+
     results = []
 
     candidates = []
+
+    opened_trades = []
 
     for market in markets:
 
@@ -535,11 +670,29 @@ def main():
 
         if decision:
 
+            candidates.append(decision)
+
             result.update(decision)
 
             result["decision"] = "PAPER_TRADE_CANDIDATE"
 
-            candidates.append(decision)
+            trade_result = execute_paper_trade(
+
+                decision,
+
+                market,
+
+                paper_trader
+
+            )
+
+            result["paper_trade"] = trade_result
+
+            if trade_result["status"] == "OPEN":
+
+                result["decision"] = "PAPER_TRADE_OPEN"
+
+                opened_trades.append(trade_result)
 
         results.append(result)
 
@@ -595,6 +748,8 @@ def main():
 
         "candidates_found": len(candidates),
 
+        "paper_trades_opened": len(opened_trades),
+
         "results": results
 
     }
@@ -609,11 +764,19 @@ def main():
 
     print("PAPER CANDIDATES:", len(candidates))
 
+    print("PAPER TRADES OPENED:", len(opened_trades))
+
     print("REAL TRADING: DISABLED")
 
     print("Results saved to strategy_decisions.json")
 
     print("=" * 50)
+
+    print("\nPAPER ACCOUNT STATUS")
+
+    for key, value in paper_trader.get_status().items():
+
+        print(f"{key}: {value}")
 
 
 if __name__ == "__main__":
