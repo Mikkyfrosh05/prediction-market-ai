@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 MIN_ELAPSED_SECONDS = 150
 MIN_ENTRY_PRICE = 0.70
 MAX_ELAPSED_SECONDS = 300
+MIN_MOMENTUM_PERCENT = 0.05
 
 
 def load_json(filename):
