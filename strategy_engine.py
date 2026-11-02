@@ -231,20 +231,20 @@ def validate_live_momentum(live_momentum):
 
     if not isinstance(live_momentum, dict):
 
-        return False, "30-second live momentum data unavailable"
+        return False, "30-second live momentum data unavailable", {}
 
     if not live_momentum.get("available"):
 
         return False, live_momentum.get(
             "reason",
             "30-second momentum not available"
-        )
+        ), {}
 
     direction = live_momentum.get("direction")
 
     if direction not in ["UP", "DOWN"]:
 
-        return False, "Live BTC momentum is FLAT or invalid"
+        return False, "Live BTC momentum is FLAT or invalid", {}
 
     try:
 
@@ -266,11 +266,11 @@ def validate_live_momentum(live_momentum):
 
     except (KeyError, ValueError, TypeError):
 
-        return False, "Invalid live momentum measurements"
+        return False, "Invalid live momentum measurements", {}
 
     if current_price <= 0:
 
-        return False, "Invalid live BTC price"
+        return False, "Invalid live BTC price", {}
 
     if not (
         LIVE_MOMENTUM_MIN_WINDOW
@@ -281,27 +281,29 @@ def validate_live_momentum(live_momentum):
         return False, (
             "Live momentum measurement window is outside "
             "the permitted range"
-        )
+        ), {}
 
-    now_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+    now_ms = int(
+        datetime.now(timezone.utc).timestamp() * 1000
+    )
 
     age_seconds = (now_ms - timestamp) / 1000
 
     if age_seconds < -2:
 
-        return False, "Live BTC timestamp is in the future"
+        return False, "Live BTC timestamp is in the future", {}
 
     if age_seconds > LIVE_PRICE_MAX_AGE_SECONDS:
 
-        return False, "Live BTC momentum data is stale"
+        return False, "Live BTC momentum data is stale", {}
 
     if direction == "UP" and movement <= 0:
 
-        return False, "Invalid UP momentum measurement"
+        return False, "Invalid UP momentum measurement", {}
 
     if direction == "DOWN" and movement >= 0:
 
-        return False, "Invalid DOWN momentum measurement"
+        return False, "Invalid DOWN momentum measurement", {}
 
     diagnostics = {
 
